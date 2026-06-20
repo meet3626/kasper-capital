@@ -440,17 +440,6 @@ export default function AdminDashboard() {
                   </label>
                 </div>
 
-                <div className="flex items-center justify-between">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-300">Two-Factor Auth (2FA)</label>
-                    <p className="text-xs text-gray-500">Require code on login.</p>
-                  </div>
-                  <label className="relative inline-flex items-center cursor-pointer">
-                    <input type="checkbox" value="" className="sr-only peer" />
-                    <div className="w-11 h-6 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-cyan-500"></div>
-                  </label>
-                </div>
-
                 <div className="pt-2">
                   <label className="block text-sm font-medium text-gray-300 mb-2">Maintenance Mode</label>
                   <select 
@@ -758,7 +747,10 @@ export default function AdminDashboard() {
       {/* Sidebar */}
       <div className="w-64 bg-[#111827] border-r border-gray-800 flex flex-col hidden md:flex">
         <div className="p-6 border-b border-gray-800">
-          <h2 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500">
+          <h2 
+            onClick={() => { setActiveTab('dashboard'); navigate('/admin/dashboard'); }}
+            className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500 cursor-pointer hover:opacity-80 transition-opacity"
+          >
             Admin Panel
           </h2>
         </div>
@@ -848,7 +840,12 @@ export default function AdminDashboard() {
       <div className="flex-1 flex flex-col h-screen">
         {/* Mobile Header */}
         <div className="md:hidden bg-[#111827] border-b border-gray-800 p-4 flex justify-between items-center z-20">
-          <h2 className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">Admin Panel</h2>
+          <h2 
+            onClick={() => { setActiveTab('dashboard'); navigate('/admin/dashboard'); }}
+            className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500 cursor-pointer hover:opacity-80 transition-opacity"
+          >
+            Admin Panel
+          </h2>
           <button onClick={handleLogout} className="text-red-400 p-2">
             <LogOut className="w-5 h-5" />
           </button>

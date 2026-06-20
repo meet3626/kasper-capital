@@ -1,5 +1,8 @@
 const Admin = require('../models/Admin');
 const generateToken = require('../utils/generateToken');
+const { generateSecret, generateURI, verifySync } = require('otplib');
+const qrcode = require('qrcode');
+
 
 // @desc    Auth admin & get token
 // @route   POST /api/auth/login
@@ -13,17 +16,29 @@ const loginAdmin = async (req, res) => {
     });
 
     if (admin && (await admin.matchPassword(password))) {
-      generateToken(res, admin._id);
-      res.json({
-        id: admin._id,
-        name: admin.name,
-        email: admin.email,
-        permissions: admin.permissions,
-      });
+      if (admin.mfaEnabled) {
+        return res.json({ requiresMfa: true, adminId: admin._id });
+      } else {
+        // Enforce 2FA Setup
+        const secret = generateSecret();
+        const otpauth = generateURI({ issuer: 'AdminPanel', label: admin.email, secret });
+        
+        admin.mfaSecret = secret;
+        await admin.save();
+        
+        const qrImageUrl = await qrcode.toDataURL(otpauth);
+        
+        return res.json({ 
+          setupMfaRequired: true, 
+          adminId: admin._id,
+          qrCode: qrImageUrl
+        });
+      }
     } else {
       res.status(401).json({ message: 'Invalid credentials' });
     }
   } catch (error) {
+    console.error('Login Error:', error);
     res.status(500).json({ message: 'Server error', error: error.message });
   }
 };
@@ -58,6 +73,7 @@ const setupMasterAdmin = async (req, res) => {
         name: admin.name,
         email: admin.email,
         permissions: admin.permissions,
+        mfaEnabled: admin.mfaEnabled,
       });
     }
   } catch (error) {
@@ -76,8 +92,50 @@ const logoutAdmin = (req, res) => {
   res.status(200).json({ message: 'Logged out successfully' });
 };
 
+// @desc    Verify MFA token for login
+// @route   POST /api/auth/login-mfa
+// @access  Public
+const verifyLoginMfa = async (req, res) => {
+  try {
+    const { adminId, mfaToken } = req.body;
+
+    const admin = await Admin.findById(adminId);
+
+    if (!admin) {
+      return res.status(404).json({ message: 'Admin not found' });
+    }
+
+    if (!admin.mfaSecret) {
+      return res.status(400).json({ message: 'MFA setup is required first' });
+    }
+
+    const verification = verifySync({ token: mfaToken, secret: admin.mfaSecret });
+
+    if (verification && verification.valid) {
+      if (!admin.mfaEnabled) {
+        admin.mfaEnabled = true;
+        await admin.save();
+      }
+
+      generateToken(res, admin._id);
+      res.json({
+        id: admin._id,
+        name: admin.name,
+        email: admin.email,
+        permissions: admin.permissions,
+        mfaEnabled: admin.mfaEnabled,
+      });
+    } else {
+      res.status(401).json({ message: 'Invalid MFA token' });
+    }
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+};
+
 module.exports = {
   loginAdmin,
   setupMasterAdmin,
-  logoutAdmin
+  logoutAdmin,
+  verifyLoginMfa
 };

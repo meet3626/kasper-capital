@@ -199,7 +199,7 @@ const MegaMenu = ({ isOpen }) => (
                       >
                         {/* Icon bubble */}
                         <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center shrink-0 mt-0.5 group-hover:border-accent-cyan/30 group-hover:bg-accent-cyan/5 transition-all duration-200">
-                          <Icon size={14} className="text-gray-400 group-hover:text-accent-cyan transition-colors duration-200" />
+                          {/* <Icon size={14} className="text-gray-400 group-hover:text-accent-cyan transition-colors duration-200" /> */}
                         </div>
 
                         {/* Text */}
@@ -461,7 +461,7 @@ const Header = () => {
                                     onClick={() => setIsOpen(false)}
                                     className="flex items-center gap-3 py-2 group"
                                   >
-                                    <Icon size={14} className="text-gray-500 group-hover:text-accent-cyan transition-colors shrink-0" />
+                                    {/* <Icon size={14} className="text-gray-500 group-hover:text-accent-cyan transition-colors shrink-0" /> */}
                                     <span className="text-sm text-gray-300 group-hover:text-white transition-colors font-medium">{item.label}</span>
                                   </Link>
                                 );

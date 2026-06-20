@@ -35,10 +35,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 // Sanitize data against NoSQL injection
-app.use(mongoSanitize());
+// app.use(mongoSanitize());
 
 // Prevent XSS attacks
-app.use(xss());
+// app.use(xss());
 
 // CORS configuration (allow requests from frontend)
 app.use(cors({
