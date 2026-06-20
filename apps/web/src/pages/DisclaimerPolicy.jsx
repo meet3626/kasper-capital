@@ -5,7 +5,7 @@ const DisclaimerPolicy = () => {
   return (
     <div className="pt-32 pb-24 bg-[#080B10] min-h-screen">
       <Helmet>
-        <title>Disclaimer Policy | Amari Capitals IT Solutions EST</title>
+        <title>Disclaimer Policy | KAPSERFX IT SOLUTIONS EST</title>
       </Helmet>
       <div className="container mx-auto px-6 max-w-4xl">
         <h1 className="text-4xl md:text-5xl font-bold mb-12 text-white uppercase tracking-widest border-b border-white/10 pb-8">
@@ -19,7 +19,7 @@ const DisclaimerPolicy = () => {
             <h2 className="text-2xl font-bold text-white mb-4">1. General Disclaimer</h2>
             <p>
               The information provided on this website is for general informational and business purposes only. 
-              While Amari Capitals IT Solutions EST ("Amari Capitals IT Solutions EST") makes reasonable efforts to ensure the accuracy of the information presented, 
+              While KAPSERFX IT SOLUTIONS EST ("KAPSERFX IT SOLUTIONS EST") makes reasonable efforts to ensure the accuracy of the information presented, 
               we make no representations or warranties regarding the completeness, accuracy, reliability, or suitability of any content. 
               Any reliance placed on the information contained on this website is strictly at the user's own risk.
             </p>
@@ -28,7 +28,7 @@ const DisclaimerPolicy = () => {
           <section>
             <h2 className="text-2xl font-bold text-white mb-4">2. No Brokerage or Financial Services</h2>
             <p>
-              Amari Capitals IT Solutions EST is a technology consulting and business services company. Amari Capitals IT Solutions EST does not:
+              KAPSERFX IT SOLUTIONS EST is a technology consulting and business services company. KAPSERFX IT SOLUTIONS EST does not:
             </p>
             <ul className="list-disc pl-6 space-y-2 mt-4">
               <li>Operate a brokerage</li>
@@ -41,7 +41,7 @@ const DisclaimerPolicy = () => {
               <li>Execute trades on behalf of clients</li>
             </ul>
             <p className="mt-4">
-              All services provided by Amari Capitals IT Solutions EST are business-to-business (B2B) services intended for businesses, licensed financial institutions, and corporate clients.
+              All services provided by KAPSERFX IT SOLUTIONS EST are business-to-business (B2B) services intended for businesses, licensed financial institutions, and corporate clients.
             </p>
           </section>
 
@@ -55,14 +55,14 @@ const DisclaimerPolicy = () => {
           <section>
             <h2 className="text-2xl font-bold text-white mb-4">4. Third-Party Providers</h2>
             <p>
-              Amari Capitals IT Solutions EST may introduce clients to third-party service providers, including technology vendors, hosting providers, payment solution providers, liquidity providers, software vendors, regulatory consultants, and other business partners. Amari Capitals IT Solutions EST is not responsible for the services, actions, performance, compliance, or obligations of any third-party provider. Any agreement entered into with a third party is solely between the client and the respective provider.
+              KAPSERFX IT SOLUTIONS EST may introduce clients to third-party service providers, including technology vendors, hosting providers, payment solution providers, liquidity providers, software vendors, regulatory consultants, and other business partners. KAPSERFX IT SOLUTIONS EST is not responsible for the services, actions, performance, compliance, or obligations of any third-party provider. Any agreement entered into with a third party is solely between the client and the respective provider.
             </p>
           </section>
 
           <section>
             <h2 className="text-2xl font-bold text-white mb-4">5. Limitation of Liability</h2>
             <p>
-              To the fullest extent permitted by law, Amari Capitals IT Solutions EST shall not be liable for any direct, indirect, incidental, consequential, special, or punitive damages arising from use of this website, reliance on website content, or business decisions made by clients.
+              To the fullest extent permitted by law, KAPSERFX IT SOLUTIONS EST shall not be liable for any direct, indirect, incidental, consequential, special, or punitive damages arising from use of this website, reliance on website content, or business decisions made by clients.
             </p>
           </section>
         </div>

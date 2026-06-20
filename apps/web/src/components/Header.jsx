@@ -8,11 +8,12 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useNavigate, Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 // ─── Language Data ─────────────────────────────────────────────────────────────
 const LANGUAGES = [
   { code: 'EN', label: 'English',  flag: '🇬🇧', dir: 'ltr' },
-  { code: 'AR', label: 'العربية',   flag: '🇦🇪', dir: 'rtl' },
+  { code: 'AR', label: 'العربية',   flag: '🇦🇪', dir: 'ltr' },
   { code: 'ES', label: 'Español',  flag: '🇪🇸', dir: 'ltr' },
   { code: 'FR', label: 'Français', flag: '🇫🇷', dir: 'ltr' },
   { code: 'ZH', label: '中文',      flag: '🇨🇳', dir: 'ltr' },
@@ -25,11 +26,11 @@ const MEGA_MENU = [
     accent: 'from-accent-cyan/20 to-transparent',
     dot: 'bg-accent-cyan',
     items: [
-      { icon: Briefcase,    label: 'Business Consulting',    desc: 'End-to-end brokerage strategy & advisory',   href: '/services#consulting'  },
-      { icon: FileCheck,    label: 'Licensing & Regulations', desc: 'Multi-jurisdiction regulatory frameworks',   href: '/services#licensing'   },
-      { icon: Server,       label: 'Hosting Server Support',  desc: 'Ultra-low latency co-location infrastructure', href: '/services#hosting'  },
-      { icon: Zap,          label: 'Liquidity Provider',      desc: 'Tier-1 deep order-book connections',         href: '/services#liquidity'   },
-      { icon: CreditCard,   label: 'Gateway Solutions',       desc: 'Multi-currency payment processing',          href: '/services#gateway'     },
+      { icon: Briefcase,    label: 'Business Consulting',    desc: 'End-to-end brokerage strategy & advisory',      href: '/services/business-consulting'      },
+      { icon: FileCheck,    label: 'Licensing & Regulations', desc: 'Multi-jurisdiction regulatory frameworks',      href: '/services/licensing-regulations'    },
+      { icon: Server,       label: 'Hosting Server Support',  desc: 'Ultra-low latency co-location infrastructure', href: '/services/hosting-server-support'   },
+      { icon: Zap,          label: 'Liquidity Provider',      desc: 'Tier-1 deep order-book connections',           href: '/services/liquidity-provider'       },
+      { icon: CreditCard,   label: 'Gateway Solutions',       desc: 'Multi-currency payment processing',            href: '/services/gateway-solutions'        },
     ],
   },
   {
@@ -37,10 +38,10 @@ const MEGA_MENU = [
     accent: 'from-accent-purple/20 to-transparent',
     dot: 'bg-accent-purple',
     items: [
-      { icon: LayoutDashboard, label: 'CRM Software',             desc: 'Intelligent client lifecycle management',  href: '/services#crm'       },
-      { icon: ShieldAlert,     label: 'Risk Management Software',  desc: 'Real-time exposure & drawdown control',   href: '/services#risk'      },
-      { icon: Monitor,         label: 'Trading Platforms',         desc: 'MT5, cTrader & custom white-label builds', href: '/services#platforms' },
-      { icon: PuzzleIcon,      label: 'Plugin Solutions',          desc: 'Proprietary performance-enhancing plugins', href: '/services#plugins'  },
+      { icon: LayoutDashboard, label: 'CRM Software',            desc: 'Intelligent client lifecycle management',     href: '/services/crm-software'               },
+      { icon: ShieldAlert,     label: 'Risk Management Software', desc: 'Real-time exposure & drawdown control',      href: '/services/risk-management-software'   },
+      { icon: Monitor,         label: 'Trading Platforms',        desc: 'MT5, cTrader & custom white-label builds',   href: '/services/trading-platforms'          },
+      { icon: PuzzleIcon,      label: 'Plugin Solutions',         desc: 'Proprietary performance-enhancing plugins',  href: '/services/plugin-solutions'           },
     ],
   },
   {
@@ -48,14 +49,15 @@ const MEGA_MENU = [
     accent: 'from-emerald-500/20 to-transparent',
     dot: 'bg-emerald-400',
     items: [
-      { icon: TrendingUp,     label: 'Digital Growth Solutions', desc: 'Data-driven acquisition & retention funnels', href: '/services#growth'   },
-      { icon: GraduationCap,  label: 'Technical Training',       desc: 'Platform, compliance & operations training',  href: '/services#training' },
+      { icon: TrendingUp,    label: 'Digital Growth Solutions', desc: 'Data-driven acquisition & retention funnels', href: '/services/digital-growth-solutions' },
+      { icon: GraduationCap, label: 'Technical Training',       desc: 'Platform, compliance & operations training',  href: '/services/technical-training'      },
     ],
   },
 ];
 
 // ─── Language Selector ─────────────────────────────────────────────────────────
 const LanguageSelector = ({ mobile = false }) => {
+  const { t, i18n } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [active, setActive] = useState(LANGUAGES[0]);
   const ref = useRef(null);
@@ -71,12 +73,13 @@ const LanguageSelector = ({ mobile = false }) => {
     setIsOpen(false);
     document.documentElement.dir = lang.dir;
     document.documentElement.lang = lang.code.toLowerCase();
+    i18n.changeLanguage(lang.code.toLowerCase());
   };
 
   if (mobile) {
     return (
       <div className="w-full">
-        <p className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-3 text-center">Language</p>
+        <p className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-3 text-center">{t('nav.language')}</p>
         <div className="grid grid-cols-5 gap-2">
           {LANGUAGES.map((lang) => (
             <button
@@ -247,6 +250,7 @@ const MegaMenu = ({ isOpen }) => (
 
 // ─── Main Header ───────────────────────────────────────────────────────────────
 const Header = () => {
+  const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [megaOpen, setMegaOpen] = useState(false);
@@ -254,11 +258,7 @@ const Header = () => {
   const megaTimeout = useRef(null);
   const navigate = useNavigate();
 
-  const navLinks = [
-    { name: 'Roadmap',  href: '/#roadmap'  },
-    { name: 'Insights', href: '/#insights' },
-    { name: 'FAQ',      href: '/#faq'      },
-  ];
+  const navLinks = [];
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 10);
@@ -291,6 +291,7 @@ const Header = () => {
   const handleHomeClick = (e) => {
     e.preventDefault();
     navigate('/');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     if (isOpen) setIsOpen(false);
   };
 
@@ -310,11 +311,16 @@ const Header = () => {
 
           {/* Logo */}
           <Link to="/" onClick={handleHomeClick} className="text-2xl font-bold text-white tracking-wider flex items-center gap-2 shrink-0">
-            <span className="text-accent-cyan">AMARI CAPITALS</span>
+            <span className="text-accent-cyan">KAPSERFX</span>
           </Link>
 
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-7">
+
+            <Link to="/" onClick={handleHomeClick} className="text-gray-300 hover:text-white transition-colors relative group font-semibold uppercase tracking-widest text-sm">
+              {t('nav.home')}
+              <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full" />
+            </Link>
 
             {/* ── Services with Mega Menu ── */}
             <div
@@ -327,7 +333,7 @@ const Header = () => {
                   megaOpen ? 'text-accent-cyan' : 'text-gray-300 hover:text-white'
                 }`}
               >
-                Services
+                {t('nav.services')}
                 <ChevronDown
                   size={13}
                   className={`transition-transform duration-300 ${megaOpen ? 'rotate-180 text-accent-cyan' : ''}`}
@@ -336,34 +342,26 @@ const Header = () => {
               <MegaMenu isOpen={megaOpen} />
             </div>
 
-            {/* Regular nav links */}
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                onClick={handleSmoothScroll}
-                className="text-gray-300 hover:text-white transition-colors relative group font-semibold uppercase tracking-widest text-sm"
-              >
-                {link.name}
-                <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full" />
-              </a>
-            ))}
-
             {/* Company Dropdown */}
             <div className="relative group">
               <button className="text-gray-300 hover:text-white transition-colors font-semibold uppercase tracking-widest text-sm flex items-center gap-1 py-7">
-                Company
+                {t('nav.company')}
                 <ChevronDown size={13} className="transition-transform duration-300 group-hover:rotate-180" />
               </button>
               <div className="absolute top-full left-0 w-56 bg-neutral-950/90 backdrop-blur-xl border border-white/10 rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 overflow-hidden">
-                <Link to="/about-us"             onClick={() => setIsOpen(false)} className="block px-4 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5 transition-colors">About Us</Link>
-                <Link to="/contact"              onClick={() => setIsOpen(false)} className="block px-4 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5 transition-colors">Contact Us</Link>
-                <Link to="/brokerage-calculator" onClick={() => setIsOpen(false)} className="block px-4 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5 transition-colors border-t border-white/5">Brokerage Calculator</Link>
+                <Link to="/about-us"             onClick={() => setIsOpen(false)} className="block px-4 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5 transition-colors">{t('nav.about')}</Link>
+                <Link to="/contact"              onClick={() => setIsOpen(false)} className="block px-4 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5 transition-colors">{t('nav.contact')}</Link>
+                <a href="/#faq"                  onClick={handleSmoothScroll} className="block px-4 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5 transition-colors border-t border-white/5">{t('nav.faq')}</a>
               </div>
             </div>
 
             <Link to="/blog" onClick={() => setIsOpen(false)} className="text-gray-300 hover:text-white transition-colors relative group font-semibold uppercase tracking-widest text-sm">
-              Blog
+              {t('nav.blog')}
+              <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full" />
+            </Link>
+
+            <Link to="/brokerage-calculator" onClick={() => setIsOpen(false)} className="text-gray-300 hover:text-white transition-colors relative group font-semibold uppercase tracking-widest text-sm">
+              {t('nav.calculator')}
               <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full" />
             </Link>
           </nav>
@@ -375,7 +373,7 @@ const Header = () => {
               className="bg-white text-black hover:bg-gray-100 group rounded-full font-bold px-6 transition-all duration-300 hover:shadow-[0_0_20px_rgba(255,255,255,0.15)]"
               onClick={handleCTA}
             >
-              Get Started
+              {t('nav.getStarted')}
               <ArrowRight className="ml-2 h-4 w-4 text-black transform transition-transform duration-300 group-hover:translate-x-1" />
             </Button>
           </div>
@@ -404,13 +402,24 @@ const Header = () => {
               {/* Mobile Header Row */}
               <div className="flex justify-between items-center h-20 shrink-0">
                 <Link to="/" onClick={handleHomeClick} className="text-2xl font-bold text-white tracking-wider">
-                  <span className="text-accent-cyan">AMARI CAPITALS</span>
+                  <span className="text-accent-cyan">KAPSERFX</span>
                 </Link>
                 <button onClick={() => setIsOpen(false)} className="text-white p-1"><X size={28} /></button>
               </div>
 
               {/* Mobile Nav */}
               <nav className="flex-grow flex flex-col justify-center items-center gap-6 py-8">
+
+                <motion.a
+                  href="/"
+                  onClick={handleHomeClick}
+                  className="text-2xl font-semibold text-gray-300 hover:text-white transition-colors uppercase tracking-widest"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: 0.05 }}
+                >
+                  {t('nav.home')}
+                </motion.a>
 
                 {/* Mobile Services Accordion */}
                 <motion.div
@@ -423,7 +432,7 @@ const Header = () => {
                     onClick={() => setMobileServicesOpen((v) => !v)}
                     className="w-full flex items-center justify-between text-2xl font-semibold text-gray-300 hover:text-white transition-colors uppercase tracking-widest"
                   >
-                    Services
+                    {t('nav.services')}
                     <ChevronDown size={20} className={`transition-transform duration-300 ${mobileServicesOpen ? 'rotate-180 text-accent-cyan' : ''}`} />
                   </button>
 
@@ -465,39 +474,26 @@ const Header = () => {
                   </AnimatePresence>
                 </motion.div>
 
-                {/* Other nav links */}
-                {navLinks.map((link, index) => (
-                  <motion.a
-                    key={link.name}
-                    href={link.href}
-                    onClick={handleSmoothScroll}
-                    className="text-2xl font-semibold text-gray-300 hover:text-white transition-colors uppercase tracking-widest"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.4, delay: 0.18 + index * 0.07 }}
-                  >
-                    {link.name}
-                  </motion.a>
-                ))}
-
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: 0.38 }}
                   className="flex flex-col items-center gap-3 w-full max-w-xs"
                 >
-                  <span className="text-xs font-bold text-gray-500 uppercase tracking-widest border-b border-white/10 pb-2 w-1/2 text-center">Company</span>
-                  <Link to="/about-us"             onClick={() => setIsOpen(false)} className="text-2xl font-semibold text-gray-300 hover:text-white transition-colors uppercase tracking-widest">About Us</Link>
-                  <Link to="/contact"              onClick={() => setIsOpen(false)} className="text-2xl font-semibold text-gray-300 hover:text-white transition-colors uppercase tracking-widest">Contact Us</Link>
-                  <Link to="/brokerage-calculator" onClick={() => setIsOpen(false)} className="text-xl font-semibold text-gray-400 hover:text-white transition-colors uppercase tracking-widest">Calculator</Link>
+                  <span className="text-xs font-bold text-gray-500 uppercase tracking-widest border-b border-white/10 pb-2 w-1/2 text-center">{t('nav.company')}</span>
+                  <Link to="/about-us"             onClick={() => setIsOpen(false)} className="text-2xl font-semibold text-gray-300 hover:text-white transition-colors uppercase tracking-widest">{t('nav.about')}</Link>
+                  <Link to="/contact"              onClick={() => setIsOpen(false)} className="text-2xl font-semibold text-gray-300 hover:text-white transition-colors uppercase tracking-widest">{t('nav.contact')}</Link>
+                  <a href="/#faq"                  onClick={handleSmoothScroll} className="text-xl font-semibold text-gray-400 hover:text-white transition-colors uppercase tracking-widest">{t('nav.faq')}</a>
                 </motion.div>
 
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: 0.46 }}
+                  className="flex flex-col items-center gap-4"
                 >
-                  <Link to="/blog" onClick={() => setIsOpen(false)} className="text-2xl font-semibold text-gray-300 hover:text-white transition-colors uppercase tracking-widest">Blog</Link>
+                  <Link to="/blog" onClick={() => setIsOpen(false)} className="text-2xl font-semibold text-gray-300 hover:text-white transition-colors uppercase tracking-widest">{t('nav.blog')}</Link>
+                  <Link to="/brokerage-calculator" onClick={() => setIsOpen(false)} className="text-2xl font-semibold text-gray-300 hover:text-white transition-colors uppercase tracking-widest">{t('nav.calculator')}</Link>
                 </motion.div>
 
                 {/* Mobile Language Selector */}
@@ -517,7 +513,7 @@ const Header = () => {
                   className="bg-white text-black hover:bg-gray-200 group w-full text-lg py-6 rounded-full font-bold uppercase tracking-widest"
                   onClick={handleCTA}
                 >
-                  Get Started
+                  {t('nav.getStarted')}
                   <ArrowRight className="ml-2 h-4 w-4 text-black transform transition-transform duration-300 group-hover:translate-x-1" />
                 </Button>
               </div>

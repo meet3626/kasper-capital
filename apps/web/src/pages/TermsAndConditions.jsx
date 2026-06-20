@@ -5,7 +5,7 @@ const TermsAndConditions = () => {
   return (
     <div className="pt-32 pb-24 bg-[#080B10] min-h-screen">
       <Helmet>
-        <title>Terms & Conditions | Amari Capitals IT Solutions EST</title>
+        <title>Terms & Conditions | KAPSERFX IT SOLUTIONS EST</title>
       </Helmet>
       <div className="container mx-auto px-6 max-w-4xl">
         <h1 className="text-4xl md:text-5xl font-bold mb-12 text-white uppercase tracking-widest border-b border-white/10 pb-8">
@@ -18,7 +18,7 @@ const TermsAndConditions = () => {
           <section>
             <h2 className="text-2xl font-bold text-white mb-4">1. Acceptance of Terms</h2>
             <p>
-              By accessing and using the Amari Capitals IT Solutions EST website and services, you accept and agree to be bound by the terms and provision of this agreement. 
+              By accessing and using the KAPSERFX IT SOLUTIONS EST website and services, you accept and agree to be bound by the terms and provision of this agreement. 
               In addition, when using these particular services, you shall be subject to any posted guidelines or rules applicable to such services. 
               Any participation in this service will constitute acceptance of this agreement. If you do not agree to abide by the above, please do not use this service.
             </p>
@@ -27,7 +27,7 @@ const TermsAndConditions = () => {
           <section>
             <h2 className="text-2xl font-bold text-white mb-4">2. Description of Services</h2>
             <p>
-              Amari Capitals IT Solutions EST provides various technology and consulting services for the financial sector, including but not limited to White Label trading platforms (MT4/MT5), 
+              KAPSERFX IT SOLUTIONS EST provides various technology and consulting services for the financial sector, including but not limited to White Label trading platforms (MT4/MT5), 
               liquidity integration, CRM deployment, company incorporation, and licensing assistance. The specific terms of your engagement with us will be 
               outlined in a separate Service Agreement.
             </p>
@@ -36,7 +36,7 @@ const TermsAndConditions = () => {
           <section>
             <h2 className="text-2xl font-bold text-white mb-4">3. Intellectual Property Rights</h2>
             <p>
-              The Site and its original content, features, and functionality are owned by Amari Capitals IT Solutions EST and are protected by international copyright, 
+              The Site and its original content, features, and functionality are owned by KAPSERFX IT SOLUTIONS EST and are protected by international copyright, 
               trademark, patent, trade secret, and other intellectual property or proprietary rights laws.
             </p>
           </section>
@@ -56,7 +56,7 @@ const TermsAndConditions = () => {
           <section>
             <h2 className="text-2xl font-bold text-white mb-4">5. Limitation of Liability</h2>
             <p>
-              In no event shall Amari Capitals IT Solutions EST, nor its directors, employees, partners, agents, suppliers, or affiliates, be liable for any indirect, 
+              In no event shall KAPSERFX IT SOLUTIONS EST, nor its directors, employees, partners, agents, suppliers, or affiliates, be liable for any indirect, 
               incidental, special, consequential or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses, 
               resulting from (i) your access to or use of or inability to access or use the Service; (ii) any conduct or content of any third party on the Service; 
               (iii) any content obtained from the Service; and (iv) unauthorized access, use or alteration of your transmissions or content.
@@ -75,7 +75,7 @@ const TermsAndConditions = () => {
             <h2 className="text-2xl font-bold text-white mb-4">7. Contact Information</h2>
             <p>
               If you have any questions about these Terms, please contact us at: <br/>
-              <a href="mailto:info@amaricapitals.com" className="text-accent-cyan hover:underline">info@amaricapitals.com</a>
+              <a href="mailto:info@kapserfx.com" className="text-accent-cyan hover:underline">info@kapserfx.com</a>
             </p>
           </section>
         </div>

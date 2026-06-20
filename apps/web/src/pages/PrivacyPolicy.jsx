@@ -5,7 +5,7 @@ const PrivacyPolicy = () => {
   return (
     <div className="pt-32 pb-24 bg-[#080B10] min-h-screen">
       <Helmet>
-        <title>Privacy Policy | Amari Capitals IT Solutions EST</title>
+        <title>Privacy Policy | KAPSERFX IT SOLUTIONS EST</title>
       </Helmet>
       <div className="container mx-auto px-6 max-w-4xl">
         <h1 className="text-4xl md:text-5xl font-bold mb-12 text-white uppercase tracking-widest border-b border-white/10 pb-8">
@@ -32,7 +32,7 @@ const PrivacyPolicy = () => {
               <li>Process transactions and send related information;</li>
               <li>Send technical notices, updates, security alerts, and support messages;</li>
               <li>Respond to your comments, questions, and requests;</li>
-              <li>Communicate about products, services, offers, and events offered by Amari Capitals IT Solutions EST.</li>
+              <li>Communicate about products, services, offers, and events offered by KAPSERFX IT SOLUTIONS EST.</li>
             </ul>
           </section>
 
@@ -51,7 +51,7 @@ const PrivacyPolicy = () => {
             <ul className="list-disc pl-6 space-y-2 mt-4">
               <li>With vendors, consultants, and other service providers who need access to such information to carry out work on our behalf;</li>
               <li>In response to a request for information if we believe disclosure is in accordance with, or required by, any applicable law or legal process;</li>
-              <li>If we believe your actions are inconsistent with our user agreements or policies, or to protect the rights, property, and safety of Amari Capitals IT Solutions EST or others;</li>
+              <li>If we believe your actions are inconsistent with our user agreements or policies, or to protect the rights, property, and safety of KAPSERFX IT SOLUTIONS EST or others;</li>
               <li>With your consent or at your direction.</li>
             </ul>
           </section>
@@ -60,7 +60,7 @@ const PrivacyPolicy = () => {
             <h2 className="text-2xl font-bold text-white mb-4">5. Contact Us</h2>
             <p>
               If you have any questions about this Privacy Policy, please contact us at: <br/>
-              <a href="mailto:info@amaricapitals.com" className="text-accent-cyan hover:underline">info@amaricapitals.com</a>
+              <a href="mailto:info@kapserfx.com" className="text-accent-cyan hover:underline">info@kapserfx.com</a>
             </p>
           </section>
         </div>

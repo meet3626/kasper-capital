@@ -2,11 +2,11 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 
 const SEOHead = ({ 
-  title = "Amari Capitals | Expert Forex Broker Solutions", 
-  description = "Turnkey Forex Brokerage solutions, trading platforms, licensing, CRM, and digital marketing strategies by Amari Capitals IT Solutions EST.", 
+  title = "KAPSERFX | Expert Forex Broker Solutions", 
+  description = "Turnkey Forex Brokerage solutions, trading platforms, licensing, CRM, and digital marketing strategies by KAPSERFX IT SOLUTIONS EST.", 
   keywords = "Forex Broker, Turnkey Solutions, MT5, cTrader, Forex Licensing, Crypto Broker, Trading Platform",
   image = "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1200&auto=format&fit=crop&q=80",
-  url = "https://amaricapitals.com",
+  url = "https://kapserfx.com",
   type = "website"
 }) => {
   return (

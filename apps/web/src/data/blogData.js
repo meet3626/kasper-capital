@@ -19,7 +19,7 @@ export const blogData = [
       <p>Once a lead registers for a demo account, the clock starts ticking. Implementing automated email sequences that provide daily market insights, trading tips, and exclusive bonuses can drastically increase your conversion rates from demo to live accounts.</p>
     `,
     date: 'February 27, 2026',
-    author: 'Amari Capitals IT Solutions EST Experts',
+    author: 'KAPSERFX IT SOLUTIONS EST Experts',
     category: 'Marketing',
     image: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1200&auto=format&fit=crop&q=80'
   },
@@ -44,7 +44,7 @@ export const blogData = [
       <p>Day 1 involves finalizing corporate structure and platform branding. Day 2 is dedicated to technical deployment, setting up the CRM, and connecting the liquidity bridge. Day 3 focuses on testing the payment systems, executing test trades, and going live.</p>
     `,
     date: 'February 24, 2026',
-    author: 'Amari Capitals IT Solutions EST Experts',
+    author: 'KAPSERFX IT SOLUTIONS EST Experts',
     category: 'Guides',
     image: 'https://images.unsplash.com/photo-1642790106117-e829e14a795f?w=1200&auto=format&fit=crop&q=80'
   },
@@ -86,7 +86,7 @@ export const blogData = [
       <p>The biggest threats often come from within. Advanced CRM systems now feature highly granular role-based access controls (RBAC), ensuring that support staff cannot access sensitive financial configurations, and dealing desk operators cannot manipulate client balances without managerial overrides and comprehensive audit logs.</p>
     `,
     date: 'February 16, 2026',
-    author: 'Amari Capitals IT Solutions EST Experts',
+    author: 'KAPSERFX IT SOLUTIONS EST Experts',
     category: 'Security',
     image: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?w=1200&auto=format&fit=crop&q=80'
   },

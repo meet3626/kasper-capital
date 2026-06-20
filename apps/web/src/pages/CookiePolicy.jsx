@@ -5,7 +5,7 @@ const CookiePolicy = () => {
   return (
     <div className="pt-32 pb-24 bg-[#080B10] min-h-screen">
       <Helmet>
-        <title>Cookie Policy | Amari Capitals IT Solutions EST</title>
+        <title>Cookie Policy | KAPSERFX IT SOLUTIONS EST</title>
       </Helmet>
       <div className="container mx-auto px-6 max-w-4xl">
         <h1 className="text-4xl md:text-5xl font-bold mb-12 text-white uppercase tracking-widest border-b border-white/10 pb-8">
@@ -18,7 +18,7 @@ const CookiePolicy = () => {
           <section>
             <h2 className="text-2xl font-bold text-white mb-4">1. Introduction</h2>
             <p>
-              This Cookie Policy explains how Amari Capitals IT Solutions EST ("Amari Capitals IT Solutions EST", "we", "our", or "us") uses cookies and similar technologies when you visit our website. By continuing to use our website, you consent to the use of cookies in accordance with this Cookie Policy.
+              This Cookie Policy explains how KAPSERFX IT SOLUTIONS EST ("KAPSERFX IT SOLUTIONS EST", "we", "our", or "us") uses cookies and similar technologies when you visit our website. By continuing to use our website, you consent to the use of cookies in accordance with this Cookie Policy.
             </p>
           </section>
 

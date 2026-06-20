@@ -7,7 +7,7 @@ const AboutUs = () => {
   return (
     <div className="min-h-screen bg-[#0B0B0B] text-white pt-32 pb-12">
       <SEOHead 
-        title="About Us | Amari Capitals IT Solutions EST"
+        title="About Us | KAPSERFX IT SOLUTIONS EST"
         description="Learn about our mission to help businesses streamline operations and accelerate growth with expert technology consulting."
       />
 
@@ -24,10 +24,10 @@ const AboutUs = () => {
               About Us
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-7xl font-[800] uppercase tracking-wider mb-6 leading-tight">
-              About <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-cyan to-accent-purple">Amari Capitals</span>
+              About <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-cyan to-accent-purple">KAPSERFX</span>
             </h1>
             <p className="text-lg text-gray-400 max-w-3xl mx-auto leading-relaxed">
-              At Amari Capitals, we specialize in providing technology consulting, infrastructure solutions, operational support, and business advisory services to financial institutions, brokerage firms, fintech companies, and corporate clients worldwide.
+              At KAPSERFX, we specialize in providing technology consulting, infrastructure solutions, operational support, and business advisory services to financial institutions, brokerage firms, fintech companies, and corporate clients worldwide.
             </p>
           </motion.div>
         </div>
@@ -46,7 +46,7 @@ const AboutUs = () => {
             >
               <OptimizedImage 
                 src="https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=800&auto=format&fit=crop&q=80" 
-                alt="Amari Capitals Overview" 
+                alt="KAPSERFX Overview" 
                 width={800}
                 height={600}
                 className="w-full h-full object-cover"
@@ -159,7 +159,7 @@ const AboutUs = () => {
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-accent-cyan to-accent-purple"></div>
             <h3 className="text-xl font-bold uppercase tracking-widest text-white mb-4">Statement</h3>
             <p className="text-gray-400 text-lg leading-relaxed">
-              Amari Capitals is a technology consulting and business services company. We do not operate a brokerage, provide trading services, offer investment advice, manage client funds, or provide financial products. All services are provided exclusively to businesses, licensed institutions, and corporate clients.
+              KAPSERFX is a technology consulting and business services company. We do not operate a brokerage, provide trading services, offer investment advice, manage client funds, or provide financial products. All services are provided exclusively to businesses, licensed institutions, and corporate clients.
             </p>
           </div>
         </div>

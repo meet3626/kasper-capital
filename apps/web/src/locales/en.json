@@ -1,48 +1,30 @@
 {
   "nav": {
+    "home": "Home",
     "services": "Services",
-    "roadmap": "Roadmap",
-    "insights": "Insights",
-    "faq": "FAQ",
     "company": "Company",
     "about": "About Us",
     "contact": "Contact Us",
+    "faq": "FAQ",
     "calculator": "Brokerage Calculator",
     "blog": "Blog",
-    "getStarted": "Get Started"
+    "getStarted": "Get Started",
+    "language": "Language"
   },
   "hero": {
-    "eyebrow": "Markets Open 24/5 · Institutional-Grade Infrastructure",
-    "headingLine1": "Premier Forex & CFD",
-    "headingLine2": "Trading Platform,",
-    "headingAccent": "Elevate Your Game",
-    "subheading": "Access 80+ currency pairs, gold, commodities & global indices with competitive spreads, advanced MT5 tools, and 24/7 expert account support.",
-    "ctaPrimary": "Let's Talk",
-    "ctaSecondary": "View Services",
-    "stat1Value": "80+",
-    "stat1Label": "Currency Pairs",
-    "stat2Value": "0.01s",
-    "stat2Label": "Execution Speed",
-    "stat3Value": "24/5",
-    "stat3Label": "Market Hours",
-    "floatCard1Label": "Execution Speed",
-    "floatCard2Label": "License Ready",
-    "floatCard3Label": "Tier-1 Liquidity",
-    "liveMarkets": "Live Markets"
-  },
-  "cta": {
-    "eyebrow": "Ready to Launch?",
-    "heading1": "Ready to Start Your",
-    "headingAccent": "Brokerage",
-    "heading2": "?",
-    "subheading": "Let's engineer your trading infrastructure together. We're here to transform your vision into an institutional-grade brokerage that drives results.",
-    "button": "Get a Free Consultation"
-  },
-  "partners": {
-    "eyebrow": "Ecosystem",
-    "heading1": "Integrated with",
-    "headingAccent": "Industry Leaders",
-    "subheading": "Seamlessly connected with tier-1 technology providers, liquidity sources, and compliance infrastructure.",
-    "trustNote": "40+ Active Integrations · Enterprise SLA · 24/7 Technical Support"
+    "eyebrow": "End-to-End Turnkey Brokerage Solutions",
+    "headingLine1": "Launch Your Institutional",
+    "headingLine2": "White-Label Brokerage,",
+    "headingAccent": "Engineered for Scale",
+    "subheading": "Accelerate your time-to-market with complete MT5 infrastructure, Tier-1 liquidity aggregation, advanced CRM portals, and fast-track FSC/CySEC legal compliance setup.",
+    "ctaPrimary": "Schedule Consultation",
+    "ctaSecondary": "Explore Solutions",
+    "stat1Value": "Tier-1",
+    "stat1Label": "Liquidity",
+    "stat2Value": "<1ms",
+    "stat2Label": "Execution Latency",
+    "stat3Value": "100%",
+    "stat3Label": "Turnkey Setup",
+    "liveMarkets": "Systems Operational"
   }
 }

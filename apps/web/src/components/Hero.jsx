@@ -4,6 +4,7 @@ import { ArrowRight, Sparkles, TrendingUp, Shield, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
 import ParticleNetwork from '@/components/ParticleNetwork';
+import { useTranslation } from 'react-i18next';
 
 // Floating animated stat card used in the side panel
 const FloatingCard = ({ icon: Icon, label, value, color, delay, className }) => (
@@ -34,6 +35,7 @@ const ChartBar = ({ height, delay, active }) => (
 );
 
 const Hero = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const handleCTAClick = () => navigate('/contact');
   const handleViewWorkClick = () => {
@@ -78,7 +80,7 @@ const Hero = () => {
             >
               <Sparkles className="w-3.5 h-3.5 text-accent-cyan" />
               <span className="text-[11px] text-gray-300 uppercase tracking-[0.2em] font-semibold">
-                Markets Open 24/5 · Institutional-Grade Infrastructure
+                {t('hero.eyebrow')}
               </span>
             </motion.div>
 
@@ -89,12 +91,12 @@ const Hero = () => {
               transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
               className="text-4xl md:text-5xl lg:text-[3.4rem] font-[800] text-white leading-[1.1] tracking-tight mb-6"
             >
-              Premier Forex &amp; CFD{' '}
+              {t('hero.headingLine1')}{' '}
               <br className="hidden md:block" />
-              Trading Platform,{' '}
+              {t('hero.headingLine2')}{' '}
               <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-cyan to-accent-purple">
-                Elevate Your Game
+                {t('hero.headingAccent')}
               </span>
             </motion.h1>
 
@@ -105,7 +107,7 @@ const Hero = () => {
               transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
               className="text-base text-gray-400 max-w-xl mb-10 font-light leading-relaxed"
             >
-              Access 80+ currency pairs, gold, commodities &amp; global indices with competitive spreads, advanced MT5 tools, and 24/7 expert account support.
+              {t('hero.subheading')}
             </motion.p>
 
             {/* CTA Buttons */}
@@ -120,7 +122,7 @@ const Hero = () => {
                 size="lg"
                 className="bg-white hover:bg-gray-100 text-black font-[800] px-8 py-6 text-sm rounded-full group uppercase tracking-widest transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_30px_rgba(255,255,255,0.15)]"
               >
-                Let's Talk
+                {t('hero.ctaPrimary')}
                 <ArrowRight className="ml-2.5 text-black group-hover:translate-x-1.5 transition-transform duration-300" size={16} />
               </Button>
               <Button
@@ -129,7 +131,7 @@ const Hero = () => {
                 variant="outline"
                 className="border-2 border-white/20 hover:bg-white/[0.07] hover:border-accent-cyan/50 text-white px-8 py-6 text-sm rounded-full font-bold uppercase tracking-widest transition-all duration-300 hover:shadow-[0_0_20px_rgba(0,229,255,0.1)]"
               >
-                View Services
+                {t('hero.ctaSecondary')}
               </Button>
             </motion.div>
 
@@ -140,7 +142,7 @@ const Hero = () => {
               transition={{ duration: 0.8, delay: 0.5 }}
               className="mt-12 pt-8 border-t border-white/[0.06] grid grid-cols-3 gap-6 max-w-sm"
             >
-              {[{ value: '80+', label: 'Currency Pairs' }, { value: '0.01s', label: 'Execution Speed' }, { value: '24/5', label: 'Market Hours' }].map((stat) => (
+              {[{ value: t('hero.stat1Value'), label: t('hero.stat1Label') }, { value: t('hero.stat2Value'), label: t('hero.stat2Label') }, { value: t('hero.stat3Value'), label: t('hero.stat3Label') }].map((stat) => (
                 <div key={stat.label}>
                   <p className="text-2xl font-[800] text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-400">{stat.value}</p>
                   <p className="text-[10px] text-gray-500 uppercase tracking-widest mt-1 font-medium">{stat.label}</p>
@@ -182,7 +184,7 @@ const Hero = () => {
                   transition={{ duration: 1.5, repeat: Infinity }}
                   className="w-2 h-2 bg-accent-cyan rounded-full"
                 />
-                <span className="text-accent-cyan text-xs font-bold uppercase tracking-widest">Live Markets</span>
+                <span className="text-accent-cyan text-xs font-bold uppercase tracking-widest">{t('hero.liveMarkets')}</span>
               </motion.div>
             </motion.div>
 

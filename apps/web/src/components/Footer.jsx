@@ -14,9 +14,9 @@ const XIcon = ({ size = 20 }) => (
 
 // ─── Configure your social media URLs here ───────────────────────────────────
 const SOCIAL_LINKS = {
-  twitter: 'https://x.com/amaricapitals',       // Update with real X/Twitter handle
-  instagram: 'https://instagram.com/amaricapitals', // Update with real Instagram URL
-  facebook: 'https://facebook.com/amaricapitals',   // Update with real Facebook URL
+  twitter: 'https://x.com/kapserfx',       // Update with real X/Twitter handle
+  instagram: 'https://instagram.com/kapserfx', // Update with real Instagram URL
+  facebook: 'https://facebook.com/kapserfx',   // Update with real Facebook URL
 };
 
 const Footer = () => {
@@ -62,29 +62,20 @@ const Footer = () => {
 
     const onSubmit = async (data) => {
         try {
-            const response = await fetch('http://localhost:5000/api/contact', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    source: 'Newsletter',
-                    email: data.email
-                })
-            });
-            const result = await response.json();
+            // Save to a separate Newsletter list in localStorage
+            const existingSubscribers = JSON.parse(localStorage.getItem('newsletterSubscribers') || '[]');
+            const newSubscriber = {
+                id: Date.now(),
+                email: data.email,
+                date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })
+            };
+            localStorage.setItem('newsletterSubscribers', JSON.stringify([newSubscriber, ...existingSubscribers]));
             
-            if (result.success) {
-                toast({
-                    title: "Subscribed! 🎉",
-                    description: "Thanks for subscribing to our newsletter.",
-                });
-                reset();
-            } else {
-                toast({
-                    title: "Subscription Failed",
-                    description: result.message || "Please try again later.",
-                    variant: "destructive"
-                });
-            }
+            toast({
+                title: "Subscribed! 🎉",
+                description: "Thanks for subscribing to our newsletter.",
+            });
+            reset();
         } catch (error) {
             toast({
                 title: "Error",
@@ -132,7 +123,7 @@ const Footer = () => {
     ];
 
     return (
-        <footer className="bg-[#232323] pt-16 pb-12 font-sans">
+        <footer className="bg-[#0B0B0B] border-t border-white/[0.06] pt-16 pb-12 font-sans">
             <div className="container mx-auto px-6 max-w-7xl">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8">
                     
@@ -140,12 +131,12 @@ const Footer = () => {
                     <div className="lg:col-span-3">
                         <div className="mb-6">
                             <h3 className="text-4xl font-bold tracking-widest text-white">
-                                AMARI CAPITALS
+                                KAPSERFX
                             </h3>
                             <p className="text-xs text-gray-400 tracking-[0.2em] mt-1">IT SOLUTIONS EST</p>
                         </div>
                         <p className="text-gray-300 mb-6 text-sm leading-relaxed">
-                            At Amari Capitals, we are your trusted partner in navigating the dynamic landscape of the Forex market.
+                            At KAPSERFX, we are your trusted partner in navigating the dynamic landscape of the Forex market.
                         </p>
                         <div className="flex gap-3 mb-10">
                             <a 
@@ -179,7 +170,7 @@ const Footer = () => {
 
                         <div>
                             <h4 className="text-accent-cyan font-bold mb-2">Policies</h4>
-                            <div className="h-0.5 w-8 bg-gradient-to-r from-[#5A378A] to-[#EE7448] mb-4"></div>
+                            <div className="h-0.5 w-8 bg-gradient-to-r from-accent-cyan to-accent-purple mb-4"></div>
                             <ul className="space-y-2">
                                 {policies.map(policy => (
                                     <li key={policy.name}>
@@ -202,7 +193,7 @@ const Footer = () => {
                     {/* Column 2: Quick Links */}
                     <div className="lg:col-span-2 lg:ml-8">
                         <h4 className="text-white font-bold text-lg mb-2">Quick Links</h4>
-                        <div className="h-0.5 w-12 bg-gradient-to-r from-[#5A378A] to-[#EE7448] mb-6"></div>
+                        <div className="h-0.5 w-12 bg-gradient-to-r from-accent-cyan to-accent-purple mb-6"></div>
                         <ul className="space-y-4">
                             {quickLinks.map(link => (
                                 <li key={link.name}>
@@ -221,7 +212,7 @@ const Footer = () => {
                     {/* Column 3: Latest Posts */}
                     <div className="lg:col-span-4">
                         <h4 className="text-white font-bold text-lg mb-2">Latest Posts</h4>
-                        <div className="h-0.5 w-12 bg-gradient-to-r from-[#5A378A] to-[#EE7448] mb-6"></div>
+                        <div className="h-0.5 w-12 bg-gradient-to-r from-accent-cyan to-accent-purple mb-6"></div>
                         <div className="space-y-6">
                             {latestPosts.map((post, idx) => (
                                 <div key={idx} className="flex gap-4 group cursor-pointer" onClick={() => {
@@ -242,16 +233,16 @@ const Footer = () => {
                     {/* Column 4: Contact Us */}
                     <div className="lg:col-span-3">
                         <h4 className="text-white font-bold text-lg mb-2">Contact Us</h4>
-                        <div className="h-0.5 w-12 bg-gradient-to-r from-[#5A378A] to-[#EE7448] mb-6"></div>
+                        <div className="h-0.5 w-12 bg-gradient-to-r from-accent-cyan to-accent-purple mb-6"></div>
                         
                         <div className="space-y-4 mb-8">
                             <div className="flex gap-3 text-gray-300 text-sm">
                                 <Mail size={18} className="shrink-0 mt-0.5 text-white" />
-                                <a href="mailto:enquiry@amaricapitals.com" className="hover:text-white transition-colors">enquiry@amaricapitals.com</a>
+                                <a href="mailto:enquiry@kapserfx.com" className="hover:text-white transition-colors">enquiry@kapserfx.com</a>
                             </div>
                             <div className="flex gap-3 text-gray-300 text-sm">
                                 <Phone size={18} className="shrink-0 mt-0.5 text-white" />
-                                <a href="tel:+971525889115" className="hover:text-white transition-colors">+971525889115</a>
+                                <a href="tel:+971568795828" className="hover:text-white transition-colors">+971568795828</a>
                             </div>
                             <div className="flex gap-3 text-gray-300 text-sm">
                                 <MapPin size={18} className="shrink-0 mt-0.5 text-white" />
@@ -273,7 +264,7 @@ const Footer = () => {
                                     })}
                                     className="w-full px-4 bg-white text-black outline-none"
                                 />
-                                <button disabled={isSubmitting} type="submit" className="px-6 bg-gradient-to-r from-[#5A378A] to-[#EE7448] text-white hover:opacity-90 transition-opacity flex items-center justify-center shrink-0 disabled:opacity-50">
+                                <button disabled={isSubmitting} type="submit" className="px-6 bg-gradient-to-r from-accent-cyan to-accent-purple text-white hover:opacity-90 transition-opacity flex items-center justify-center shrink-0 disabled:opacity-50">
                                     <ArrowRight size={18} />
                                 </button>
                             </div>

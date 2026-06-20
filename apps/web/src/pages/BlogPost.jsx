@@ -30,7 +30,7 @@ const BlogPost = () => {
   return (
     <div className="min-h-screen bg-[#080B10] text-white pt-24 pb-16 font-sans">
       <Helmet>
-        <title>{post.title} | Amari Capitals IT Solutions EST</title>
+        <title>{post.title} | KAPSERFX IT SOLUTIONS EST</title>
       </Helmet>
 
       <div className="container mx-auto px-6 max-w-4xl">

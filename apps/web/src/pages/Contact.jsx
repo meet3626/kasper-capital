@@ -30,30 +30,39 @@ const Contact = () => {
 
   const onSubmit = async (data) => {
     try {
-      const response = await fetch('http://localhost:5000/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...data, source: 'Contact Page / Lets Talk' })
-      });
-      const result = await response.json();
-      
-      if (result.success) {
-        toast({
-          title: "Message Sent! 🚀",
-          description: "We've received your request and will be in touch shortly.",
+      // Save to localStorage for Admin Panel
+      const existingLeads = JSON.parse(localStorage.getItem('adminLeads') || '[]');
+      const newLead = {
+        ...data,
+        id: Date.now(),
+        status: 'New',
+        interest: 'General Inquiry', // Default or derived
+        date: new Date().toLocaleString(),
+        source: 'Contact Page / Lets Talk'
+      };
+      localStorage.setItem('adminLeads', JSON.stringify([newLead, ...existingLeads]));
+
+      // Optionally still try the fetch if they have a backend, but we don't block success on it
+      try {
+        await fetch('http://localhost:5000/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(newLead)
         });
-        reset();
-      } else {
-        toast({
-          title: "Submission Failed",
-          description: result.message || "Please try again later.",
-          variant: "destructive"
-        });
+      } catch (e) {
+        // Ignore backend error for now since we rely on localStorage
       }
+      
+      toast({
+        title: "Message Sent! 🚀",
+        description: "We've received your request and will be in touch shortly.",
+      });
+      reset();
+      
     } catch (error) {
       toast({
-        title: "Connection Error",
-        description: "Failed to connect to the server.",
+        title: "Submission Error",
+        description: "Failed to process your request.",
         variant: "destructive"
       });
     }
@@ -62,7 +71,7 @@ const Contact = () => {
   return (
     <motion.div initial="initial" animate="in" exit="out" variants={pageVariants} transition={{ type: 'tween', ease: 'anticipate', duration: 0.5 }}>
       <Helmet>
-        <title>Connect With Us | Amari Capitals IT Solutions EST</title>
+        <title>Connect With Us | KAPSERFX IT SOLUTIONS EST</title>
       </Helmet>
       
       <section className="bg-[#0C0D0D] text-white py-32 sm:py-40 min-h-screen">
@@ -80,8 +89,8 @@ const Contact = () => {
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-12">
                 <div>
-                  <ContactInfoBlock title="Email Us" lines={["enquiry@amaricapitals.com"]} delay={0.4} />
-                  <ContactInfoBlock title="Call Us" lines={["+971525889115"]} delay={0.6} />
+                  <ContactInfoBlock title="Email Us" lines={["enquiry@kapserfx.com"]} delay={0.4} />
+                  <ContactInfoBlock title="Call Us" lines={["+971568795828"]} delay={0.6} />
                 </div>
                 <div>
                   <ContactInfoBlock title="Visit Us" lines={["2807, Churchill Executive Tower", "Business Bay, Dubai, UAE"]} delay={0.5} />

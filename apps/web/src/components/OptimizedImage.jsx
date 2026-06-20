@@ -4,7 +4,7 @@ const OptimizedImage = ({ src, alt, className = "", width, height, ...props }) =
   return (
     <img
       src={src}
-      alt={alt || "Amari Capitals Image"}
+      alt={alt || "KAPSERFX Image"}
       className={`transition-opacity duration-300 ${className}`}
       loading="lazy"
       decoding="async"

@@ -224,9 +224,9 @@ const BrokerSetupCalculator = () => {
       <div className="container mx-auto max-w-7xl">
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold uppercase tracking-wider mb-4">
-            Broker Setup <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF6B4A] to-white">Calculator</span>
+            Brokerage Startup Cost <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF6B4A] to-white">Estimator</span>
           </h1>
-          <p className="text-gray-400 text-lg">Calculate your estimated setup and operating costs instantly.</p>
+          <p className="text-gray-400 text-lg">Calculate your exact technology, liquidity, and platform maintenance costs to launch your own turnkey brokerage.</p>
         </div>
 
         <div className="flex flex-col lg:flex-row gap-8">

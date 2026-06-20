@@ -16,7 +16,7 @@ const Home = () => {
   return (
     <div className="bg-[#0B0B0B] min-h-screen text-white font-sans">
       <SEOHead 
-        title="Amari Capitals | Turnkey Forex Broker Solutions"
+        title="KAPSERFX | Turnkey Forex Broker Solutions"
         description="Launch your Forex brokerage in days. We offer MT5/cTrader platforms, CRM, liquidity integration, and digital marketing strategies."
       />
 

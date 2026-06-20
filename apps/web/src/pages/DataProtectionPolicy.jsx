@@ -5,7 +5,7 @@ const DataProtectionPolicy = () => {
   return (
     <div className="pt-32 pb-24 bg-[#080B10] min-h-screen">
       <Helmet>
-        <title>Data Protection Policy | Amari Capitals IT Solutions EST</title>
+        <title>Data Protection Policy | KAPSERFX IT SOLUTIONS EST</title>
       </Helmet>
       <div className="container mx-auto px-6 max-w-4xl">
         <h1 className="text-4xl md:text-5xl font-bold mb-12 text-white uppercase tracking-widest border-b border-white/10 pb-8">
@@ -18,7 +18,7 @@ const DataProtectionPolicy = () => {
           <section>
             <h2 className="text-2xl font-bold text-white mb-4">1. Introduction</h2>
             <p>
-              Amari Capitals IT Solutions EST ("Amari Capitals IT Solutions EST", "we", "our", or "us") is committed to protecting the confidentiality, integrity, and security of personal and business information entrusted to us. This Data Protection Policy outlines how we collect, process, store, protect, and manage data in accordance with applicable data protection laws and industry best practices.
+              KAPSERFX IT SOLUTIONS EST ("KAPSERFX IT SOLUTIONS EST", "we", "our", or "us") is committed to protecting the confidentiality, integrity, and security of personal and business information entrusted to us. This Data Protection Policy outlines how we collect, process, store, protect, and manage data in accordance with applicable data protection laws and industry best practices.
             </p>
           </section>
 
@@ -38,7 +38,7 @@ const DataProtectionPolicy = () => {
           <section>
             <h2 className="text-2xl font-bold text-white mb-4">3. Data We May Collect</h2>
             <p>
-              Amari Capitals IT Solutions EST may collect and process names, contact details, company information, email addresses, telephone numbers, business documentation, project-related information, technical usage data, and communication records. We collect only information necessary for legitimate business purposes.
+              KAPSERFX IT SOLUTIONS EST may collect and process names, contact details, company information, email addresses, telephone numbers, business documentation, project-related information, technical usage data, and communication records. We collect only information necessary for legitimate business purposes.
             </p>
           </section>
 
@@ -52,7 +52,7 @@ const DataProtectionPolicy = () => {
           <section>
             <h2 className="text-2xl font-bold text-white mb-4">5. Data Security Measures</h2>
             <p>
-              Amari Capitals IT Solutions EST implements reasonable administrative, technical, and organizational safeguards to protect data against unauthorized access, loss, theft, misuse, disclosure, alteration, or destruction. Security measures may include access controls, encryption, secure hosting environments, and restricted access policies.
+              KAPSERFX IT SOLUTIONS EST implements reasonable administrative, technical, and organizational safeguards to protect data against unauthorized access, loss, theft, misuse, disclosure, alteration, or destruction. Security measures may include access controls, encryption, secure hosting environments, and restricted access policies.
             </p>
           </section>
 

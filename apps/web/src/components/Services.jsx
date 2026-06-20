@@ -1,20 +1,14 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Monitor, Target, Users, LineChart, Globe, Coins, Shield, Code, Briefcase, Server, Lock, Zap } from 'lucide-react';
+import { Monitor, Users, LineChart, Shield, Server, Briefcase } from 'lucide-react';
 
 const servicesData = [
-  { icon: LineChart, title: 'Forex Trading', desc: 'Trade 80+ major, minor and exotic currency pairs with competitive spreads from 0.0 pips and deep institutional liquidity.' },
-  { icon: Monitor, title: 'MetaTrader 5 (MT5)', desc: 'Industry-standard platform with advanced charting, 100+ technical indicators, expert advisors, and multi-asset trading.' },
-  { icon: Globe, title: 'Commodities', desc: 'Trade gold, silver, crude oil, natural gas, and agricultural commodities with ultra-tight spreads and no hidden fees.' },
-  { icon: Target, title: 'Indices (CFDs)', desc: 'Access global stock indices including US30, NASDAQ100, FTSE100, DAX40 and more with flexible leverage options.' },
-  { icon: Coins, title: 'Crypto CFDs', desc: 'Speculate on Bitcoin, Ethereum, Ripple and 30+ crypto pairs through regulated CFD trading without owning the asset.' },
-  { icon: Zap, title: 'Exotic Pairs', desc: 'Capture emerging-market opportunities with USD/TRY, USD/ZAR, EUR/SGD and other high-volatility currency pairs.' },
-  { icon: Shield, title: 'Islamic Accounts', desc: 'Swap-free trading accounts fully compliant with Sharia law — no overnight interest charges on any open positions.' },
-  { icon: Users, title: 'Client Portal (CRM)', desc: 'Manage deposits, withdrawals, account verification, and documents from a secure, intuitive online client portal.' },
-  { icon: Briefcase, title: 'Trading Conditions', desc: 'Transparent spreads, competitive commissions, flexible leverage up to 1:500, and no requotes or hidden markups.' },
-  { icon: Server, title: 'VPS Hosting', desc: 'Ultra-low latency VPS servers co-located near liquidity providers for uninterrupted algorithmic and EA trading.' },
-  { icon: Lock, title: 'Segregated Funds', desc: 'Client funds held in segregated accounts at tier-1 banks, fully isolated from company operational capital.' },
-  { icon: Code, title: 'Educational Center', desc: 'Structured forex education covering fundamentals, technical analysis, risk management, and live market webinars.' },
+  { icon: LineChart, title: 'Multi-Asset Liquidity', desc: 'Connect your brokerage to deep Tier-1 liquidity pools offering 80+ FX pairs, Commodities, and Crypto CFDs with aggregated feeds and tight institutional spreads.' },
+  { icon: Monitor, title: 'White-Label MT5 Platform', desc: 'Deploy a fully branded MT5 trading environment complete with advanced admin controls, manager terminals, and custom plugins tailored for your brokerage.' },
+  { icon: Users, title: 'Branded CRM & Client Portal', desc: 'Streamline your back-office operations with an intelligent portal featuring automated KYC/AML onboarding, multi-tier IB management, and integrated payment gateways.' },
+  { icon: Server, title: 'Ultra-Low Latency VPS', desc: 'Provide your traders with sub-millisecond execution speeds via our globally distributed, co-located servers adjacent to major liquidity providers.' },
+  { icon: Shield, title: 'Risk Management & Centroid', desc: 'Safeguard your brokerage with sophisticated risk management bridging and Centroid integration, offering real-time exposure monitoring to mitigate toxic flow.' },
+  { icon: Briefcase, title: 'Islamic Compliance Setup', desc: 'Expand your regional market share by easily configuring swap-free, Sharia-compliant trading accounts for your clients without complex administrative overhead.' },
 ];
 
 const containerVariants = {
@@ -48,7 +42,7 @@ const Services = () => {
             viewport={{ once: true }}
             className="section-label"
           >
-            Trading Instruments
+            Turnkey Solutions
           </motion.p>
           <motion.h2
             initial={{ opacity: 0, y: -10 }}
@@ -57,7 +51,7 @@ const Services = () => {
             transition={{ delay: 0.1 }}
             className="text-4xl md:text-5xl font-bold text-white"
           >
-            Everything You Need to <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-cyan to-accent-purple">Trade</span>
+            Complete Brokerage <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-cyan to-accent-purple">Infrastructure</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 10 }}
@@ -66,7 +60,7 @@ const Services = () => {
             transition={{ delay: 0.2 }}
             className="text-gray-400 mt-5 max-w-2xl mx-auto text-lg leading-relaxed"
           >
-            Access forex, commodities, indices and crypto through a single account with institutional-grade execution and transparent pricing.
+            Launch and scale your forex brand with our comprehensive suite of B2B technology, Tier-1 liquidity, and operational management tools.
           </motion.p>
         </div>
 
@@ -75,7 +69,7 @@ const Services = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
           {servicesData.map((service, index) => {
             const Icon = service.icon;

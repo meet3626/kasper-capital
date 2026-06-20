@@ -4,24 +4,24 @@ import { Plus, Minus } from 'lucide-react';
 
 const faqs = [
   {
-    question: 'What trading instruments are available on Kasper Capital Markets?',
-    answer: 'We offer 80+ forex currency pairs, commodities (gold, silver, oil), global indices (US30, NASDAQ, FTSE), and 30+ cryptocurrency CFDs — all accessible from a single account on MT5.',
+    question: 'What is included in the KAPSERFX Turnkey Brokerage bundle?',
+    answer: 'Our comprehensive turnkey setup includes a fully branded MT5 White Label platform, Techysquad CRM with integrated Client Portal, Tier-1 liquidity bridges via Centroid, multi-currency payment gateway integrations, and a custom-designed corporate website.',
   },
   {
-    question: 'What is the minimum deposit to open a live account?',
-    answer: 'You can start trading with a minimum deposit of $100 USD. We offer multiple account types to suit different trading styles and capital levels.',
+    question: 'How long does it take to deploy the MT5 White Label platform?',
+    answer: 'A standard MT5 White Label environment can be fully deployed, branded, and configured within 2 to 4 weeks. This includes the setup of manager terminals, administrative controls, and connection to your selected liquidity providers.',
   },
   {
-    question: 'Does Kasper Capital Markets offer a Demo account?',
-    answer: 'Yes, we offer a fully-featured demo account with $50,000 virtual funds so you can practice trading strategies and explore all platform features without risking real money.',
+    question: 'How do you assist with FSC or CySEC licensing?',
+    answer: 'We provide end-to-end regulatory advisory. Our legal partners assist with corporate structuring, compiling the required documentation, capital adequacy planning, and liaising directly with the FSC (Mauritius) or CySEC (Cyprus) to fast-track your brokerage license.',
   },
   {
-    question: 'Which trading platforms do you support?',
-    answer: 'We support MetaTrader 5 (MT5) across desktop (Windows/macOS), iOS, Android, and WebTrader. MT5 gives you access to advanced charts, 100+ indicators, and automated Expert Advisors.',
+    question: 'Do you provide CRM and Payment Gateway integrations?',
+    answer: 'Yes. We integrate the industry-leading Techysquad CRM, customized to your brand, which features automated KYC/AML onboarding, multi-tier IB management, and pre-integrated crypto and fiat payment gateways for seamless deposits and withdrawals.',
   },
   {
-    question: 'Do you offer Islamic (swap-free) accounts?',
-    answer: 'Yes. We offer fully Sharia-compliant Islamic accounts with no overnight swap charges on any open positions, designed for traders observing Islamic financial principles.',
+    question: 'Can you connect my brokerage to my preferred liquidity provider?',
+    answer: 'Absolutely. While we offer highly competitive aggregated Tier-1 liquidity out-of-the-box, our FIX API and bridging technology allow seamless integration with any global liquidity provider of your choice.',
   }
 ];
 
