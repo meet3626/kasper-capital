@@ -46,9 +46,9 @@ const Roadmap = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-gray-400 text-lg"
+            className="text-gray-400 text-lg max-w-3xl mx-auto leading-relaxed"
           >
-            12 precision-engineered steps to institutional-grade brokerage launch.
+            A fragmented launch guarantees regulatory friction and capital bleed. Our 12-step institutional blueprint engineers your brokerage for zero-delay deployment, ensuring uncompromised compliance and immediate operational dominance.
           </motion.p>
         </div>
 

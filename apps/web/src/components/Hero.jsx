@@ -7,12 +7,12 @@ import ParticleNetwork from '@/components/ParticleNetwork';
 import { useTranslation } from 'react-i18next';
 
 // Floating animated stat card used in the side panel
-const FloatingCard = ({ icon: Icon, label, value, color, delay, className }) => (
+const FloatingCard = ({ icon: Icon, label, value, color, delay, className, tooltipText }) => (
   <motion.div
     initial={{ opacity: 0, x: 40, y: 20 }}
     animate={{ opacity: 1, x: 0, y: 0 }}
     transition={{ duration: 0.8, delay, ease: [0.22, 1, 0.36, 1] }}
-    className={`absolute bg-[#141820]/90 backdrop-blur-md border border-white/10 rounded-2xl px-5 py-4 flex items-center gap-3 shadow-2xl ${className}`}
+    className={`absolute bg-[#141820]/90 backdrop-blur-md border border-white/10 rounded-2xl px-5 py-4 flex items-center gap-3 shadow-2xl group cursor-default hover:border-white/30 transition-colors duration-300 ${className}`}
   >
     <div className={`w-9 h-9 rounded-xl flex items-center justify-center ${color}`}>
       <Icon size={18} className="text-white" />
@@ -21,6 +21,17 @@ const FloatingCard = ({ icon: Icon, label, value, color, delay, className }) => 
       <p className="text-white font-bold text-lg leading-none">{value}</p>
       <p className="text-gray-400 text-xs mt-0.5 tracking-wide">{label}</p>
     </div>
+
+    {/* Tooltip */}
+    {tooltipText && (
+      <div className="absolute -top-12 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 group-hover:-top-14 transition-all duration-300 pointer-events-none z-50">
+        <div className="bg-neutral-800 border border-white/20 text-gray-200 text-[11px] font-medium px-3 py-1.5 rounded-lg whitespace-nowrap shadow-xl">
+          {tooltipText}
+        </div>
+        {/* Tooltip arrow */}
+        <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-neutral-800 border-b border-r border-white/20 rotate-45" />
+      </div>
+    )}
   </motion.div>
 );
 
@@ -192,10 +203,11 @@ const Hero = () => {
             <FloatingCard
               icon={TrendingUp}
               label="Execution Speed"
-              value="0.4ms"
+              value="<1ms"
               color="bg-gradient-to-br from-accent-cyan to-accent-cyan/50"
               delay={0.8}
               className="-top-4 -left-8"
+              tooltipText="Co-located servers in London LD4 & New York NY4"
             />
             <FloatingCard
               icon={Shield}
@@ -204,6 +216,7 @@ const Hero = () => {
               color="bg-gradient-to-br from-accent-purple to-accent-purple/50"
               delay={1.0}
               className="-bottom-4 -left-4"
+              tooltipText="Pre-cleared regulatory frameworks & corporate structuring"
             />
             <FloatingCard
               icon={Zap}
@@ -212,6 +225,7 @@ const Hero = () => {
               color="bg-gradient-to-br from-orange-500 to-orange-500/50"
               delay={1.2}
               className="top-16 -right-8"
+              tooltipText="Direct market access to Top-Tier Prime of Primes"
             />
 
             {/* Rotating orbital ring */}

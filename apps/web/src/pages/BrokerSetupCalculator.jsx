@@ -224,7 +224,7 @@ const BrokerSetupCalculator = () => {
       <div className="container mx-auto max-w-7xl">
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold uppercase tracking-wider mb-4">
-            Brokerage Startup Cost <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF6B4A] to-white">Estimator</span>
+            Brokerage Startup Cost <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-cyan to-accent-purple">Estimator</span>
           </h1>
           <p className="text-gray-400 text-lg">Calculate your exact technology, liquidity, and platform maintenance costs to launch your own turnkey brokerage.</p>
         </div>
@@ -242,7 +242,7 @@ const BrokerSetupCalculator = () => {
                   onClick={() => setCurrentStepIndex(idx)}
                   className={`flex-shrink-0 px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 ${
                     idx === currentStepIndex 
-                    ? 'bg-[#FF6B4A] text-white' 
+                    ? 'bg-accent-cyan text-white' 
                     : 'bg-white/5 text-gray-400 hover:bg-white/10'
                   }`}
                 >
@@ -283,9 +283,9 @@ const BrokerSetupCalculator = () => {
                        <div 
                          key={opt.id} 
                          onClick={() => toggleSelection(currentStep.id, opt.id, currentStep.type)}
-                         className={`relative cursor-pointer p-6 rounded-2xl border transition-all duration-300 ${isSelected ? 'border-[#FF6B4A] bg-[#FF6B4A]/10' : 'border-white/10 bg-white/5 hover:border-white/30'}`}
+                         className={`relative cursor-pointer p-6 rounded-2xl border transition-all duration-300 ${isSelected ? 'border-accent-cyan bg-accent-cyan/10' : 'border-white/10 bg-white/5 hover:border-white/30'}`}
                        >
-                         {isSelected && <div className="absolute top-4 right-4 text-[#FF6B4A]"><Check size={20} /></div>}
+                         {isSelected && <div className="absolute top-4 right-4 text-accent-cyan"><Check size={20} /></div>}
                          <h3 className="text-lg font-bold text-white mb-2 pr-8">{opt.name}</h3>
                          <div className="text-sm text-gray-400 space-y-1">
                            <p>Setup Time: <span className="text-white">{opt.time}</span></p>
@@ -302,9 +302,9 @@ const BrokerSetupCalculator = () => {
                       <div 
                         key={opt.id} 
                         onClick={() => toggleSelection(currentStep.id, opt.id, currentStep.type)}
-                        className={`relative cursor-pointer p-6 rounded-2xl border transition-all duration-300 flex flex-col justify-between ${isSelected ? 'border-[#FF6B4A] bg-[#FF6B4A]/10' : 'border-white/10 bg-white/5 hover:border-white/30'}`}
+                        className={`relative cursor-pointer p-6 rounded-2xl border transition-all duration-300 flex flex-col justify-between ${isSelected ? 'border-accent-cyan bg-accent-cyan/10' : 'border-white/10 bg-white/5 hover:border-white/30'}`}
                       >
-                        {isSelected && <div className="absolute top-4 right-4 text-[#FF6B4A]"><Check size={20} /></div>}
+                        {isSelected && <div className="absolute top-4 right-4 text-accent-cyan"><Check size={20} /></div>}
                         <div>
                           <h3 className="text-lg font-bold text-white mb-4 pr-8 leading-snug">{opt.name}</h3>
                         </div>
@@ -363,7 +363,7 @@ const BrokerSetupCalculator = () => {
 
               <div className="mb-8">
                 <p className="text-sm text-gray-400 font-medium mb-1 uppercase tracking-widest">Year 1 Total</p>
-                <p className="text-4xl font-[800] text-transparent bg-clip-text bg-gradient-to-r from-[#FF6B4A] to-white">
+                <p className="text-4xl font-[800] text-transparent bg-clip-text bg-gradient-to-r from-accent-cyan to-accent-purple">
                   ${totals.year1Total.toLocaleString()}
                 </p>
               </div>
@@ -387,7 +387,7 @@ const BrokerSetupCalculator = () => {
                 </div>
               </div>
 
-              <button className="w-full mt-8 py-4 bg-[#FF6B4A] hover:bg-[#ff8066] text-white rounded-full font-bold uppercase tracking-widest transition-colors">
+              <button className="w-full mt-8 py-4 bg-accent-cyan hover:bg-cyan-400 text-white rounded-full font-bold uppercase tracking-widest transition-colors">
                 Request Quote
               </button>
             </div>

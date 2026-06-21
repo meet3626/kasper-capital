@@ -24,7 +24,7 @@ const Blog = () => {
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-7xl font-[800] uppercase tracking-wider mb-6 leading-tight">
               Latest Insights <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF6B4A] to-white">& News</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-cyan to-accent-purple">& News</span>
             </h1>
             <p className="text-lg text-gray-400 max-w-2xl mx-auto">
               Stay updated with the latest trends, regulatory changes, and expert advice on running a successful Forex brokerage.
@@ -74,7 +74,7 @@ const Blog = () => {
                     </div>
                   </div>
 
-                  <h3 className="text-xl font-bold text-white leading-snug mb-3 group-hover:text-[#FF6B4A] transition-colors line-clamp-2">
+                  <h3 className="text-xl font-bold text-white leading-snug mb-3 group-hover:text-accent-cyan transition-colors line-clamp-2">
                     {post.title}
                   </h3>
                   
@@ -82,7 +82,7 @@ const Blog = () => {
                     {post.excerpt}
                   </p>
 
-                  <button className="flex items-center gap-2 text-sm font-bold text-white group-hover:text-[#FF6B4A] transition-colors mt-auto w-fit">
+                  <button className="flex items-center gap-2 text-sm font-bold text-white group-hover:text-accent-cyan transition-colors mt-auto w-fit">
                     READ MORE <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                   </button>
                 </div>

@@ -87,12 +87,12 @@ const FAQ = () => {
                   <span className={`text-base font-semibold transition-colors duration-300 pr-4 leading-snug ${isActive ? 'text-accent-cyan' : 'text-white group-hover:text-accent-cyan/80'}`}>
                     {faq.question}
                   </span>
-                  <div className={`shrink-0 w-8 h-8 rounded-full flex items-center justify-center border transition-all duration-300 ${
+                  <div className={`shrink-0 w-8 h-8 rounded-full flex items-center justify-center border transition-all duration-500 ${
                     isActive
-                      ? 'bg-accent-cyan text-black border-accent-cyan rotate-0'
-                      : 'bg-white/5 text-gray-400 border-white/10 group-hover:border-white/30 group-hover:text-white'
+                      ? 'bg-accent-cyan/10 text-accent-cyan border-accent-cyan/50 rotate-180 shadow-[0_0_15px_rgba(0,255,255,0.3)]'
+                      : 'bg-white/5 text-gray-400 border-white/10 group-hover:border-white/30 group-hover:text-white rotate-0'
                   }`}>
-                    {isActive ? <Minus size={16} /> : <Plus size={16} />}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6"/></svg>
                   </div>
                 </button>
                 <AnimatePresence>

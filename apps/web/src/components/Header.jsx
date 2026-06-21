@@ -198,8 +198,10 @@ const MegaMenu = ({ isOpen }) => (
                         className="group flex items-start gap-3 px-3 py-3 rounded-xl transition-all duration-200 hover:bg-white/[0.04] border border-transparent hover:border-white/[0.08]"
                       >
                         {/* Icon bubble */}
-                        <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center shrink-0 mt-0.5 group-hover:border-accent-cyan/30 group-hover:bg-accent-cyan/5 transition-all duration-200">
-                          {/* <Icon size={14} className="text-gray-400 group-hover:text-accent-cyan transition-colors duration-200" /> */}
+                        <div className="relative w-10 h-10 rounded-xl bg-white/[0.02] border border-white/10 flex items-center justify-center shrink-0 mt-0.5 overflow-hidden transition-all duration-500 group-hover:border-accent-cyan/40 group-hover:bg-accent-cyan/[0.05] group-hover:shadow-[0_0_20px_rgba(0,255,255,0.15)_inset]">
+                          {/* Animated flare */}
+                          <div className="absolute -inset-[100%] bg-gradient-to-r from-transparent via-accent-cyan/10 to-transparent rotate-45 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-in-out" />
+                          <Icon size={18} strokeWidth={1.5} className="text-gray-400 group-hover:text-accent-cyan group-hover:scale-110 transition-all duration-300 relative z-10" />
                         </div>
 
                         {/* Text */}
@@ -303,11 +305,13 @@ const Header = () => {
   return (
     <>
       <motion.header
-        className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-          isScrolled ? 'bg-[#0B0B0B]/90 backdrop-blur-lg border-b border-white/10' : 'bg-transparent'
+        className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ease-[0.22,1,0.36,1] ${
+          isScrolled ? 'bg-[#080b12]/85 backdrop-blur-xl border-b border-white/[0.08] shadow-[0_10px_40px_rgba(0,0,0,0.5)]' : 'bg-transparent'
         }`}
       >
-        <div className="container mx-auto px-6 h-20 flex justify-between items-center">
+        <div className={`container mx-auto px-6 flex justify-between items-center transition-all duration-500 ease-[0.22,1,0.36,1] ${
+          isScrolled ? 'h-16' : 'h-24'
+        }`}>
 
           {/* Logo */}
           <Link to="/" onClick={handleHomeClick} className="text-2xl font-bold text-white tracking-wider flex items-center gap-2 shrink-0">
@@ -461,7 +465,9 @@ const Header = () => {
                                     onClick={() => setIsOpen(false)}
                                     className="flex items-center gap-3 py-2 group"
                                   >
-                                    {/* <Icon size={14} className="text-gray-500 group-hover:text-accent-cyan transition-colors shrink-0" /> */}
+                                    <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center shrink-0 group-hover:border-accent-cyan/30 group-hover:bg-accent-cyan/10 transition-all duration-300">
+                                      <Icon size={14} className="text-gray-500 group-hover:text-accent-cyan group-hover:scale-110 transition-all duration-300" />
+                                    </div>
                                     <span className="text-sm text-gray-300 group-hover:text-white transition-colors font-medium">{item.label}</span>
                                   </Link>
                                 );

@@ -4,6 +4,7 @@ import Hero from '@/components/Hero';
 import Services from '@/components/Services';
 import Features from '@/components/Features';
 import Roadmap from '@/components/Roadmap';
+import ProfitEstimator from '@/components/ProfitEstimator';
 import Insights from '@/components/Insights';
 import FAQ from '@/components/FAQ';
 import Testimonials from '@/components/Testimonials';
@@ -11,6 +12,7 @@ import Partners from '@/components/Partners';
 import CTA from '@/components/CTA';
 import SectionAnimator from '@/components/SectionAnimator';
 import SEOHead from '@/components/SEOHead';
+import AboutKAPSERFX from '@/components/AboutKAPSERFX';
 
 const Home = () => {
   return (
@@ -24,10 +26,12 @@ const Home = () => {
       <SectionAnimator><Services /></SectionAnimator>
       <SectionAnimator><Features /></SectionAnimator>
       <Roadmap />
+      <SectionAnimator><ProfitEstimator /></SectionAnimator>
       <SectionAnimator><Insights /></SectionAnimator>
       <SectionAnimator><FAQ /></SectionAnimator>
       <SectionAnimator><Testimonials /></SectionAnimator>
       <SectionAnimator><Partners /></SectionAnimator>
+      <SectionAnimator><AboutKAPSERFX /></SectionAnimator>
       <SectionAnimator><CTA /></SectionAnimator>
     </div>
   );
