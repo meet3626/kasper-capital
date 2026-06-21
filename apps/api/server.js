@@ -21,6 +21,12 @@ const app = express();
 // Set security HTTP headers
 app.use(helmet());
 
+// CORS configuration (allow requests from frontend)
+app.use(cors({
+  origin: true,
+  credentials: true,
+}));
+
 // Rate Limiting (100 requests per 10 minutes per IP)
 const limiter = rateLimit({
   windowMs: 10 * 60 * 1000, 
@@ -40,11 +46,7 @@ app.use(cookieParser());
 // Prevent XSS attacks
 // app.use(xss());
 
-// CORS configuration (allow requests from frontend)
-app.use(cors({
-  origin: true,
-  credentials: true,
-}));
+
 
 // Routes
 app.use('/api/auth', authRoutes);
