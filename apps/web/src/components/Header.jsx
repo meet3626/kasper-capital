@@ -318,17 +318,17 @@ const Header = () => {
             : 'bg-transparent py-5'
             }`}
         >
-          <div className="max-w-7xl mx-auto px-4 md:px-8 flex justify-between items-center w-full">
+          <div className="max-w-[1400px] mx-auto px-4 md:px-6 flex justify-between items-center w-full gap-4">
 
             {/* Logo */}
-            <Link to="/" onClick={handleHomeClick} className="text-xl md:text-2xl font-[800] text-white tracking-widest flex items-center gap-2 shrink-0">
+            <Link to="/" onClick={handleHomeClick} className="text-lg md:text-xl font-[800] text-white tracking-wide flex items-center shrink-0">
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-cyan to-white">BROKERCORESOLUTION</span>
             </Link>
 
             {/* Desktop Nav */}
-            <nav className="hidden lg:flex items-center gap-7">
+            <nav className="hidden lg:flex items-center gap-4 xl:gap-7 shrink-0">
 
-              <Link to="/" onClick={handleHomeClick} className="text-gray-300 hover:text-white transition-colors relative group font-semibold uppercase tracking-widest text-sm">
+              <Link to="/" onClick={handleHomeClick} className="text-gray-300 hover:text-white transition-colors relative group font-semibold uppercase tracking-wider text-[13px] xl:text-sm">
                 {'HOME'}
                 <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full" />
               </Link>
@@ -340,7 +340,7 @@ const Header = () => {
                 onMouseLeave={handleMegaLeave}
               >
                 <button
-                  className={`flex items-center gap-1.5 text-sm font-semibold uppercase tracking-widest transition-colors duration-200 py-7 ${megaOpen ? 'text-accent-cyan' : 'text-gray-300 hover:text-white'
+                  className={`flex items-center gap-1.5 text-[13px] xl:text-sm font-semibold uppercase tracking-wider transition-colors duration-200 py-7 ${megaOpen ? 'text-accent-cyan' : 'text-gray-300 hover:text-white'
                     }`}
                 >
                   {t('nav.services')}
@@ -354,7 +354,7 @@ const Header = () => {
 
               {/* Company Dropdown */}
               <div className="relative group">
-                <button className="text-gray-300 hover:text-white transition-colors font-semibold uppercase tracking-widest text-sm flex items-center gap-1 py-7">
+                <button className="text-gray-300 hover:text-white transition-colors font-semibold uppercase tracking-wider text-[13px] xl:text-sm flex items-center gap-1 py-7">
                   {t('nav.company')}
                   <ChevronDown size={13} className="transition-transform duration-300 group-hover:rotate-180" />
                 </button>
@@ -365,12 +365,12 @@ const Header = () => {
                 </div>
               </div>
 
-              <Link to="/blog" onClick={() => setIsOpen(false)} className="text-gray-300 hover:text-white transition-colors relative group font-semibold uppercase tracking-widest text-sm">
+              <Link to="/blog" onClick={() => setIsOpen(false)} className="text-gray-300 hover:text-white transition-colors relative group font-semibold uppercase tracking-wider text-[13px] xl:text-sm">
                 {t('nav.blog')}
                 <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full" />
               </Link>
 
-              <Link to="/brokerage-calculator" onClick={() => setIsOpen(false)} className="text-gray-300 hover:text-white transition-colors relative group font-semibold uppercase tracking-widest text-sm">
+              <Link to="/brokerage-calculator" onClick={() => setIsOpen(false)} className="text-gray-300 hover:text-white transition-colors relative group font-semibold uppercase tracking-wider text-[13px] xl:text-sm">
                 {t('nav.calculator')}
                 <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full" />
               </Link>
