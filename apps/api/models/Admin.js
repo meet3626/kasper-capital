@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const argon2 = require('argon2');
+const bcrypt = require('bcryptjs');
 
 const adminSchema = new mongoose.Schema({
   name: {
@@ -43,13 +43,13 @@ const adminSchema = new mongoose.Schema({
 
 // Hash password before saving
 adminSchema.pre('save', async function () {
-  if (!this.isModified('password')) return;
-  this.password = await argon2.hash(this.password);
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
 });
 
 // Method to verify password
 adminSchema.methods.matchPassword = async function (enteredPassword) {
-  return await argon2.verify(this.password, enteredPassword);
+  return await bcrypt.compare(enteredPassword, this.password);
 };
 
 module.exports = mongoose.model('Admin', adminSchema);
