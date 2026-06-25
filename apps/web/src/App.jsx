@@ -4,19 +4,21 @@ import Layout from '@/components/Layout';
 import WhatsAppButton from '@/components/WhatsAppButton';
 import { AnimatePresence } from 'framer-motion';
 
-// Lazy loading pages for massive performance boost
-const Home = React.lazy(() => import('@/pages/Home'));
-const Contact = React.lazy(() => import('@/pages/Contact'));
+// Static imports for core pages to ensure INSTANT navigation (zero latency)
+import Home from '@/pages/Home';
+import Contact from '@/pages/Contact';
+import BrokerSetupCalculator from '@/pages/BrokerSetupCalculator';
+import AboutUs from '@/pages/AboutUs';
+import ServiceDetail from '@/pages/ServiceDetail';
+
+// Lazy loading for secondary/heavy pages
 const Project = React.lazy(() => import('@/pages/Project'));
-const BrokerSetupCalculator = React.lazy(() => import('@/pages/BrokerSetupCalculator'));
-const AboutUs = React.lazy(() => import('@/pages/AboutUs'));
 const Blog = React.lazy(() => import('@/pages/Blog'));
 const BlogPost = React.lazy(() => import('@/pages/BlogPost'));
 const PrivacyPolicy = React.lazy(() => import('@/pages/PrivacyPolicy'));
 const TermsAndConditions = React.lazy(() => import('@/pages/TermsAndConditions'));
 const RefundPolicy = React.lazy(() => import('@/pages/RefundPolicy'));
 const AMLPolicy = React.lazy(() => import('@/pages/AMLPolicy'));
-const ServiceDetail = React.lazy(() => import('@/pages/ServiceDetail'));
 const AdminLogin = React.lazy(() => import('@/pages/Admin/AdminLogin'));
 const AdminDashboard = React.lazy(() => import('@/pages/Admin/AdminDashboard'));
 
