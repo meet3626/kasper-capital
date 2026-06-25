@@ -1,7 +1,7 @@
 {
   "buildCommand": "npm run build --prefix apps/web",
   "outputDirectory": "apps/web/dist",
-  "installCommand": "npm install",
+  "installCommand": "npm install --include=dev",
   "framework": "vite",
   "rewrites": [
     { "source": "/api/(.*)", "destination": "/api/index.js" },
