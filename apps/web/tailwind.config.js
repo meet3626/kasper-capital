@@ -44,6 +44,9 @@ module.exports = {
           yellow: '#FFD700',
           black: '#000000',
           obsidian: '#0A0A0A',
+          cyan: '#FFD700', // Aliased to Electric Yellow for global theme overhaul
+          blue: '#FFFFFF', // Aliased to White for global theme overhaul
+          purple: '#A3A3A3', // Aliased to Muted Gray for global theme overhaul
         },
         popover: {
           default: 'hsl(var(--popover))',
