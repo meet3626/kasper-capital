@@ -12,7 +12,7 @@ const sendEmail = async (options) => {
   });
 
   const message = {
-    from: `${process.env.FROM_NAME || 'Kasper Web Admin'} <${process.env.FROM_EMAIL || 'noreply@kasperweb.com'}>`,
+    from: `${process.env.FROM_NAME || 'BrokerCoreSolution Web Admin'} <${process.env.FROM_EMAIL || 'noreply@brokercoresolution.com'}>`,
     to: options.email,
     subject: options.subject,
     text: options.message,

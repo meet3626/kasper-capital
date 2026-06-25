@@ -18,7 +18,7 @@ const createLead = async (req, res) => {
 
     try {
       await sendEmail({
-        email: process.env.ADMIN_EMAIL || 'admin@kasperweb.com',
+        email: process.env.ADMIN_EMAIL || 'admin@brokercoresolution.com',
         subject: `New Lead: ${source} - ${name}`,
         message: `You have received a new lead from the ${source} form.\n\nName: ${name}\nEmail: ${email}\nPhone: ${phone || 'N/A'}\nMessage: ${message || 'N/A'}`,
       });
