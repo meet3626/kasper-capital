@@ -616,7 +616,37 @@ export default function AdminDashboard() {
           </div>
 
           <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl p-6 shadow-lg">
-            <div className="overflow-x-auto">
+            {/* Mobile View */}
+            <div className="md:hidden space-y-4">
+              {adminUsers.map((admin) => (
+                <div key={admin.id} className="bg-black/20 border border-gray-800 rounded-lg p-4 space-y-3">
+                  <div className="flex justify-between items-start">
+                    <div className="overflow-hidden pr-2">
+                      <div className="text-white font-medium truncate">{admin.name}</div>
+                      <div className="text-gray-400 text-sm truncate">{admin.email}</div>
+                    </div>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {Object.keys(admin.permissions).map(key => admin.permissions[key] && (
+                      <span key={key} className="px-2 py-1 bg-purple-500/10 text-purple-400 border border-purple-500/20 rounded-md text-[10px] uppercase font-bold tracking-wider">
+                        {key.replace('_', ' ')}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="pt-3 border-t border-gray-800 flex justify-end gap-2">
+                    {admin.id !== 1 && (
+                      <>
+                        <button onClick={() => openAdminModal(admin)} className="text-yellow-400 hover:text-yellow-400 text-xs font-medium px-3 py-1.5 border border-yellow-400/30 hover:border-yellow-400 rounded-lg transition-colors">Edit</button>
+                        <button onClick={() => handleDeleteAdmin(admin.id)} className="text-red-500 hover:text-red-400 text-xs font-medium px-3 py-1.5 border border-red-500/30 hover:border-red-400 rounded-lg transition-colors">Delete</button>
+                      </>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Desktop View */}
+            <div className="hidden md:block overflow-x-auto">
               <table className="w-full text-left border-collapse min-w-[700px]">
                 <thead>
                   <tr className="border-b border-gray-800">
@@ -978,7 +1008,7 @@ export default function AdminDashboard() {
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-400 mb-1">Content (Rich Text)</label>
-                  <div className="bg-white rounded-lg text-black mb-12">
+                  <div className="bg-white rounded-lg text-black mb-12 pb-12">
                     <ReactQuill 
                       theme="snow" 
                       value={blogForm.content} 
@@ -996,7 +1026,24 @@ export default function AdminDashboard() {
           )}
 
           <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl p-6 shadow-lg">
-            <div className="overflow-x-auto">
+            {/* Mobile View */}
+            <div className="md:hidden space-y-4">
+              {blogs.length > 0 ? blogs.map((blog) => (
+                <div key={blog.id} className="bg-black/20 border border-gray-800 rounded-lg p-4 space-y-3">
+                  <div className="text-white font-medium truncate">{blog.title}</div>
+                  <div className="text-gray-500 text-xs">{blog.date}</div>
+                  <div className="pt-3 border-t border-gray-800 flex justify-end gap-2">
+                    <button onClick={() => { setEditingBlog(blog); setBlogForm(blog); }} className="text-yellow-400 hover:text-yellow-400 text-xs font-medium px-3 py-1.5 border border-yellow-400/30 hover:border-yellow-400 rounded-lg transition-colors">Edit</button>
+                    <button onClick={() => handleDeleteBlog(blog.id)} className="text-red-500 hover:text-red-400 text-xs font-medium px-3 py-1.5 border border-red-500/30 hover:border-red-400 rounded-lg transition-colors">Delete</button>
+                  </div>
+                </div>
+              )) : (
+                <div className="py-8 text-center text-gray-500">No blogs created yet.</div>
+              )}
+            </div>
+
+            {/* Desktop View */}
+            <div className="hidden md:block overflow-x-auto">
               <table className="w-full text-left border-collapse min-w-[500px]">
                 <thead>
                   <tr className="border-b border-gray-800">
