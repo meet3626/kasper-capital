@@ -77,7 +77,7 @@
   }
 
   ::selection {
-    @apply bg-accent-cyan/30 text-white;
+    @apply bg-accent-yellow/30 text-white;
   }
 }
 
@@ -92,7 +92,7 @@
     @apply bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400;
   }
   .text-gradient-primary {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-accent-cyan to-accent-blue;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-accent-yellow to-white;
   }
 }
 

@@ -11,7 +11,7 @@ export default function WhatsAppButton() {
       href={`https://wa.me/${phoneNumber}?text=${defaultMessage}`}
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-6 right-6 z-[100] flex items-center justify-center w-14 h-14 bg-[#25D366] text-white rounded-full shadow-2xl hover:bg-[#1DA851] transition-colors"
+      className="fixed bottom-6 right-6 z-[100] flex items-center justify-center w-14 h-14 bg-accent-yellow text-black rounded-full shadow-2xl hover:bg-black hover:text-accent-yellow border-2 border-transparent hover:border-accent-yellow transition-all duration-300 group"
       initial={{ scale: 0, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
       whileHover={{ scale: 1.1 }}

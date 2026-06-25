@@ -41,8 +41,9 @@ module.exports = {
         accent: {
           default: 'hsl(var(--accent))',
           foreground: 'hsl(var(--accent-foreground))',
-          cyan: '#00e5ff',
-          blue: '#0055ff',
+          yellow: '#FFD700',
+          black: '#000000',
+          obsidian: '#0A0A0A',
         },
         popover: {
           default: 'hsl(var(--popover))',

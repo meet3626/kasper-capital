@@ -224,7 +224,7 @@ const BrokerSetupCalculator = () => {
       <div className="container mx-auto max-w-7xl">
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold uppercase tracking-wider mb-4">
-            Brokerage Startup Cost <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-cyan to-accent-purple">Estimator</span>
+            Brokerage Startup Cost <span className="text-accent-yellow">Estimator</span>
           </h1>
           <p className="text-gray-400 text-lg">Calculate your exact technology, liquidity, and platform maintenance costs to launch your own turnkey brokerage.</p>
         </div>
@@ -235,24 +235,31 @@ const BrokerSetupCalculator = () => {
           <div className="flex-grow flex flex-col">
             
             {/* Step Indicators */}
-            <div className="flex overflow-x-auto pb-4 mb-6 hide-scrollbar gap-2">
-              {steps.map((step, idx) => (
-                <button
-                  key={step.id}
-                  onClick={() => setCurrentStepIndex(idx)}
-                  className={`flex-shrink-0 px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 ${
-                    idx === currentStepIndex 
-                    ? 'bg-accent-cyan text-white' 
-                    : 'bg-white/5 text-gray-400 hover:bg-white/10'
-                  }`}
-                >
-                  {step.id}. {step.title}
-                </button>
-              ))}
+            <div className="relative pb-4 mb-6">
+              <div className="flex overflow-x-auto hide-scrollbar gap-2 relative z-10">
+                {steps.map((step, idx) => (
+                  <button
+                    key={step.id}
+                    onClick={() => setCurrentStepIndex(idx)}
+                    className={`flex-shrink-0 px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 ${
+                      idx === currentStepIndex 
+                      ? 'bg-accent-yellow text-black' 
+                      : 'bg-transparent border border-white/20 text-gray-400 hover:bg-white/5'
+                    }`}
+                  >
+                    {step.id}. {step.title}
+                  </button>
+                ))}
+              </div>
+              <div className="absolute bottom-0 left-0 w-full h-[1px] bg-white/10 z-0" />
+              <div 
+                className="absolute bottom-0 left-0 h-[1px] bg-accent-yellow z-10 transition-all duration-300" 
+                style={{ width: `${((currentStepIndex + 1) / steps.length) * 100}%` }} 
+              />
             </div>
 
             {/* Current Step Content */}
-            <div className="bg-[#121212] border border-white/10 rounded-3xl p-6 md:p-8 flex-grow">
+            <div className="bg-[#0A0A0A] border border-[#262626] rounded-3xl p-6 md:p-8 flex-grow">
               <div className="flex justify-between items-center mb-8">
                 <h2 className="text-2xl font-bold text-white uppercase tracking-wider">{currentStep.title}</h2>
                 <span className="text-sm text-gray-500 font-medium">Step {currentStep.id} of 10</span>
@@ -283,9 +290,9 @@ const BrokerSetupCalculator = () => {
                        <div 
                          key={opt.id} 
                          onClick={() => toggleSelection(currentStep.id, opt.id, currentStep.type)}
-                         className={`relative cursor-pointer p-6 rounded-2xl border transition-all duration-300 ${isSelected ? 'border-accent-cyan bg-accent-cyan/10' : 'border-white/10 bg-white/5 hover:border-white/30'}`}
+                         className={`relative cursor-pointer p-6 rounded-2xl transition-all duration-300 ${isSelected ? 'border-[1.5px] border-accent-yellow bg-black' : 'border border-[#262626] bg-[#0A0A0A] hover:border-white/30'}`}
                        >
-                         {isSelected && <div className="absolute top-4 right-4 text-accent-cyan"><Check size={20} /></div>}
+                         {isSelected && <div className="absolute top-4 right-4 text-accent-yellow"><Check size={20} /></div>}
                          <h3 className="text-lg font-bold text-white mb-2 pr-8">{opt.name}</h3>
                          <div className="text-sm text-gray-400 space-y-1">
                            <p>Setup Time: <span className="text-white">{opt.time}</span></p>
@@ -302,13 +309,13 @@ const BrokerSetupCalculator = () => {
                       <div 
                         key={opt.id} 
                         onClick={() => toggleSelection(currentStep.id, opt.id, currentStep.type)}
-                        className={`relative cursor-pointer p-6 rounded-2xl border transition-all duration-300 flex flex-col justify-between ${isSelected ? 'border-accent-cyan bg-accent-cyan/10' : 'border-white/10 bg-white/5 hover:border-white/30'}`}
+                        className={`relative cursor-pointer p-6 rounded-2xl transition-all duration-300 flex flex-col justify-between ${isSelected ? 'border-[1.5px] border-accent-yellow bg-black' : 'border border-[#262626] bg-[#0A0A0A] hover:border-white/30'}`}
                       >
-                        {isSelected && <div className="absolute top-4 right-4 text-accent-cyan"><Check size={20} /></div>}
+                        {isSelected && <div className="absolute top-4 right-4 text-accent-yellow"><Check size={20} /></div>}
                         <div>
                           <h3 className="text-lg font-bold text-white mb-4 pr-8 leading-snug">{opt.name}</h3>
                         </div>
-                        <div className="text-sm text-gray-400 space-y-2 mt-4 pt-4 border-t border-white/10">
+                        <div className="text-sm text-gray-400 space-y-2 mt-4 pt-4 border-t border-[#262626]">
                           {opt.time && <p className="flex justify-between"><span>Time:</span> <span className="text-white font-medium">{opt.time}</span></p>}
                           {opt.pages && <p className="flex justify-between"><span>Pages:</span> <span className="text-white font-medium">{opt.pages}</span></p>}
                           {(opt.oneTime !== undefined || opt.totalCost !== undefined || opt.deposit !== undefined) && (
@@ -331,7 +338,7 @@ const BrokerSetupCalculator = () => {
               </div>
 
               {/* Navigation Buttons */}
-              <div className="flex justify-between items-center mt-10 pt-6 border-t border-white/10">
+              <div className="flex justify-between items-center mt-10 pt-6 border-t border-[#262626]">
                 <button 
                   onClick={() => setCurrentStepIndex(prev => Math.max(0, prev - 1))}
                   disabled={currentStepIndex === 0}
@@ -353,7 +360,7 @@ const BrokerSetupCalculator = () => {
 
           {/* Sidebar Summary */}
           <div className="w-full lg:w-80 flex-shrink-0">
-            <div className="sticky top-28 bg-[#121212] border border-white/10 rounded-3xl p-6">
+            <div className="sticky top-28 bg-[#0A0A0A] border border-[#262626] rounded-3xl p-6">
               <div className="flex justify-between items-start mb-6">
                  <h3 className="text-xl font-bold text-white uppercase tracking-wider">Summary</h3>
                  <button onClick={handleReset} className="text-gray-400 hover:text-white transition-colors" title="Reset Calculator">
@@ -363,12 +370,12 @@ const BrokerSetupCalculator = () => {
 
               <div className="mb-8">
                 <p className="text-sm text-gray-400 font-medium mb-1 uppercase tracking-widest">Year 1 Total</p>
-                <p className="text-4xl font-[800] text-transparent bg-clip-text bg-gradient-to-r from-accent-cyan to-accent-purple">
+                <p className="text-4xl font-[800] text-accent-yellow">
                   ${totals.year1Total.toLocaleString()}
                 </p>
               </div>
 
-              <div className="space-y-4 pt-6 border-t border-white/10">
+              <div className="space-y-4 pt-6 border-t border-[#262626]">
                 <div className="flex justify-between items-center">
                   <span className="text-gray-400 text-sm">One-Time Cost</span>
                   <span className="text-white font-bold">${totals.oneTime.toLocaleString()}</span>
@@ -387,7 +394,7 @@ const BrokerSetupCalculator = () => {
                 </div>
               </div>
 
-              <button className="w-full mt-8 py-4 bg-accent-cyan hover:bg-cyan-400 text-white rounded-full font-bold uppercase tracking-widest transition-colors">
+              <button className="w-full mt-8 py-4 bg-accent-yellow hover:bg-black text-black hover:text-white border hover:border-accent-yellow rounded-full font-bold uppercase tracking-widest transition-all duration-300">
                 Request Quote
               </button>
             </div>
