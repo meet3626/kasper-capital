@@ -62,6 +62,8 @@ app.use('/api/analytics', analyticsRoutes);
 app.use('/api/upload', uploadRoutes);
 app.use('/api/admins', adminRoutes);
 
+app.get('/api/test-env', (req, res) => res.json({ mongo: !!process.env.MONGO_URI, secret: !!process.env.JWT_SECRET }));
+
 // Root Endpoint
 app.get('/', (req, res) => {
   res.send('API is running...');
