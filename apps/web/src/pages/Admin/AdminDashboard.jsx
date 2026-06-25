@@ -607,7 +607,7 @@ export default function AdminDashboard() {
 
           {showAdminModal && (
             <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
-              <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl w-full max-w-lg p-6 shadow-2xl relative">
+              <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl w-full max-w-lg p-6 shadow-2xl relative my-auto max-h-[90vh] overflow-y-auto">
                 <h2 className="text-xl font-bold text-white mb-6">{editingAdminId ? 'Edit Admin' : 'Create New Admin'}</h2>
                 <form onSubmit={handleSaveAdmin} className="space-y-4">
                   <div>
@@ -1102,11 +1102,14 @@ export default function AdminDashboard() {
         </main>
 
         {/* Mobile Bottom Navigation */}
-        <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white/5 backdrop-blur-xl border-t border-white/10 z-50 px-2 py-3 flex justify-around items-center">
+        <style>{`
+          .hide-scrollbar::-webkit-scrollbar { display: none; }
+        `}</style>
+        <div className="md:hidden fixed bottom-0 left-0 right-0 bg-[#0a0f1c]/95 backdrop-blur-xl border-t border-white/10 z-50 px-4 py-3 flex overflow-x-auto gap-6 hide-scrollbar" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
           {currentAdmin?.permissions?.dashboard && (
             <button
               onClick={() => setActiveTab('dashboard')}
-              className={`flex flex-col items-center gap-1 p-2 rounded-lg transition-colors ${
+              className={`flex flex-col items-center gap-1 flex-shrink-0 transition-colors ${
                 activeTab === 'dashboard' ? 'text-cyan-400' : 'text-gray-500 hover:text-gray-300'
               }`}
             >
@@ -1117,7 +1120,7 @@ export default function AdminDashboard() {
           {currentAdmin?.permissions?.users && (
             <button
               onClick={() => setActiveTab('users')}
-              className={`flex flex-col items-center gap-1 p-2 rounded-lg transition-colors ${
+              className={`flex flex-col items-center gap-1 flex-shrink-0 transition-colors ${
                 activeTab === 'users' ? 'text-cyan-400' : 'text-gray-500 hover:text-gray-300'
               }`}
             >
@@ -1128,7 +1131,7 @@ export default function AdminDashboard() {
           {currentAdmin?.permissions?.newsletter && (
             <button
               onClick={() => setActiveTab('newsletter')}
-              className={`flex flex-col items-center gap-1 p-2 rounded-lg transition-colors ${
+              className={`flex flex-col items-center gap-1 flex-shrink-0 transition-colors ${
                 activeTab === 'newsletter' ? 'text-cyan-400' : 'text-gray-500 hover:text-gray-300'
               }`}
             >
@@ -1136,10 +1139,33 @@ export default function AdminDashboard() {
               <span className="text-[10px] font-medium">Newsletter</span>
             </button>
           )}
+          
+          <button
+            onClick={() => setActiveTab('blogs')}
+            className={`flex flex-col items-center gap-1 flex-shrink-0 transition-colors ${
+              activeTab === 'blogs' ? 'text-cyan-400' : 'text-gray-500 hover:text-gray-300'
+            }`}
+          >
+            <FileText className="w-5 h-5" />
+            <span className="text-[10px] font-medium">Blogs</span>
+          </button>
+          
+          {currentAdmin?.permissions?.manage_admins && (
+            <button
+              onClick={() => setActiveTab('manage_admins')}
+              className={`flex flex-col items-center gap-1 flex-shrink-0 transition-colors ${
+                activeTab === 'manage_admins' ? 'text-cyan-400' : 'text-gray-500 hover:text-gray-300'
+              }`}
+            >
+              <LogOut className="w-5 h-5" />
+              <span className="text-[10px] font-medium">Admins</span>
+            </button>
+          )}
+
           {currentAdmin?.permissions?.settings && (
             <button
               onClick={() => setActiveTab('settings')}
-              className={`flex flex-col items-center gap-1 p-2 rounded-lg transition-colors ${
+              className={`flex flex-col items-center gap-1 flex-shrink-0 transition-colors ${
                 activeTab === 'settings' ? 'text-cyan-400' : 'text-gray-500 hover:text-gray-300'
               }`}
             >
