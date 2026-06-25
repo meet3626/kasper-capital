@@ -63,7 +63,8 @@ const setupMasterAdmin = async (req, res) => {
         newsletter: true,
         settings: true,
         manage_admins: true
-      }
+      },
+      isMaster: true
     });
 
     if (admin) {
@@ -133,9 +134,43 @@ const verifyLoginMfa = async (req, res) => {
   }
 };
 
+// @desc    Generate local MFA secret and QR
+// @route   POST /api/auth/local-mfa-generate
+// @access  Public
+const generateLocalMfa = async (req, res) => {
+  try {
+    const { email } = req.body;
+    const secret = generateSecret();
+    const otpauth = generateURI({ issuer: 'AdminPanel', label: email, secret });
+    const qrImageUrl = await qrcode.toDataURL(otpauth);
+    res.json({ secret, qrCode: qrImageUrl });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error generating MFA' });
+  }
+};
+
+// @desc    Verify local MFA token
+// @route   POST /api/auth/local-mfa-verify
+// @access  Public
+const verifyLocalMfa = async (req, res) => {
+  try {
+    const { mfaToken, secret } = req.body;
+    const verification = verifySync({ token: mfaToken, secret });
+    if (verification && verification.valid) {
+      res.json({ success: true });
+    } else {
+      res.status(401).json({ message: 'Invalid MFA token' });
+    }
+  } catch (error) {
+    res.status(500).json({ message: 'Server error verifying MFA' });
+  }
+};
+
 module.exports = {
   loginAdmin,
   setupMasterAdmin,
   logoutAdmin,
-  verifyLoginMfa
+  verifyLoginMfa,
+  generateLocalMfa,
+  verifyLocalMfa
 };

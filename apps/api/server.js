@@ -12,6 +12,7 @@ const blogRoutes = require('./routes/blogRoutes');
 const leadRoutes = require('./routes/leadRoutes');
 const analyticsRoutes = require('./routes/analyticsRoutes');
 const uploadRoutes = require('./routes/uploadRoutes');
+const adminRoutes = require('./routes/adminRoutes');
 
 // Load env vars
 dotenv.config();
@@ -23,6 +24,9 @@ const app = express();
 
 // Set security HTTP headers
 app.use(helmet());
+
+// Enable trust proxy for Vercel
+app.set('trust proxy', 1);
 
 // CORS configuration (allow requests from frontend)
 app.use(cors({
@@ -56,6 +60,7 @@ app.use('/api/leads', leadRoutes);
 app.use('/api/blogs', blogRoutes);
 app.use('/api/analytics', analyticsRoutes);
 app.use('/api/upload', uploadRoutes);
+app.use('/api/admins', adminRoutes);
 
 // Root Endpoint
 app.get('/', (req, res) => {

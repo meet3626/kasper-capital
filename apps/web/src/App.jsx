@@ -3,6 +3,7 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import Layout from '@/components/Layout';
 import WhatsAppButton from '@/components/WhatsAppButton';
 import { AnimatePresence } from 'framer-motion';
+import { Analytics } from '@vercel/analytics/react';
 
 // Static imports for core pages to ensure INSTANT navigation (zero latency)
 import Home from '@/pages/Home';
@@ -91,6 +92,7 @@ function App() {
         </Suspense>
       </AnimatePresence>
       {!isAdminRoute && <WhatsAppButton />}
+      <Analytics />
     </>
   );
 }
