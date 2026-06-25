@@ -25,22 +25,22 @@ const fadeIn = {
 // ── Accent colour maps ──────────────────────────────────────────────────────
 const ACCENT = {
   cyan: {
-    glow:   'from-accent-cyan/20 via-accent-cyan/5 to-transparent',
-    border: 'border-accent-cyan/30',
-    text:   'text-accent-cyan',
-    badge:  'bg-accent-cyan/10 text-accent-cyan border-accent-cyan/20',
-    dot:    'bg-accent-cyan',
-    metric: 'from-accent-cyan to-cyan-300',
-    tag:    'bg-accent-cyan/10 border-accent-cyan/20 text-accent-cyan',
+    glow:   'from-accent-yellow/20 via-accent-yellow/5 to-transparent',
+    border: 'border-accent-yellow/30',
+    text:   'text-accent-yellow',
+    badge:  'bg-accent-yellow/10 text-accent-yellow border-accent-yellow/20',
+    dot:    'bg-accent-yellow',
+    metric: 'from-accent-yellow to-white',
+    tag:    'bg-accent-yellow/10 border-accent-yellow/20 text-accent-yellow',
   },
   purple: {
-    glow:   'from-accent-purple/20 via-accent-purple/5 to-transparent',
-    border: 'border-accent-purple/30',
-    text:   'text-accent-purple',
-    badge:  'bg-accent-purple/10 text-accent-purple border-accent-purple/20',
-    dot:    'bg-accent-purple',
-    metric: 'from-accent-purple to-purple-300',
-    tag:    'bg-accent-purple/10 border-accent-purple/20 text-accent-purple',
+    glow:   'from-accent-yellow/20 via-accent-yellow/5 to-transparent',
+    border: 'border-accent-yellow/30',
+    text:   'text-accent-yellow',
+    badge:  'bg-accent-yellow/10 text-accent-yellow border-accent-yellow/20',
+    dot:    'bg-accent-yellow',
+    metric: 'from-accent-yellow to-white',
+    tag:    'bg-accent-yellow/10 border-accent-yellow/20 text-accent-yellow',
   },
 };
 
@@ -91,7 +91,7 @@ const ServiceDetail = () => {
           <p className="text-gray-400 mb-8">The service module you're looking for doesn't exist.</p>
           <Link
             to="/"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-accent-cyan text-black font-semibold text-sm hover:bg-accent-cyan/90 transition-colors"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-accent-yellow text-black font-semibold text-sm hover:bg-accent-yellow/90 transition-colors"
           >
             <ArrowLeft size={16} /> Back to Home
           </Link>
@@ -204,7 +204,7 @@ const ServiceDetail = () => {
               viewport={{ once: true }}
               className="flex items-center gap-3 mb-10"
             >
-              <div className={`w-8 h-px ${service.accent === 'cyan' ? 'bg-accent-cyan' : 'bg-accent-purple'}`} />
+              <div className={`w-8 h-px bg-accent-yellow`} />
               <span className="text-xs uppercase tracking-[0.2em] text-gray-500 font-bold">
                 Deep Technical Overview
               </span>
@@ -238,9 +238,7 @@ const ServiceDetail = () => {
                       viewport={{ once: true }}
                       className={`flex items-center gap-4 p-4 rounded-xl border ${a.border} bg-white/3 hover:bg-white/6 transition-colors`}
                     >
-                      <div className={`w-9 h-9 rounded-lg flex items-center justify-center shrink-0 ${
-                        service.accent === 'cyan' ? 'bg-accent-cyan/10' : 'bg-accent-purple/10'
-                      }`}>
+                      <div className={`w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-accent-yellow/10`}>
                         <Icon size={16} className={a.text} />
                       </div>
                       <div>
@@ -261,9 +259,7 @@ const ServiceDetail = () => {
         <div
           className="absolute inset-0 pointer-events-none opacity-40"
           style={{
-            background: service.accent === 'cyan'
-              ? 'radial-gradient(ellipse 60% 40% at 50% 50%, rgba(0,230,230,0.04) 0%, transparent 70%)'
-              : 'radial-gradient(ellipse 60% 40% at 50% 50%, rgba(110,60,180,0.06) 0%, transparent 70%)',
+            background: 'radial-gradient(ellipse 60% 40% at 50% 50%, rgba(255,215,0,0.04) 0%, transparent 70%)'
           }}
         />
         <div className="container mx-auto px-6 relative z-10">
@@ -273,7 +269,7 @@ const ServiceDetail = () => {
               viewport={{ once: true }}
               className="flex items-center gap-3 mb-4"
             >
-              <div className={`w-8 h-px ${service.accent === 'cyan' ? 'bg-accent-cyan' : 'bg-accent-purple'}`} />
+              <div className={`w-8 h-px bg-accent-yellow`} />
               <span className="text-xs uppercase tracking-[0.2em] text-gray-500 font-bold">
                 Feature & Technology Specifications
               </span>
@@ -308,7 +304,7 @@ const ServiceDetail = () => {
               viewport={{ once: true }}
               className="flex items-center gap-3 mb-4"
             >
-              <div className={`w-8 h-px ${service.accent === 'cyan' ? 'bg-accent-cyan' : 'bg-accent-purple'}`} />
+              <div className={`w-8 h-px bg-accent-yellow`} />
               <span className="text-xs uppercase tracking-[0.2em] text-gray-500 font-bold">
                 Strategic Business Value
               </span>
@@ -323,9 +319,7 @@ const ServiceDetail = () => {
               <div
                 className={`absolute top-0 right-0 w-64 h-64 rounded-bl-full opacity-20 pointer-events-none`}
                 style={{
-                  background: service.accent === 'cyan'
-                    ? 'radial-gradient(circle, rgba(0,230,230,0.3) 0%, transparent 70%)'
-                    : 'radial-gradient(circle, rgba(110,60,180,0.3) 0%, transparent 70%)',
+                  background: 'radial-gradient(circle, rgba(255,215,0,0.3) 0%, transparent 70%)'
                 }}
               />
               <p className="text-gray-200 leading-8 text-base md:text-lg font-light relative z-10">
@@ -357,11 +351,7 @@ const ServiceDetail = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 to="/contact"
-                className={`inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full font-semibold text-sm transition-all duration-200 ${
-                  service.accent === 'cyan'
-                    ? 'bg-accent-cyan text-black hover:bg-accent-cyan/90'
-                    : 'bg-accent-purple text-white hover:bg-accent-purple/90'
-                }`}
+                className={`inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full font-semibold text-sm transition-all duration-200 bg-accent-yellow text-black hover:bg-accent-yellow/90`}
               >
                 Request a Consultation <ArrowRight size={16} />
               </Link>
