@@ -30,20 +30,22 @@ const LiquidBlob = ({ position, color, distort, speed, scale }) => {
 };
 
 export default function Admin3DBackground() {
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(true);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     const checkDevice = () => {
       setIsMobile(window.innerWidth < 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
     };
     checkDevice();
+    setMounted(true);
     window.addEventListener('resize', checkDevice);
     return () => window.removeEventListener('resize', checkDevice);
   }, []);
 
   return (
     <div className="fixed inset-0 z-0 pointer-events-none bg-[#030610]">
-      {isMobile ? (
+      {(!mounted || isMobile) ? (
         <div className="absolute inset-0 overflow-hidden opacity-60">
           <div className="absolute top-[-10%] left-[-20%] w-[70%] h-[70%] bg-cyan-500/10 rounded-full blur-[100px] animate-pulse" style={{ animationDuration: '4s' }} />
           <div className="absolute bottom-[-10%] right-[-20%] w-[70%] h-[70%] bg-purple-500/10 rounded-full blur-[100px] animate-pulse" style={{ animationDuration: '5s', animationDelay: '1s' }} />

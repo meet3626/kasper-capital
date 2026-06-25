@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 export default function WhatsAppButton() {
   // Using the support number we found in the settings: +971568795828
   const phoneNumber = "971568795828";
-  const defaultMessage = encodeURIComponent("Hello! I'm interested in KapserFX services and would like to know more.");
+  const defaultMessage = encodeURIComponent("Hello! I'm interested in BrokerCoreSolution services and would like to know more.");
 
   return (
     <motion.a

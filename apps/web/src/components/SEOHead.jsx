@@ -2,11 +2,11 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 
 const SEOHead = ({ 
-  title = "KAPSERFX | Expert Forex Broker Solutions", 
-  description = "Turnkey Forex Brokerage solutions, trading platforms, licensing, CRM, and digital marketing strategies by KAPSERFX IT SOLUTIONS EST.", 
+  title = "BROKERCORESOLUTION | Expert Forex Broker Solutions", 
+  description = "Turnkey Forex Brokerage solutions, trading platforms, licensing, CRM, and digital marketing strategies by BrokerCoreSolution.", 
   keywords = "Forex Broker, Turnkey Solutions, MT5, cTrader, Forex Licensing, Crypto Broker, Trading Platform",
   image = "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1200&auto=format&fit=crop&q=80",
-  url = "https://kapserfx.com",
+  url = "https://brokercoresolution.com",
   type = "website"
 }) => {
   return (
@@ -36,10 +36,10 @@ const SEOHead = ({
           {
             "@context": "https://schema.org",
             "@type": "FinancialService",
-            "name": "KAPSERFX IT SOLUTIONS EST",
-            "alternateName": "KAPSERFX Turnkey Brokerage Solutions",
-            "url": "https://www.kapserfx.com",
-            "logo": "https://www.kapserfx.com/logo.png",
+            "name": "BrokerCoreSolution",
+            "alternateName": "BROKERCORESOLUTION Turnkey Brokerage Solutions",
+            "url": "https://www.brokercoresolution.com",
+            "logo": "https://www.brokercoresolution.com/logo.png",
             "description": "Premium B2B Fintech provider specializing in turnkey Forex broker solutions, MT5/cTrader white-label platforms, Tier-1 liquidity integration, and global regulatory compliance.",
             "address": {
               "@type": "PostalAddress",
@@ -49,10 +49,10 @@ const SEOHead = ({
             },
             "areaServed": "Worldwide",
             "telephone": "+971-55-1234567",
-            "email": "contact@kapserfx.com",
+            "email": "contact@brokercoresolution.com",
             "sameAs": [
-              "https://www.linkedin.com/company/kapserfx",
-              "https://twitter.com/kapserfx"
+              "https://www.linkedin.com/company/brokercoresolution",
+              "https://twitter.com/brokercoresolution"
             ],
             "priceRange": "$$$",
             "aggregateRating": {

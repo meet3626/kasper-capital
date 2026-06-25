@@ -322,7 +322,7 @@ const Header = () => {
 
             {/* Logo */}
             <Link to="/" onClick={handleHomeClick} className="text-xl md:text-2xl font-[800] text-white tracking-widest flex items-center gap-2 shrink-0">
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-cyan to-white">KAPSERFX</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-cyan to-white">BROKERCORESOLUTION</span>
             </Link>
 
             {/* Desktop Nav */}
@@ -432,7 +432,7 @@ const Header = () => {
               {/* Mobile Header Row */}
               <div className="flex justify-between items-center h-20 shrink-0">
                 <Link to="/" onClick={handleHomeClick} className="text-2xl font-bold text-white tracking-wider">
-                  <span className="text-accent-cyan">KAPSERFX</span>
+                  <span className="text-accent-cyan">BROKERCORESOLUTION</span>
                 </Link>
                 <button onClick={() => setIsOpen(false)} className="text-white p-1"><X size={28} /></button>
               </div>

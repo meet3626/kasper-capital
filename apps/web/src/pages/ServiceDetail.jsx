@@ -117,7 +117,7 @@ const ServiceDetail = () => {
       className="min-h-screen text-white overflow-x-hidden"
     >
       <Helmet>
-        <title>{service.title} — KAPSERFX Institutional Solutions</title>
+        <title>{service.title} — BROKERCORESOLUTION Institutional Solutions</title>
         <meta
           name="description"
           content={`${service.subtitle} — ${service.overview[0].slice(0, 155)}...`}
@@ -351,7 +351,7 @@ const ServiceDetail = () => {
               </span>
             </h2>
             <p className="text-gray-400 mb-8 text-lg">
-              Speak with a KAPSERFX institutional solutions architect. No generic pitch decks —
+              Speak with a BROKERCORESOLUTION institutional solutions architect. No generic pitch decks —
               a structured technical consultation mapped to your brokerage's specific requirements.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

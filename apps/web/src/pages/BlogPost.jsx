@@ -59,7 +59,7 @@ const BlogPost = () => {
   return (
     <div className="min-h-screen text-white pt-24 pb-16 font-sans">
       <Helmet>
-        <title>{post.title} | KAPSERFX IT SOLUTIONS EST</title>
+        <title>{post.title} | BrokerCoreSolution</title>
       </Helmet>
 
       <div className="container mx-auto px-6 max-w-4xl">

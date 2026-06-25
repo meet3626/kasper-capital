@@ -8,7 +8,7 @@ const AboutUs = () => {
   return (
     <div className="min-h-screen text-white pt-32 pb-12 relative overflow-hidden">
       <SEOHead 
-        title="About Us | KAPSERFX IT SOLUTIONS EST"
+        title="About Us | BrokerCoreSolution"
         description="Learn about our mission to help businesses streamline operations and accelerate growth with expert technology consulting."
       />
 
@@ -33,7 +33,7 @@ const AboutUs = () => {
               Pioneering <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-cyan to-accent-purple italic font-light">Brokerage</span> Infrastructure
             </h1>
             <p className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto font-light leading-relaxed">
-              At KAPSERFX, we specialize in providing elite technology consulting, infrastructure solutions, and business advisory services to financial institutions, brokerage firms, and corporate clients worldwide.
+              At BROKERCORESOLUTION, we specialize in providing elite technology consulting, infrastructure solutions, and business advisory services to financial institutions, brokerage firms, and corporate clients worldwide.
             </p>
           </motion.div>
         </div>
@@ -152,7 +152,7 @@ const AboutUs = () => {
             <div>
               <h3 className="text-xl font-bold uppercase tracking-widest text-white mb-4">Corporate Statement</h3>
               <p className="text-gray-400 text-lg leading-relaxed font-light">
-                KAPSERFX is a technology consulting and business services company. We do not operate a brokerage, provide trading services, offer investment advice, manage client funds, or provide financial products. All services are provided exclusively to businesses, licensed institutions, and corporate clients.
+                BROKERCORESOLUTION is a technology consulting and business services company. We do not operate a brokerage, provide trading services, offer investment advice, manage client funds, or provide financial products. All services are provided exclusively to businesses, licensed institutions, and corporate clients.
               </p>
             </div>
           </motion.div>

@@ -12,9 +12,9 @@ const XIcon = ({ size = 20 }) => (
 );
 
 const SOCIAL_LINKS = {
-  twitter: 'https://x.com/kapserfx',
-  instagram: 'https://instagram.com/kapserfx',
-  facebook: 'https://facebook.com/kapserfx',
+  twitter: 'https://x.com/brokercoresolution',
+  instagram: 'https://instagram.com/brokercoresolution',
+  facebook: 'https://facebook.com/brokercoresolution',
 };
 
 const Footer = () => {
@@ -162,7 +162,7 @@ const Footer = () => {
                         <div className="mb-8">
                             <h3 className="text-4xl font-[900] tracking-tighter text-gray-900 dark:text-white flex items-center gap-2">
                                 <span className="w-4 h-4 bg-gradient-to-br from-accent-cyan to-accent-purple rounded-sm inline-block"></span>
-                                KAPSERFX
+                                BROKERCORESOLUTION
                             </h3>
                             <p className="text-xs font-bold text-accent-cyan tracking-[0.2em] mt-2 uppercase">IT Solutions Est</p>
                         </div>
@@ -175,7 +175,7 @@ const Footer = () => {
                                 <div className="w-10 h-10 rounded-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 flex items-center justify-center group-hover:border-accent-cyan transition-colors">
                                     <Mail size={16} className="group-hover:text-accent-cyan transition-colors" />
                                 </div>
-                                <a href="mailto:enquiry@kapserfx.com" className="hover:text-gray-900 dark:hover:text-white transition-colors">enquiry@kapserfx.com</a>
+                                <a href="mailto:enquiry@brokercoresolution.com" className="hover:text-gray-900 dark:hover:text-white transition-colors">enquiry@brokercoresolution.com</a>
                             </div>
                             <div className="flex items-center gap-4 text-gray-600 dark:text-gray-400 font-light group cursor-pointer">
                                 <div className="w-10 h-10 rounded-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 flex items-center justify-center group-hover:border-accent-cyan transition-colors">
@@ -258,7 +258,7 @@ const Footer = () => {
                 {/* Bottom Bar */}
                 <div className="pt-8 border-t border-black/10 dark:border-white/10 flex flex-col md:flex-row justify-between items-center gap-6">
                     <p className="text-sm text-gray-500 font-light">
-                        &copy; {new Date().getFullYear()} KAPSERFX IT Solutions Est. All rights reserved.
+                        &copy; {new Date().getFullYear()} BROKERCORESOLUTION IT Solutions Est. All rights reserved.
                     </p>
                     
                     <div className="flex gap-4">

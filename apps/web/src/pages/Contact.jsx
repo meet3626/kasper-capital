@@ -70,7 +70,7 @@ const Contact = () => {
   return (
     <motion.div initial="initial" animate="in" exit="out" variants={pageVariants} transition={{ type: 'tween', ease: 'anticipate', duration: 0.5 }} className="min-h-screen pt-32 pb-24 relative overflow-hidden">
       <Helmet>
-        <title>Contact Sales | KAPSERFX IT SOLUTIONS</title>
+        <title>Contact Sales | BrokerCoreSolution</title>
       </Helmet>
 
       {/* Background Ambience */}
@@ -95,7 +95,7 @@ const Contact = () => {
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-12">
-              <ContactInfoCard icon={Mail} title="Email Us" lines={["enquiry@kapserfx.com", "sales@kapserfx.com"]} delay={0.4} />
+              <ContactInfoCard icon={Mail} title="Email Us" lines={["enquiry@brokercoresolution.com", "sales@brokercoresolution.com"]} delay={0.4} />
               <ContactInfoCard icon={Phone} title="Call Us" lines={["+971 56 879 5828", "Mon-Fri, 9am-6pm (GST)"]} delay={0.5} />
               <div className="sm:col-span-2">
                 <ContactInfoCard icon={MapPin} title="Headquarters" lines={["Office 2807, Churchill Executive Tower", "Business Bay, Dubai, United Arab Emirates"]} delay={0.6} />

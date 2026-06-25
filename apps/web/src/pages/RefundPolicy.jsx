@@ -5,7 +5,7 @@ const RefundPolicy = () => {
   return (
     <div className="pt-32 pb-24 min-h-screen">
       <Helmet>
-        <title>Refund & Cancellation Policy | KAPSERFX IT SOLUTIONS EST</title>
+        <title>Refund & Cancellation Policy | BrokerCoreSolution</title>
       </Helmet>
       <div className="container mx-auto px-6 max-w-4xl">
         <h1 className="text-4xl md:text-5xl font-bold mb-12 text-white uppercase tracking-widest border-b border-white/10 pb-8">
@@ -18,10 +18,10 @@ const RefundPolicy = () => {
           <section>
             <h2 className="text-2xl font-bold text-white mb-4">1. General Overview</h2>
             <p>
-              At KAPSERFX IT SOLUTIONS EST, we strive to ensure absolute clarity regarding the services we provide and the financial commitments involved. This Refund and Cancellation Policy outlines the terms governing refunds, cancellations, and service termination for our consulting, technology implementation, website development, and CRM solutions.
+              At BrokerCoreSolution, we strive to ensure absolute clarity regarding the services we provide and the financial commitments involved. This Refund and Cancellation Policy outlines the terms governing refunds, cancellations, and service termination for our consulting, technology implementation, website development, and CRM solutions.
             </p>
             <p className="mt-4">
-              By engaging KAPSERFX IT SOLUTIONS EST for any service, clients agree to the terms set forth in this policy.
+              By engaging BrokerCoreSolution for any service, clients agree to the terms set forth in this policy.
             </p>
           </section>
 
@@ -37,7 +37,7 @@ const RefundPolicy = () => {
             <ul className="list-disc pl-6 space-y-2 mt-4">
               <li><strong>Prior to Commencement:</strong> If a cancellation request is received and approved before any resources have been allocated or work has begun, a refund may be issued, subject to administrative fees.</li>
               <li><strong>Work in Progress:</strong> If a project is cancelled while in progress, the client will be billed for all work completed up to the point of cancellation. Any pre-payments exceeding the value of the completed work may be refunded at our discretion.</li>
-              <li><strong>Third-Party Costs:</strong> Any costs incurred by KAPSERFX IT SOLUTIONS EST on behalf of the client for third-party services (e.g., software licenses, hosting, vendor fees) are strictly non-refundable.</li>
+              <li><strong>Third-Party Costs:</strong> Any costs incurred by BrokerCoreSolution on behalf of the client for third-party services (e.g., software licenses, hosting, vendor fees) are strictly non-refundable.</li>
             </ul>
           </section>
 
@@ -51,7 +51,7 @@ const RefundPolicy = () => {
           <section>
             <h2 className="text-2xl font-bold text-white mb-4">5. Contact Us</h2>
             <p>
-              If you wish to request a cancellation or have questions about a potential refund, please contact your dedicated account manager or email us directly at <strong>enquiry@kapserfx.com</strong>.
+              If you wish to request a cancellation or have questions about a potential refund, please contact your dedicated account manager or email us directly at <strong>enquiry@brokercoresolution.com</strong>.
             </p>
           </section>
         </div>

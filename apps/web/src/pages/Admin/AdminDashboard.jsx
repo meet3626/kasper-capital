@@ -185,7 +185,7 @@ export default function AdminDashboard() {
   const handleEmailBroadcast = () => {
     const emails = leads.map(l => l.email).filter(Boolean).join(',');
     if (emails) {
-      window.location.href = `mailto:?bcc=${emails}&subject=Update from KapserFX`;
+      window.location.href = `mailto:?bcc=${emails}&subject=Update from BrokerCoreSolution`;
     } else {
       alert("No valid email addresses found in your leads.");
     }

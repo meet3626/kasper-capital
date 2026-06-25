@@ -4,7 +4,7 @@ import { Plus, Minus } from 'lucide-react';
 
 const faqs = [
   {
-    question: 'What is included in the KAPSERFX Turnkey Brokerage bundle?',
+    question: 'What is included in the BROKERCORESOLUTION Turnkey Brokerage bundle?',
     answer: 'Our comprehensive turnkey setup includes a fully branded MT5 White Label platform, Techysquad CRM with integrated Client Portal, Tier-1 liquidity bridges via Centroid, multi-currency payment gateway integrations, and a custom-designed corporate website.',
   },
   {

@@ -11,13 +11,13 @@ import Partners from '@/components/Partners';
 import CTA from '@/components/CTA';
 import SectionAnimator from '@/components/SectionAnimator';
 import SEOHead from '@/components/SEOHead';
-import AboutKAPSERFX from '@/components/AboutKAPSERFX';
+import AboutBROKERCORESOLUTION from '@/components/AboutBROKERCORESOLUTION';
 
 const Home = () => {
   return (
     <div className="w-full">
       <SEOHead 
-        title="KAPSERFX | Turnkey Forex Broker Solutions"
+        title="BROKERCORESOLUTION | Turnkey Forex Broker Solutions"
         description="Launch your Forex brokerage in days. We offer MT5/cTrader platforms, CRM, liquidity integration, and digital marketing strategies."
       />
 
@@ -30,7 +30,7 @@ const Home = () => {
       <SectionAnimator><FAQ /></SectionAnimator>
       <SectionAnimator><Testimonials /></SectionAnimator>
       <SectionAnimator><Partners /></SectionAnimator>
-      <SectionAnimator><AboutKAPSERFX /></SectionAnimator>
+      <SectionAnimator><AboutBROKERCORESOLUTION /></SectionAnimator>
       <SectionAnimator><CTA /></SectionAnimator>
     </div>
   );
