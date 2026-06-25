@@ -49,9 +49,21 @@ export default function AdminDashboard() {
       return;
     }
 
-    // Load admin users
-    const users = JSON.parse(localStorage.getItem('adminUsers') || '[]');
-    setAdminUsers(users);
+    // Load admin users from API
+    const fetchAdmins = async () => {
+      try {
+        const isProd = import.meta.env.PROD;
+        const apiUrl = import.meta.env.VITE_API_URL || (isProd ? '' : 'http://localhost:5000');
+        const res = await fetch(`${apiUrl}/api/admins`);
+        if (res.ok) {
+          const data = await res.json();
+          setAdminUsers(data);
+        }
+      } catch (err) {
+        console.error('Failed to load admins', err);
+      }
+    };
+    fetchAdmins();
 
     // Load maintenance mode
     const savedMaintenance = localStorage.getItem('maintenanceMode');
@@ -198,36 +210,84 @@ export default function AdminDashboard() {
     permissions: { dashboard: false, users: false, newsletter: false, settings: false, manage_admins: false }
   });
 
-  const handleSaveAdmin = (e) => {
+  const handleSaveAdmin = async (e) => {
     e.preventDefault();
-    let updatedUsers;
-    if (editingAdminId) {
-       updatedUsers = adminUsers.map(u => u.id === editingAdminId ? { ...u, name: adminForm.name, email: adminForm.email, permissions: adminForm.permissions, password: adminForm.password ? btoa(adminForm.password) : u.password } : u);
-    } else {
-       updatedUsers = [...adminUsers, { ...adminForm, id: Date.now(), password: btoa(adminForm.password) }];
+    try {
+      const isProd = import.meta.env.PROD;
+      const apiUrl = import.meta.env.VITE_API_URL || (isProd ? '' : 'http://localhost:5000');
+      
+      const payload = { ...adminForm };
+      // Normal admins cannot assign master roles
+      if (!currentAdmin?.isMaster) {
+        delete payload.isMaster;
+      }
+      
+      if (editingAdminId) {
+        // Prevent editing master admin if not master
+        const targetAdmin = adminUsers.find(u => u._id === editingAdminId || u.id === editingAdminId);
+        if (targetAdmin?.isMaster && !currentAdmin?.isMaster) {
+          return alert("Only a Master Admin can edit a Master Admin.");
+        }
+        
+        const res = await fetch(`${apiUrl}/api/admins/${editingAdminId}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        if (res.ok) {
+          const updated = await res.json();
+          setAdminUsers(adminUsers.map(u => (u._id === editingAdminId || u.id === editingAdminId) ? updated : u));
+        } else {
+          const error = await res.json();
+          alert(error.message || 'Failed to update admin');
+          return;
+        }
+      } else {
+        const res = await fetch(`${apiUrl}/api/admins`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        if (res.ok) {
+          const newAdmin = await res.json();
+          setAdminUsers([...adminUsers, newAdmin]);
+        } else {
+          const error = await res.json();
+          alert(error.message || 'Failed to create admin');
+          return;
+        }
+      }
+      setShowAdminModal(false);
+    } catch (err) {
+      alert("Error saving admin");
     }
-    setAdminUsers(updatedUsers);
-    localStorage.setItem('adminUsers', JSON.stringify(updatedUsers));
-    setShowAdminModal(false);
   };
 
-  const handleDeleteAdmin = (id) => {
-    if (id === 1) return alert("Cannot delete the Master Admin!");
-    if (id === currentAdmin.id) return alert("Cannot delete yourself!");
+  const handleDeleteAdmin = async (id) => {
     if (window.confirm("Delete this admin?")) {
-      const updated = adminUsers.filter(u => u.id !== id);
-      setAdminUsers(updated);
-      localStorage.setItem('adminUsers', JSON.stringify(updated));
+      try {
+        const isProd = import.meta.env.PROD;
+        const apiUrl = import.meta.env.VITE_API_URL || (isProd ? '' : 'http://localhost:5000');
+        const res = await fetch(`${apiUrl}/api/admins/${id}`, { method: 'DELETE' });
+        if (res.ok) {
+          setAdminUsers(adminUsers.filter(u => u._id !== id && u.id !== id));
+        } else {
+          const error = await res.json();
+          alert(error.message || 'Failed to delete admin');
+        }
+      } catch (err) {
+        alert("Error deleting admin");
+      }
     }
   };
 
   const openAdminModal = (admin = null) => {
     if (admin) {
-      setEditingAdminId(admin.id);
-      setAdminForm({ name: admin.name, email: admin.email, password: '', permissions: admin.permissions });
+      setEditingAdminId(admin._id || admin.id);
+      setAdminForm({ name: admin.name, email: admin.email, password: '', permissions: admin.permissions || {}, isMaster: admin.isMaster || false });
     } else {
       setEditingAdminId(null);
-      setAdminForm({ name: '', email: '', password: '', permissions: { dashboard: false, users: false, newsletter: false, settings: false, manage_admins: false } });
+      setAdminForm({ name: '', email: '', password: '', isMaster: false, permissions: { dashboard: false, users: false, newsletter: false, settings: false, manage_admins: false } });
     }
     setShowAdminModal(true);
   };
@@ -672,13 +732,13 @@ export default function AdminDashboard() {
                         </div>
                       </td>
                       <td className="py-4 px-4 text-right">
-                        {admin.id !== 1 && (
+                        {(!admin.isMaster || currentAdmin?.isMaster) && (
                           <button onClick={() => openAdminModal(admin)} className="text-yellow-400 hover:text-yellow-400 text-sm font-medium px-3 py-1.5 border border-yellow-400/30 hover:border-yellow-400 rounded-lg transition-colors mr-2">
                             Edit
                           </button>
                         )}
-                        {admin.id !== 1 && (
-                          <button onClick={() => handleDeleteAdmin(admin.id)} className="text-red-500 hover:text-red-400 text-sm font-medium px-3 py-1.5 border border-red-500/30 hover:border-red-400 rounded-lg transition-colors">
+                        {!admin.isMaster && (admin._id !== currentAdmin?._id && admin.id !== currentAdmin?.id) && (
+                          <button onClick={() => handleDeleteAdmin(admin._id || admin.id)} className="text-red-500 hover:text-red-400 text-sm font-medium px-3 py-1.5 border border-red-500/30 hover:border-red-400 rounded-lg transition-colors">
                             Delete
                           </button>
                         )}
@@ -717,6 +777,15 @@ export default function AdminDashboard() {
                         </label>
                       ))}
                     </div>
+                    {currentAdmin?.isMaster && (
+                      <div className="mt-4 pt-4 border-t border-gray-800/50">
+                        <label className="flex items-center gap-2 cursor-pointer bg-yellow-500/10 p-3 rounded-lg border border-yellow-500/20">
+                          <input type="checkbox" checked={adminForm.isMaster || false} onChange={e => setAdminForm({...adminForm, isMaster: e.target.checked})} className="rounded border-gray-700 bg-gray-800 text-yellow-400 focus:ring-yellow-400" />
+                          <span className="text-sm text-yellow-400 font-bold tracking-wide">Grant Master Admin Role</span>
+                        </label>
+                        <p className="text-xs text-gray-500 mt-2 ml-1">Master admins can edit other master admins and assign master roles.</p>
+                      </div>
+                    )}
                   </div>
                   <div className="flex justify-end gap-3 mt-8">
                     <button type="button" onClick={() => setShowAdminModal(false)} className="px-6 py-2 border border-gray-700 text-gray-300 hover:bg-gray-800 hover:text-white rounded-lg font-medium transition-colors">Cancel</button>
