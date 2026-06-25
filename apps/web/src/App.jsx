@@ -19,8 +19,8 @@ const PrivacyPolicy = React.lazy(() => import('@/pages/PrivacyPolicy'));
 const TermsAndConditions = React.lazy(() => import('@/pages/TermsAndConditions'));
 const RefundPolicy = React.lazy(() => import('@/pages/RefundPolicy'));
 const AMLPolicy = React.lazy(() => import('@/pages/AMLPolicy'));
-const AdminLogin = React.lazy(() => import('@/pages/Admin/AdminLogin'));
-const AdminDashboard = React.lazy(() => import('@/pages/Admin/AdminDashboard'));
+const AdminLogin = React.lazy(() => import('@/pages/admin/AdminLogin'));
+const AdminDashboard = React.lazy(() => import('@/pages/admin/AdminDashboard'));
 
 function PageLoader() {
   return (
