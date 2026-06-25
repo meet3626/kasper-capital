@@ -9,7 +9,7 @@ const RefundPolicy = () => {
       </Helmet>
       <div className="container mx-auto px-6 max-w-4xl">
         <h1 className="text-4xl md:text-5xl font-bold mb-12 text-white uppercase tracking-widest border-b border-white/10 pb-8">
-          Refund & Cancellation <span className="text-accent-cyan">Policy</span>
+          Refund & Cancellation <span className="text-accent-yellow">Policy</span>
         </h1>
         
         <div className="prose prose-invert prose-lg max-w-none space-y-8 text-gray-300">

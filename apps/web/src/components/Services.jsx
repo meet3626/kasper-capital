@@ -4,12 +4,12 @@ import { Monitor, Users, LineChart, Shield, Server, Briefcase, ArrowUpRight } fr
 import Service3DElement from './Service3DElement';
 
 const servicesData = [
-  { type: 'liquidity', icon: LineChart, title: 'Multi-Asset Liquidity', desc: 'Connect your brokerage to deep Tier-1 liquidity pools offering 80+ FX pairs, Commodities, and Crypto CFDs with aggregated feeds and tight institutional spreads.', span: 'lg:col-span-2 md:col-span-2', bgStyle: 'bg-gradient-to-br from-black/5 to-transparent dark:from-white/5 dark:to-transparent border-black/10 dark:border-white/10 hover:border-accent-cyan/40' },
-  { type: 'platform', icon: Monitor, title: 'White-Label MT5 Platform', desc: 'Deploy a fully branded MT5 trading environment complete with advanced admin controls.', span: 'lg:col-span-1 md:col-span-1', bgStyle: 'bg-gradient-to-br from-accent-cyan/10 to-transparent border-accent-cyan/20 hover:border-accent-cyan/50' },
-  { type: 'crm', icon: Users, title: 'Branded CRM & Portal', desc: 'Streamline back-office operations with an intelligent portal featuring automated KYC/AML onboarding.', span: 'lg:col-span-1 md:col-span-1', bgStyle: 'bg-white/50 dark:bg-white/5 backdrop-blur-md border border-black/10 dark:border-white/10 hover:border-accent-purple/50' },
+  { type: 'liquidity', icon: LineChart, title: 'Multi-Asset Liquidity', desc: 'Connect your brokerage to deep Tier-1 liquidity pools offering 80+ FX pairs, Commodities, and Crypto CFDs with aggregated feeds and tight institutional spreads.', span: 'lg:col-span-2 md:col-span-2', bgStyle: 'bg-gradient-to-br from-black/5 to-transparent dark:from-white/5 dark:to-transparent border-black/10 dark:border-white/10 hover:border-accent-yellow/40' },
+  { type: 'platform', icon: Monitor, title: 'White-Label MT5 Platform', desc: 'Deploy a fully branded MT5 trading environment complete with advanced admin controls.', span: 'lg:col-span-1 md:col-span-1', bgStyle: 'bg-gradient-to-br from-accent-yellow/10 to-transparent border-accent-yellow/20 hover:border-accent-yellow/50' },
+  { type: 'crm', icon: Users, title: 'Branded CRM & Portal', desc: 'Streamline back-office operations with an intelligent portal featuring automated KYC/AML onboarding.', span: 'lg:col-span-1 md:col-span-1', bgStyle: 'bg-white/50 dark:bg-white/5 backdrop-blur-md border border-black/10 dark:border-white/10 hover:border-white/50' },
   { type: 'vps', icon: Server, title: 'Ultra-Low Latency VPS', desc: 'Provide your traders with sub-millisecond execution speeds via our globally distributed, co-located servers.', span: 'lg:col-span-2 md:col-span-2', bgStyle: 'bg-gradient-to-bl from-black/5 to-transparent dark:from-white/5 dark:to-transparent border-black/10 dark:border-white/10 hover:border-accent-blue/40' },
   { type: 'risk', icon: Shield, title: 'Risk Management', desc: 'Safeguard your brokerage with sophisticated bridging and real-time exposure monitoring to mitigate toxic flow.', span: 'lg:col-span-1.5 md:col-span-1', bgStyle: 'bg-white dark:bg-[#111621] border-black/5 dark:border-white/5 hover:border-black/20 dark:hover:border-white/20' },
-  { type: 'compliance', icon: Briefcase, title: 'Islamic Compliance Setup', desc: 'Expand your regional market share by easily configuring swap-free, Sharia-compliant trading accounts for your clients without complex administrative overhead.', span: 'lg:col-span-2 md:col-span-2', bgStyle: 'bg-gradient-to-t from-accent-purple/10 to-transparent border-accent-purple/20 hover:border-accent-purple/50' },
+  { type: 'compliance', icon: Briefcase, title: 'Islamic Compliance Setup', desc: 'Expand your regional market share by easily configuring swap-free, Sharia-compliant trading accounts for your clients without complex administrative overhead.', span: 'lg:col-span-2 md:col-span-2', bgStyle: 'bg-gradient-to-t from-white/10 to-transparent border-white/20 hover:border-white/50' },
 ];
 
 const containerVariants = {
@@ -36,8 +36,8 @@ const Services = () => {
   return (
     <section id="services" className="py-24 transition-colors duration-500 relative overflow-hidden">
       {/* Background Glow */}
-      <div className="absolute top-[20%] left-[-10%] w-[800px] h-[800px] bg-accent-cyan/10 rounded-full blur-[150px] pointer-events-none z-0"></div>
-      <div className="absolute bottom-[10%] right-[-10%] w-[600px] h-[600px] bg-accent-purple/10 rounded-full blur-[150px] pointer-events-none z-0"></div>
+      <div className="absolute top-[20%] left-[-10%] w-[800px] h-[800px] bg-accent-yellow/10 rounded-full blur-[150px] pointer-events-none z-0"></div>
+      <div className="absolute bottom-[10%] right-[-10%] w-[600px] h-[600px] bg-white/10 rounded-full blur-[150px] pointer-events-none z-0"></div>
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
@@ -46,9 +46,9 @@ const Services = () => {
               initial={{ opacity: 0, y: -10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="inline-flex items-center gap-2 px-4 py-1.5 bg-black/5 dark:bg-white/5 backdrop-blur-md border border-black/10 dark:border-white/10 rounded-full text-xs font-semibold uppercase tracking-widest text-accent-cyan mb-6"
+              className="inline-flex items-center gap-2 px-4 py-1.5 bg-black/5 dark:bg-white/5 backdrop-blur-md border border-black/10 dark:border-white/10 rounded-full text-xs font-semibold uppercase tracking-widest text-accent-yellow mb-6"
             >
-              <div className="w-2 h-2 rounded-full bg-accent-cyan animate-pulse"></div>
+              <div className="w-2 h-2 rounded-full bg-accent-yellow animate-pulse"></div>
               Turnkey Solutions
             </motion.p>
             <motion.h2
@@ -102,7 +102,7 @@ const Services = () => {
                 
                 <div className="flex justify-between items-start mb-12 relative z-10">
                   <div className="w-14 h-14 rounded-2xl bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 flex items-center justify-center text-gray-900 dark:text-white backdrop-blur-md group-hover:scale-110 group-hover:bg-black/10 dark:group-hover:bg-white/10 transition-all duration-500">
-                    <Icon size={24} className="group-hover:text-accent-cyan transition-colors" />
+                    <Icon size={24} className="group-hover:text-accent-yellow transition-colors" />
                   </div>
                   <div className="w-10 h-10 rounded-full border border-black/10 dark:border-white/10 flex items-center justify-center opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 group-hover:bg-black/5 dark:group-hover:bg-white/5 text-gray-900 dark:text-white">
                     <ArrowUpRight size={18} />
@@ -110,7 +110,7 @@ const Services = () => {
                 </div>
                 
                 <div className="relative z-10">
-                  <h3 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white mb-3 tracking-tight group-hover:text-accent-cyan transition-colors duration-300">
+                  <h3 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white mb-3 tracking-tight group-hover:text-accent-yellow transition-colors duration-300">
                     {service.title}
                   </h3>
                   <p className="text-gray-600 dark:text-gray-400 leading-relaxed font-light text-sm md:text-base">

@@ -108,7 +108,7 @@ export default function AdminLogin() {
     <div className="min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8 relative overflow-hidden bg-[#030610]">
       <Admin3DBackground />
       {/* Background elements */}
-      <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] rounded-full bg-cyan-500/10 blur-[120px] pointer-events-none" />
+      <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] rounded-full bg-yellow-400/10 blur-[120px] pointer-events-none" />
       <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] rounded-full bg-purple-500/10 blur-[120px] pointer-events-none" />
 
       <div className="sm:mx-auto sm:w-full sm:max-w-md relative z-10">
@@ -126,7 +126,7 @@ export default function AdminLogin() {
         transition={{ duration: 0.5 }}
         className="mt-8 sm:mx-auto sm:w-full sm:max-w-md relative z-10"
       >
-        <div className="bg-[#111827] py-8 px-4 shadow-2xl shadow-cyan-500/5 sm:rounded-2xl sm:px-10 border border-gray-800">
+        <div className="bg-[#111827] py-8 px-4 shadow-2xl shadow-yellow-400/5 sm:rounded-2xl sm:px-10 border border-gray-800">
           {!requiresMfa && !setupMfaRequired ? (
             <form className="space-y-6" onSubmit={handleLogin}>
               {error && (
@@ -155,7 +155,7 @@ export default function AdminLogin() {
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="block w-full pl-10 bg-[#1F2937] border-gray-700 text-white rounded-lg focus:ring-cyan-500 focus:border-cyan-500 sm:text-sm py-2.5"
+                    className="block w-full pl-10 bg-[#1F2937] border-gray-700 text-white rounded-lg focus:ring-yellow-400 focus:border-yellow-400 sm:text-sm py-2.5"
                     placeholder="Enter your email or username"
                   />
                 </div>
@@ -180,7 +180,7 @@ export default function AdminLogin() {
                     required
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="block w-full pl-10 bg-[#1F2937] border-gray-700 text-white rounded-lg focus:ring-cyan-500 focus:border-cyan-500 sm:text-sm py-2.5"
+                    className="block w-full pl-10 bg-[#1F2937] border-gray-700 text-white rounded-lg focus:ring-yellow-400 focus:border-yellow-400 sm:text-sm py-2.5"
                     placeholder="Enter your password"
                   />
                 </div>
@@ -189,7 +189,7 @@ export default function AdminLogin() {
               <div>
                 <button
                   type="submit"
-                  className="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500 focus:ring-offset-gray-900 transition-all duration-200"
+                  className="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-gradient-to-r from-yellow-500 to-gray-400 hover:from-yellow-400 hover:to-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-400 focus:ring-offset-gray-900 transition-all duration-200"
                 >
                   Sign in
                 </button>
@@ -228,7 +228,7 @@ export default function AdminLogin() {
                     maxLength="6"
                     value={mfaCode}
                     onChange={(e) => setMfaCode(e.target.value.replace(/\D/g, ''))}
-                    className="block w-full pl-10 bg-[#1F2937] border-gray-700 text-white rounded-lg focus:ring-cyan-500 focus:border-cyan-500 sm:text-sm py-2.5 tracking-widest text-center text-lg"
+                    className="block w-full pl-10 bg-[#1F2937] border-gray-700 text-white rounded-lg focus:ring-yellow-400 focus:border-yellow-400 sm:text-sm py-2.5 tracking-widest text-center text-lg"
                     placeholder="000000"
                   />
                 </div>
@@ -244,7 +244,7 @@ export default function AdminLogin() {
                 </button>
                 <button
                   type="submit"
-                  className="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500 focus:ring-offset-gray-900 transition-all duration-200"
+                  className="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-gradient-to-r from-yellow-500 to-gray-400 hover:from-yellow-400 hover:to-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-400 focus:ring-offset-gray-900 transition-all duration-200"
                 >
                   Enable & Login
                 </button>
@@ -279,7 +279,7 @@ export default function AdminLogin() {
                     maxLength="6"
                     value={mfaCode}
                     onChange={(e) => setMfaCode(e.target.value.replace(/\D/g, ''))}
-                    className="block w-full pl-10 bg-[#1F2937] border-gray-700 text-white rounded-lg focus:ring-cyan-500 focus:border-cyan-500 sm:text-sm py-2.5 tracking-widest text-center text-lg"
+                    className="block w-full pl-10 bg-[#1F2937] border-gray-700 text-white rounded-lg focus:ring-yellow-400 focus:border-yellow-400 sm:text-sm py-2.5 tracking-widest text-center text-lg"
                     placeholder="000000"
                   />
                 </div>
@@ -295,7 +295,7 @@ export default function AdminLogin() {
                 </button>
                 <button
                   type="submit"
-                  className="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500 focus:ring-offset-gray-900 transition-all duration-200"
+                  className="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-gradient-to-r from-yellow-500 to-gray-400 hover:from-yellow-400 hover:to-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-400 focus:ring-offset-gray-900 transition-all duration-200"
                 >
                   Verify
                 </button>

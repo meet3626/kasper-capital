@@ -24,8 +24,8 @@ const LANGUAGES = [
 const MEGA_MENU = [
   {
     column: 'Broker Setup',
-    accent: 'from-accent-cyan/20 to-transparent',
-    dot: 'bg-accent-cyan',
+    accent: 'from-accent-yellow/20 to-transparent',
+    dot: 'bg-accent-yellow',
     items: [
       { icon: Briefcase, label: 'Business Consulting', desc: 'End-to-end brokerage strategy & advisory', href: '/services/business-consulting' },
       { icon: FileCheck, label: 'Licensing & Regulations', desc: 'Multi-jurisdiction regulatory frameworks', href: '/services/licensing-regulations' },
@@ -36,8 +36,8 @@ const MEGA_MENU = [
   },
   {
     column: 'Tech Solutions',
-    accent: 'from-accent-purple/20 to-transparent',
-    dot: 'bg-accent-purple',
+    accent: 'from-white/20 to-transparent',
+    dot: 'bg-white',
     items: [
       { icon: LayoutDashboard, label: 'CRM Software', desc: 'Intelligent client lifecycle management', href: '/services/crm-software' },
       { icon: ShieldAlert, label: 'Risk Management Software', desc: 'Real-time exposure & drawdown control', href: '/services/risk-management-software' },
@@ -96,12 +96,12 @@ const LanguageSelector = ({ mobile = false }) => {
               key={lang.code}
               onClick={() => handleSelect(lang)}
               className={`flex flex-col items-center gap-1 p-2 rounded-xl transition-all duration-200 ${active.code === lang.code
-                ? 'bg-accent-cyan/20 border border-accent-cyan/50'
+                ? 'bg-accent-yellow/20 border border-accent-yellow/50'
                 : 'bg-white/5 border border-white/10 hover:bg-white/10'
                 }`}
             >
               <span className="text-xl">{lang.flag}</span>
-              <span className={`text-[10px] font-bold uppercase tracking-wider ${active.code === lang.code ? 'text-accent-cyan' : 'text-gray-400'}`}>
+              <span className={`text-[10px] font-bold uppercase tracking-wider ${active.code === lang.code ? 'text-accent-yellow' : 'text-gray-400'}`}>
                 {lang.code}
               </span>
             </button>
@@ -115,12 +115,12 @@ const LanguageSelector = ({ mobile = false }) => {
     <div ref={ref} className="relative">
       <button
         onClick={() => setIsOpen((v) => !v)}
-        className={`flex items-center gap-1.5 px-3 py-2 rounded-xl border transition-all duration-300 text-sm font-semibold uppercase tracking-widest group ${isOpen ? 'bg-accent-cyan/10 border-accent-cyan/40 text-accent-cyan' : 'bg-white/5 border-white/10 text-gray-400 hover:bg-white/10 hover:border-white/20 hover:text-white'
+        className={`flex items-center gap-1.5 px-3 py-2 rounded-xl border transition-all duration-300 text-sm font-semibold uppercase tracking-widest group ${isOpen ? 'bg-accent-yellow/10 border-accent-yellow/40 text-accent-yellow' : 'bg-white/5 border-white/10 text-gray-400 hover:bg-white/10 hover:border-white/20 hover:text-white'
           }`}
       >
-        <Globe size={14} className={`transition-colors ${isOpen ? 'text-accent-cyan' : 'text-gray-400 group-hover:text-white'}`} />
+        <Globe size={14} className={`transition-colors ${isOpen ? 'text-accent-yellow' : 'text-gray-400 group-hover:text-white'}`} />
         <span>{active.code}</span>
-        <ChevronDown size={12} className={`transition-transform duration-300 ${isOpen ? 'rotate-180 text-accent-cyan' : ''}`} />
+        <ChevronDown size={12} className={`transition-transform duration-300 ${isOpen ? 'rotate-180 text-accent-yellow' : ''}`} />
       </button>
 
       <AnimatePresence>
@@ -145,20 +145,20 @@ const LanguageSelector = ({ mobile = false }) => {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: i * 0.04 }}
                     onClick={() => handleSelect(lang)}
-                    className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-200 ${isActive ? 'bg-accent-cyan/15 text-accent-cyan' : 'text-gray-300 hover:bg-white/5 hover:text-white'
+                    className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-200 ${isActive ? 'bg-accent-yellow/15 text-accent-yellow' : 'text-gray-300 hover:bg-white/5 hover:text-white'
                       }`}
                   >
                     <span className="text-xl w-8 h-8 flex items-center justify-center rounded-full bg-white/5 border border-white/10 shrink-0">{lang.flag}</span>
                     <div className="flex-1 text-left">
-                      <p className={`text-sm font-semibold leading-none ${isActive ? 'text-accent-cyan' : ''}`}>{lang.label}</p>
+                      <p className={`text-sm font-semibold leading-none ${isActive ? 'text-accent-yellow' : ''}`}>{lang.label}</p>
                       <p className="text-[10px] text-gray-500 mt-0.5 uppercase tracking-widest">{lang.code}</p>
                     </div>
-                    {isActive && <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} className="w-1.5 h-1.5 rounded-full bg-accent-cyan shrink-0" />}
+                    {isActive && <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} className="w-1.5 h-1.5 rounded-full bg-accent-yellow shrink-0" />}
                   </motion.button>
                 );
               })}
             </div>
-            <div className="h-px bg-gradient-to-r from-transparent via-accent-cyan/30 to-transparent" />
+            <div className="h-px bg-gradient-to-r from-transparent via-accent-yellow/30 to-transparent" />
           </motion.div>
         )}
       </AnimatePresence>
@@ -178,7 +178,7 @@ const MegaMenu = ({ isOpen }) => (
         className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-[860px] z-50 rounded-2xl border border-white/[0.08] bg-[#0a0c12]/95 backdrop-blur-2xl shadow-[0_30px_80px_rgba(0,0,0,0.6)] overflow-hidden"
       >
         {/* Top glow hairline */}
-        <div className="h-px bg-gradient-to-r from-transparent via-accent-cyan/40 to-transparent" />
+        <div className="h-px bg-gradient-to-r from-transparent via-accent-yellow/40 to-transparent" />
 
         <div className="grid grid-cols-3 divide-x divide-white/[0.06] p-6 gap-0">
           {MEGA_MENU.map((col, ci) => (
@@ -205,10 +205,10 @@ const MegaMenu = ({ isOpen }) => (
                         className="group flex items-start gap-3 px-3 py-3 rounded-xl transition-all duration-200 hover:bg-white/[0.04] border border-transparent hover:border-white/[0.08]"
                       >
                         {/* Icon bubble */}
-                        <div className="relative w-10 h-10 rounded-xl bg-white/[0.02] border border-white/10 flex items-center justify-center shrink-0 mt-0.5 overflow-hidden transition-all duration-500 group-hover:border-accent-cyan/40 group-hover:bg-accent-cyan/[0.05] group-hover:shadow-[0_0_20px_rgba(0,255,255,0.15)_inset]">
+                        <div className="relative w-10 h-10 rounded-xl bg-white/[0.02] border border-white/10 flex items-center justify-center shrink-0 mt-0.5 overflow-hidden transition-all duration-500 group-hover:border-accent-yellow/40 group-hover:bg-accent-yellow/[0.05] group-hover:shadow-[0_0_20px_rgba(0,255,255,0.15)_inset]">
                           {/* Animated flare */}
-                          <div className="absolute -inset-[100%] bg-gradient-to-r from-transparent via-accent-cyan/10 to-transparent rotate-45 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-in-out" />
-                          <Icon size={18} strokeWidth={1.5} className="text-gray-400 group-hover:text-accent-cyan group-hover:scale-110 transition-all duration-300 relative z-10" />
+                          <div className="absolute -inset-[100%] bg-gradient-to-r from-transparent via-accent-yellow/10 to-transparent rotate-45 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-in-out" />
+                          <Icon size={18} strokeWidth={1.5} className="text-gray-400 group-hover:text-accent-yellow group-hover:scale-110 transition-all duration-300 relative z-10" />
                         </div>
 
                         {/* Text */}
@@ -219,7 +219,7 @@ const MegaMenu = ({ isOpen }) => (
                             </p>
                             <ArrowUpRight
                               size={11}
-                              className="text-gray-600 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 group-hover:text-accent-cyan transition-all duration-200"
+                              className="text-gray-600 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 group-hover:text-accent-yellow transition-all duration-200"
                             />
                           </div>
                           <p className="text-[11px] text-gray-500 mt-0.5 leading-snug group-hover:text-gray-400 transition-colors duration-200">
@@ -243,7 +243,7 @@ const MegaMenu = ({ isOpen }) => (
           </div>
           <Link
             to="/contact"
-            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-accent-cyan/10 border border-accent-cyan/30 text-accent-cyan text-xs font-bold uppercase tracking-widest hover:bg-accent-cyan/20 hover:border-accent-cyan/50 transition-all duration-200 group"
+            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-accent-yellow/10 border border-accent-yellow/30 text-accent-yellow text-xs font-bold uppercase tracking-widest hover:bg-accent-yellow/20 hover:border-accent-yellow/50 transition-all duration-200 group"
           >
             Book a Call
             <ArrowRight size={12} className="group-hover:translate-x-0.5 transition-transform duration-200" />
@@ -251,7 +251,7 @@ const MegaMenu = ({ isOpen }) => (
         </div>
 
         {/* Bottom glow */}
-        <div className="h-px bg-gradient-to-r from-transparent via-accent-purple/30 to-transparent" />
+        <div className="h-px bg-gradient-to-r from-transparent via-accent-yellow/30 to-transparent" />
       </motion.div>
     )}
   </AnimatePresence>
@@ -322,7 +322,7 @@ const Header = () => {
 
             {/* Logo */}
             <Link to="/" onClick={handleHomeClick} className="text-lg md:text-xl font-[800] text-white tracking-wide flex items-center shrink-0">
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-cyan to-white">BROKERCORESOLUTION</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-yellow to-white">BROKERCORESOLUTION</span>
             </Link>
 
             {/* Desktop Nav */}
@@ -340,13 +340,13 @@ const Header = () => {
                 onMouseLeave={handleMegaLeave}
               >
                 <button
-                  className={`flex items-center gap-1.5 text-[13px] xl:text-sm font-semibold uppercase tracking-wider transition-colors duration-200 py-7 ${megaOpen ? 'text-accent-cyan' : 'text-gray-300 hover:text-white'
+                  className={`flex items-center gap-1.5 text-[13px] xl:text-sm font-semibold uppercase tracking-wider transition-colors duration-200 py-7 ${megaOpen ? 'text-accent-yellow' : 'text-gray-300 hover:text-white'
                     }`}
                 >
                   {t('nav.services')}
                   <ChevronDown
                     size={13}
-                    className={`transition-transform duration-300 ${megaOpen ? 'rotate-180 text-accent-cyan' : ''}`}
+                    className={`transition-transform duration-300 ${megaOpen ? 'rotate-180 text-accent-yellow' : ''}`}
                   />
                 </button>
                 <MegaMenu isOpen={megaOpen} />
@@ -413,8 +413,8 @@ const Header = () => {
           >
             {/* 3D Animated Background Elements */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-              <div className="absolute top-[-10%] right-[-20%] w-[300px] h-[300px] bg-accent-cyan/[0.2] rounded-full blur-[80px]" />
-              <div className="absolute bottom-[-10%] left-[-20%] w-[300px] h-[300px] bg-accent-purple/[0.2] rounded-full blur-[80px]" />
+              <div className="absolute top-[-10%] right-[-20%] w-[300px] h-[300px] bg-accent-yellow/[0.2] rounded-full blur-[80px]" />
+              <div className="absolute bottom-[-10%] left-[-20%] w-[300px] h-[300px] bg-white/[0.2] rounded-full blur-[80px]" />
               <motion.div
                 animate={{ y: [0, -30, 0], rotate: [0, 90, 0], scale: [1, 1.1, 1] }}
                 transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
@@ -423,7 +423,7 @@ const Header = () => {
               <motion.div
                 animate={{ y: [0, 40, 0], rotate: [0, -90, 0], scale: [1, 1.2, 1] }}
                 transition={{ duration: 15, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-                className="absolute bottom-[20%] right-[5%] w-64 h-64 border border-accent-cyan/10 rounded-full"
+                className="absolute bottom-[20%] right-[5%] w-64 h-64 border border-accent-yellow/10 rounded-full"
               />
             </div>
 
@@ -432,7 +432,7 @@ const Header = () => {
               {/* Mobile Header Row */}
               <div className="flex justify-between items-center h-20 shrink-0">
                 <Link to="/" onClick={handleHomeClick} className="text-2xl font-bold text-white tracking-wider">
-                  <span className="text-accent-cyan">BROKERCORESOLUTION</span>
+                  <span className="text-accent-yellow">BROKERCORESOLUTION</span>
                 </Link>
                 <button onClick={() => setIsOpen(false)} className="text-white p-1"><X size={28} /></button>
               </div>
@@ -463,7 +463,7 @@ const Header = () => {
                     className="w-full flex items-center justify-center gap-3 text-2xl font-semibold text-gray-300 hover:text-white transition-colors uppercase tracking-widest text-center"
                   >
                     {t('nav.services')}
-                    <ChevronDown size={20} className={`transition-transform duration-300 ${mobileServicesOpen ? 'rotate-180 text-accent-cyan' : ''}`} />
+                    <ChevronDown size={20} className={`transition-transform duration-300 ${mobileServicesOpen ? 'rotate-180 text-accent-yellow' : ''}`} />
                   </button>
 
                   <AnimatePresence>
@@ -491,8 +491,8 @@ const Header = () => {
                                     onClick={() => setIsOpen(false)}
                                     className="flex items-center gap-3 py-2 group"
                                   >
-                                    <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center shrink-0 group-hover:border-accent-cyan/30 group-hover:bg-accent-cyan/10 transition-all duration-300">
-                                      <Icon size={14} className="text-gray-500 group-hover:text-accent-cyan group-hover:scale-110 transition-all duration-300" />
+                                    <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center shrink-0 group-hover:border-accent-yellow/30 group-hover:bg-accent-yellow/10 transition-all duration-300">
+                                      <Icon size={14} className="text-gray-500 group-hover:text-accent-yellow group-hover:scale-110 transition-all duration-300" />
                                     </div>
                                     <span className="text-sm text-gray-300 group-hover:text-white transition-colors font-medium">{item.label}</span>
                                   </Link>

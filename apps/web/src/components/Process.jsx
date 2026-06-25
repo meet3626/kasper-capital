@@ -27,7 +27,7 @@ const Process = () => {
     <section id="process" className="py-24 transition-colors duration-500 relative overflow-hidden" ref={containerRef}>
       {/* Dynamic Backgrounds */}
       <div className="absolute top-[10%] right-[0%] w-[800px] h-[800px] bg-accent-blue/5 rounded-full blur-[150px] pointer-events-none" />
-      <div className="absolute bottom-[10%] left-[0%] w-[800px] h-[800px] bg-accent-cyan/5 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute bottom-[10%] left-[0%] w-[800px] h-[800px] bg-accent-yellow/5 rounded-full blur-[150px] pointer-events-none" />
 
       <div className="container mx-auto px-6 relative z-10 max-w-5xl">
         <div className="text-center mb-24">
@@ -35,7 +35,7 @@ const Process = () => {
             initial={{ opacity: 0, y: -10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 bg-black/5 dark:bg-white/5 backdrop-blur-md rounded-full text-xs font-semibold uppercase tracking-widest text-accent-cyan mb-6"
+            className="inline-flex items-center gap-2 px-4 py-1.5 bg-black/5 dark:bg-white/5 backdrop-blur-md rounded-full text-xs font-semibold uppercase tracking-widest text-accent-yellow mb-6"
           >
             Our Methodology
           </motion.div>
@@ -46,7 +46,7 @@ const Process = () => {
             transition={{ delay: 0.1, duration: 0.6 }}
             className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 dark:text-white leading-tight tracking-tight mb-4"
           >
-            The Complete <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-cyan to-accent-blue italic font-light">10-Step Process</span>
+            The Complete <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-yellow to-accent-blue italic font-light">10-Step Process</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -64,7 +64,7 @@ const Process = () => {
           <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-black/10 dark:bg-white/10 transform md:-translate-x-1/2"></div>
           {/* Animated fill line */}
           <motion.div 
-            className="absolute left-4 md:left-1/2 top-0 bottom-0 w-[2px] bg-gradient-to-b from-accent-cyan to-accent-blue transform md:-translate-x-1/2 origin-top"
+            className="absolute left-4 md:left-1/2 top-0 bottom-0 w-[2px] bg-gradient-to-b from-accent-yellow to-accent-blue transform md:-translate-x-1/2 origin-top"
             style={{ height: lineHeight }}
           ></motion.div>
 
@@ -81,7 +81,7 @@ const Process = () => {
                       whileInView={{ scale: 1 }}
                       viewport={{ once: true, margin: "-100px" }}
                       transition={{ delay: 0.2 }}
-                      className="absolute w-4 h-4 rounded-full bg-accent-cyan shadow-[0_0_15px_rgba(0,229,255,0.6)] z-20"
+                      className="absolute w-4 h-4 rounded-full bg-accent-yellow shadow-[0_0_15px_rgba(0,229,255,0.6)] z-20"
                     ></motion.div>
                   </div>
 
@@ -96,13 +96,13 @@ const Process = () => {
                     transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                     className={`w-full md:w-[45%] relative group ${isEven ? 'md:order-2' : 'md:order-1 md:text-right'}`}
                   >
-                    <div className="p-8 rounded-3xl bg-white dark:bg-white/5 border border-black/5 dark:border-white/5 group-hover:border-accent-cyan/30 shadow-lg dark:shadow-none transition-colors duration-500 relative overflow-hidden">
-                      <div className="absolute top-0 right-0 w-32 h-32 bg-accent-cyan/5 rounded-bl-full -mr-16 -mt-16 transition-transform group-hover:scale-110"></div>
+                    <div className="p-8 rounded-3xl bg-white dark:bg-white/5 border border-black/5 dark:border-white/5 group-hover:border-accent-yellow/30 shadow-lg dark:shadow-none transition-colors duration-500 relative overflow-hidden">
+                      <div className="absolute top-0 right-0 w-32 h-32 bg-accent-yellow/5 rounded-bl-full -mr-16 -mt-16 transition-transform group-hover:scale-110"></div>
                       
                       <div className="text-5xl font-[900] text-transparent bg-clip-text bg-gradient-to-b from-black/10 dark:from-white/10 to-transparent mb-2">
                         {step.id}
                       </div>
-                      <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-accent-cyan transition-colors">
+                      <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-accent-yellow transition-colors">
                         {step.title}
                       </h3>
                       <p className="text-gray-600 dark:text-gray-400 text-sm font-light leading-relaxed">

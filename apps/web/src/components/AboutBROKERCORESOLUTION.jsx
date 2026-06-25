@@ -20,9 +20,9 @@ const AboutBROKERCORESOLUTION = () => {
             <p className="section-label mb-4">Our Heritage</p>
             <h2 className="text-4xl md:text-5xl lg:text-6xl xl:text-[72px] font-[800] text-white leading-[1.1] tracking-tight mb-6 uppercase break-words md:break-normal">
               About <br className="hidden lg:block" />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-cyan to-accent-purple">BROKERCORESOLUTION</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-yellow to-white">BROKERCORESOLUTION</span>
             </h2>
-            <div className="w-32 h-1.5 bg-gradient-to-r from-accent-cyan to-transparent rounded-full mb-8" />
+            <div className="w-32 h-1.5 bg-gradient-to-r from-accent-yellow to-transparent rounded-full mb-8" />
           </motion.div>
 
           <motion.div 

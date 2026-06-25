@@ -49,7 +49,7 @@ const BlogPost = () => {
     return (
       <div className="min-h-screen text-white flex flex-col items-center justify-center pt-24 pb-12">
         <h1 className="text-4xl font-bold mb-4">{error || 'Post Not Found'}</h1>
-        <button onClick={() => navigate('/blog')} className="text-accent-cyan hover:underline flex items-center gap-2">
+        <button onClick={() => navigate('/blog')} className="text-accent-yellow hover:underline flex items-center gap-2">
           <ArrowLeft size={16} /> Back to Blog
         </button>
       </div>
@@ -77,7 +77,7 @@ const BlogPost = () => {
           transition={{ duration: 0.6 }}
         >
           <div className="mb-6 flex flex-wrap gap-4 items-center text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-widest">
-            <span className="flex items-center gap-1.5 text-accent-cyan bg-accent-cyan/10 px-3 py-1 rounded-full">
+            <span className="flex items-center gap-1.5 text-accent-yellow bg-accent-yellow/10 px-3 py-1 rounded-full">
               <Tag size={14} /> {post.category}
             </span>
             <span className="flex items-center gap-1.5">
@@ -104,14 +104,14 @@ const BlogPost = () => {
           </div>
 
           <div 
-            className="prose prose-lg dark:prose-invert prose-headings:text-gray-900 dark:prose-headings:text-white prose-a:text-accent-cyan prose-a:no-underline hover:prose-a:underline max-w-none prose-p:text-gray-700 dark:prose-p:text-gray-300 prose-li:text-gray-700 dark:prose-li:text-gray-300 prose-strong:text-gray-900 dark:prose-strong:text-white"
+            className="prose prose-lg dark:prose-invert prose-headings:text-gray-900 dark:prose-headings:text-white prose-a:text-accent-yellow prose-a:no-underline hover:prose-a:underline max-w-none prose-p:text-gray-700 dark:prose-p:text-gray-300 prose-li:text-gray-700 dark:prose-li:text-gray-300 prose-strong:text-gray-900 dark:prose-strong:text-white"
             dangerouslySetInnerHTML={{ __html: post.content }}
           />
 
           <div className="mt-16 pt-8 border-t border-black/10 dark:border-white/10">
             <div className="flex flex-col md:flex-row justify-between items-center gap-6">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-accent-purple to-accent-cyan flex items-center justify-center">
+                <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-white to-accent-yellow flex items-center justify-center">
                   <User size={24} className="text-white" />
                 </div>
                 <div>

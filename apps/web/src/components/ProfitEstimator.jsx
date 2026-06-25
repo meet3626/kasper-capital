@@ -30,7 +30,7 @@ const ProfitEstimator = () => {
   return (
     <section className="py-24 relative overflow-hidden">
       {/* Background */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-accent-cyan/[0.03] rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-accent-yellow/[0.03] rounded-full blur-[100px] pointer-events-none" />
 
       <div className="container mx-auto px-6 max-w-6xl relative z-10">
         <div className="text-center mb-16">
@@ -38,10 +38,10 @@ const ProfitEstimator = () => {
             initial={{ opacity: 0, y: -10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2.5 px-4 py-2 bg-accent-cyan/[0.05] border border-accent-cyan/20 rounded-full mb-6"
+            className="inline-flex items-center gap-2.5 px-4 py-2 bg-accent-yellow/[0.05] border border-accent-yellow/20 rounded-full mb-6"
           >
-            <Calculator className="w-4 h-4 text-accent-cyan" />
-            <span className="text-xs text-accent-cyan font-bold uppercase tracking-widest">Interactive Calculator</span>
+            <Calculator className="w-4 h-4 text-accent-yellow" />
+            <span className="text-xs text-accent-yellow font-bold uppercase tracking-widest">Interactive Calculator</span>
           </motion.div>
           <motion.h2
             initial={{ opacity: 0, y: 10 }}
@@ -49,7 +49,7 @@ const ProfitEstimator = () => {
             viewport={{ once: true }}
             className="text-3xl md:text-5xl font-[800] text-white mb-4"
           >
-            Calculate Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-cyan to-accent-purple">Profit Potential</span>
+            Calculate Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-yellow to-white">Profit Potential</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 10 }}
@@ -71,7 +71,7 @@ const ProfitEstimator = () => {
           {/* LEFT: INPUT CONSOLE */}
           <div className="lg:w-1/2 p-8 lg:p-12 border-b lg:border-b-0 lg:border-r border-white/10">
             <h3 className="text-xl font-bold text-white mb-8 flex items-center gap-2">
-              <div className="w-2 h-6 bg-accent-cyan rounded-full" />
+              <div className="w-2 h-6 bg-accent-yellow rounded-full" />
               Input Console
             </h3>
 
@@ -89,7 +89,7 @@ const ProfitEstimator = () => {
                   step="10" 
                   value={volumeM} 
                   onChange={(e) => setVolumeM(Number(e.target.value))}
-                  className="w-full h-2 bg-white/10 rounded-lg appearance-none cursor-pointer accent-accent-cyan"
+                  className="w-full h-2 bg-white/10 rounded-lg appearance-none cursor-pointer accent-accent-yellow"
                 />
                 <div className="flex justify-between text-xs text-gray-500 mt-2 font-medium">
                   <span>$10M</span>
@@ -110,7 +110,7 @@ const ProfitEstimator = () => {
                   step="50" 
                   value={traders} 
                   onChange={(e) => setTraders(Number(e.target.value))}
-                  className="w-full h-2 bg-white/10 rounded-lg appearance-none cursor-pointer accent-accent-purple"
+                  className="w-full h-2 bg-white/10 rounded-lg appearance-none cursor-pointer accent-accent-yellow"
                 />
                 <div className="flex justify-between text-xs text-gray-500 mt-2 font-medium">
                   <span>50</span>
@@ -131,7 +131,7 @@ const ProfitEstimator = () => {
                   step="0.1" 
                   value={spread} 
                   onChange={(e) => setSpread(Number(e.target.value))}
-                  className="w-full h-2 bg-white/10 rounded-lg appearance-none cursor-pointer accent-accent-cyan"
+                  className="w-full h-2 bg-white/10 rounded-lg appearance-none cursor-pointer accent-accent-yellow"
                 />
                 <div className="flex justify-between text-xs text-gray-500 mt-2 font-medium">
                   <span>0.1</span>
@@ -144,10 +144,10 @@ const ProfitEstimator = () => {
           {/* RIGHT: PROJECTION MATRIX */}
           <div className="lg:w-1/2 p-8 lg:p-12 bg-gradient-to-br from-white/[0.02] to-transparent relative overflow-hidden flex flex-col justify-center">
             {/* Ambient background glow */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-accent-cyan/10 rounded-full blur-3xl" />
+            <div className="absolute top-0 right-0 w-64 h-64 bg-accent-yellow/10 rounded-full blur-3xl" />
             
             <h3 className="text-xl font-bold text-white mb-8 flex items-center gap-2 relative z-10">
-              <div className="w-2 h-6 bg-accent-purple rounded-full" />
+              <div className="w-2 h-6 bg-white rounded-full" />
               Projection Matrix
             </h3>
 
@@ -162,11 +162,11 @@ const ProfitEstimator = () => {
               </div>
 
               {/* Revenue Projection */}
-              <div className="bg-gradient-to-br from-accent-cyan/[0.08] to-transparent border border-accent-cyan/30 rounded-2xl p-6 shadow-[0_0_30px_rgba(0,255,255,0.05)_inset]">
-                <p className="text-sm text-accent-cyan uppercase tracking-widest font-semibold mb-2">Projected Gross Revenue</p>
+              <div className="bg-gradient-to-br from-accent-yellow/[0.08] to-transparent border border-accent-yellow/30 rounded-2xl p-6 shadow-[0_0_30px_rgba(0,255,255,0.05)_inset]">
+                <p className="text-sm text-accent-yellow uppercase tracking-widest font-semibold mb-2">Projected Gross Revenue</p>
                 <div className="flex flex-wrap items-baseline gap-2">
-                  <span className="text-5xl font-[800] text-transparent bg-clip-text bg-gradient-to-r from-accent-cyan to-white">{formatCurrency(revenue)}</span>
-                  <span className="text-accent-cyan/70 font-medium">/ mo</span>
+                  <span className="text-5xl font-[800] text-transparent bg-clip-text bg-gradient-to-r from-accent-yellow to-white">{formatCurrency(revenue)}</span>
+                  <span className="text-accent-yellow/70 font-medium">/ mo</span>
                 </div>
                 <div className="mt-4 flex items-center gap-2">
                   <div className="px-3 py-1 bg-green-500/20 text-green-400 text-xs font-bold rounded-md border border-green-500/30 flex items-center gap-1">

@@ -30,7 +30,7 @@ const CTA = () => {
             transition={{ delay: 0.1 }}
             className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight uppercase tracking-widest break-words"
           >
-            Ready to Start Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-cyan to-accent-purple">Brokerage</span>?
+            Ready to Start Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-yellow to-white">Brokerage</span>?
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}

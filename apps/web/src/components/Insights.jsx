@@ -15,7 +15,7 @@ const Insights = () => {
         <div className="flex flex-col md:flex-row justify-between items-end mb-16">
           <div className="max-w-2xl">
             <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white uppercase tracking-widest">
-              In-Depth <span className="text-accent-cyan">Insights</span>
+              In-Depth <span className="text-accent-yellow">Insights</span>
             </h2>
             <p className="text-gray-400 text-lg">Stay ahead of the curve with our expert analysis on technology, regulation, and market trends.</p>
           </div>
@@ -47,10 +47,10 @@ const Insights = () => {
               </div>
               <div className="p-6">
                 <div className="flex justify-between items-center mb-4">
-                  <span className="text-xs font-bold text-accent-cyan uppercase tracking-wider">{insight.category}</span>
+                  <span className="text-xs font-bold text-accent-yellow uppercase tracking-wider">{insight.category}</span>
                   <span className="text-xs text-gray-500">{insight.date}</span>
                 </div>
-                <h3 className="text-xl font-bold text-white mb-4 group-hover:text-accent-cyan transition-colors">{insight.title}</h3>
+                <h3 className="text-xl font-bold text-white mb-4 group-hover:text-accent-yellow transition-colors">{insight.title}</h3>
                 <div onClick={(e) => { e.stopPropagation(); navigate(`/blog/${insight.slug}`); }} className="inline-flex items-center text-sm text-gray-400 group-hover:text-white transition-colors">
                   Read Article <ArrowRight size={16} className="ml-2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
                 </div>

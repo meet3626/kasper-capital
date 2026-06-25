@@ -148,7 +148,7 @@ export default function AdminDashboard() {
 
   const getStatusColor = (status) => {
     switch(status) {
-      case 'New': return 'bg-blue-500/10 text-blue-400 border-blue-500/20';
+      case 'New': return 'bg-gray-300/10 text-blue-400 border-gray-300/20';
       case 'Connected': return 'bg-yellow-500/10 text-yellow-400 border-yellow-500/20';
       case 'In Progress': return 'bg-purple-500/10 text-purple-400 border-purple-500/20';
       case 'Closed (Won)': return 'bg-green-500/10 text-green-400 border-green-500/20';
@@ -293,7 +293,7 @@ export default function AdminDashboard() {
         >
           <div className="flex justify-between items-center mb-6">
             <h1 className="text-2xl font-bold text-white">Leads & Inquiries</h1>
-            <button className="px-4 py-2 bg-cyan-600 hover:bg-cyan-500 text-white rounded-lg text-sm font-medium transition-colors">
+            <button className="px-4 py-2 bg-yellow-500 hover:bg-yellow-400 text-white rounded-lg text-sm font-medium transition-colors">
               Export CSV
             </button>
           </div>
@@ -309,7 +309,7 @@ export default function AdminDashboard() {
                       type="text" 
                       value={editingLead.name || ''} 
                       onChange={e => handleEditChange('name', e.target.value)}
-                      className="w-full bg-black/20 border border-white/10 backdrop-blur-sm text-white rounded-lg px-4 py-2 focus:outline-none focus:border-cyan-500"
+                      className="w-full bg-black/20 border border-white/10 backdrop-blur-sm text-white rounded-lg px-4 py-2 focus:outline-none focus:border-yellow-400"
                     />
                   </div>
                   <div>
@@ -318,7 +318,7 @@ export default function AdminDashboard() {
                       type="email" 
                       value={editingLead.email || ''} 
                       onChange={e => handleEditChange('email', e.target.value)}
-                      className="w-full bg-black/20 border border-white/10 backdrop-blur-sm text-white rounded-lg px-4 py-2 focus:outline-none focus:border-cyan-500"
+                      className="w-full bg-black/20 border border-white/10 backdrop-blur-sm text-white rounded-lg px-4 py-2 focus:outline-none focus:border-yellow-400"
                     />
                   </div>
                   <div>
@@ -327,7 +327,7 @@ export default function AdminDashboard() {
                       type="text" 
                       value={editingLead.phone || ''} 
                       onChange={e => handleEditChange('phone', e.target.value)}
-                      className="w-full bg-black/20 border border-white/10 backdrop-blur-sm text-white rounded-lg px-4 py-2 focus:outline-none focus:border-cyan-500"
+                      className="w-full bg-black/20 border border-white/10 backdrop-blur-sm text-white rounded-lg px-4 py-2 focus:outline-none focus:border-yellow-400"
                     />
                   </div>
                   <div>
@@ -336,7 +336,7 @@ export default function AdminDashboard() {
                       type="text" 
                       value={editingLead.interest || ''} 
                       onChange={e => handleEditChange('interest', e.target.value)}
-                      className="w-full bg-black/20 border border-white/10 backdrop-blur-sm text-white rounded-lg px-4 py-2 focus:outline-none focus:border-cyan-500"
+                      className="w-full bg-black/20 border border-white/10 backdrop-blur-sm text-white rounded-lg px-4 py-2 focus:outline-none focus:border-yellow-400"
                     />
                   </div>
                   <div>
@@ -345,7 +345,7 @@ export default function AdminDashboard() {
                       value={editingLead.message || ''} 
                       onChange={e => handleEditChange('message', e.target.value)}
                       rows={3}
-                      className="w-full bg-black/20 border border-white/10 backdrop-blur-sm text-white rounded-lg px-4 py-2 focus:outline-none focus:border-cyan-500 resize-none"
+                      className="w-full bg-black/20 border border-white/10 backdrop-blur-sm text-white rounded-lg px-4 py-2 focus:outline-none focus:border-yellow-400 resize-none"
                     />
                   </div>
                 </div>
@@ -365,7 +365,7 @@ export default function AdminDashboard() {
                     </button>
                     <button 
                       onClick={saveEditedLead}
-                      className="px-6 py-2 bg-cyan-600 hover:bg-cyan-500 text-white rounded-lg font-medium transition-colors"
+                      className="px-6 py-2 bg-yellow-500 hover:bg-yellow-400 text-white rounded-lg font-medium transition-colors"
                     >
                       Save Changes
                     </button>
@@ -389,7 +389,7 @@ export default function AdminDashboard() {
                     <div className="text-gray-500 text-[10px] whitespace-nowrap">{lead.date}</div>
                   </div>
                   <div>
-                    <div className="text-cyan-400 text-sm font-medium">{lead.interest}</div>
+                    <div className="text-yellow-400 text-sm font-medium">{lead.interest}</div>
                     {lead.message && <div className="text-gray-400 text-xs mt-1 italic line-clamp-2">"{lead.message}"</div>}
                   </div>
                   <div className="pt-3 border-t border-gray-800 flex justify-between items-center">
@@ -406,7 +406,7 @@ export default function AdminDashboard() {
                     </select>
                     <button 
                       onClick={() => setEditingLead(lead)}
-                      className="text-cyan-500 hover:text-cyan-400 text-xs font-medium px-3 py-1.5 border border-cyan-500/30 hover:border-cyan-400 rounded-lg transition-colors"
+                      className="text-yellow-400 hover:text-yellow-400 text-xs font-medium px-3 py-1.5 border border-yellow-400/30 hover:border-yellow-400 rounded-lg transition-colors"
                     >
                       Edit
                     </button>
@@ -436,7 +436,7 @@ export default function AdminDashboard() {
                         <div className="text-gray-300">{lead.email}</div>
                         <div className="text-gray-500 text-sm">{lead.phone}</div>
                       </td>
-                      <td className="py-4 px-4 text-cyan-400">
+                      <td className="py-4 px-4 text-yellow-400">
                         {lead.interest}
                         {lead.message && <div className="text-gray-400 text-xs mt-1 truncate max-w-xs" title={lead.message}>"{lead.message}"</div>}
                       </td>
@@ -457,7 +457,7 @@ export default function AdminDashboard() {
                       <td className="py-4 px-4 text-right">
                         <button 
                           onClick={() => setEditingLead(lead)}
-                          className="text-cyan-500 hover:text-cyan-400 text-sm font-medium px-3 py-1.5 border border-cyan-500/30 hover:border-cyan-400 rounded-lg transition-colors"
+                          className="text-yellow-400 hover:text-yellow-400 text-sm font-medium px-3 py-1.5 border border-yellow-400/30 hover:border-yellow-400 rounded-lg transition-colors"
                         >
                           Edit
                         </button>
@@ -548,15 +548,15 @@ export default function AdminDashboard() {
               <form className="space-y-5">
                 <div>
                   <label className="block text-sm font-medium text-gray-400 mb-1">Administrator Name</label>
-                  <input type="text" defaultValue="Meet Gelani" className="w-full bg-[#1F2937] border-gray-700 text-white rounded-lg focus:ring-cyan-500 focus:border-cyan-500 p-2.5 outline-none" />
+                  <input type="text" defaultValue="Meet Gelani" className="w-full bg-[#1F2937] border-gray-700 text-white rounded-lg focus:ring-yellow-400 focus:border-yellow-400 p-2.5 outline-none" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-400 mb-1">Admin Email Address</label>
-                  <input type="email" defaultValue="admin@gmail.com" className="w-full bg-[#1F2937] border-gray-700 text-white rounded-lg focus:ring-cyan-500 focus:border-cyan-500 p-2.5 outline-none" />
+                  <input type="email" defaultValue="admin@gmail.com" className="w-full bg-[#1F2937] border-gray-700 text-white rounded-lg focus:ring-yellow-400 focus:border-yellow-400 p-2.5 outline-none" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-400 mb-1">Change Password</label>
-                  <input type="password" placeholder="••••••••" className="w-full bg-[#1F2937] border-gray-700 text-white rounded-lg focus:ring-cyan-500 focus:border-cyan-500 p-2.5 outline-none" />
+                  <input type="password" placeholder="••••••••" className="w-full bg-[#1F2937] border-gray-700 text-white rounded-lg focus:ring-yellow-400 focus:border-yellow-400 p-2.5 outline-none" />
                 </div>
               </form>
             </div>
@@ -572,7 +572,7 @@ export default function AdminDashboard() {
                   </div>
                   <label className="relative inline-flex items-center cursor-pointer">
                     <input type="checkbox" value="" className="sr-only peer" defaultChecked />
-                    <div className="w-11 h-6 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-cyan-500"></div>
+                    <div className="w-11 h-6 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-yellow-400"></div>
                   </label>
                 </div>
 
@@ -581,7 +581,7 @@ export default function AdminDashboard() {
                   <select 
                     value={maintenanceMode}
                     onChange={(e) => setMaintenanceMode(e.target.value)}
-                    className="w-full bg-[#1F2937] border-gray-700 text-white rounded-lg focus:ring-cyan-500 focus:border-cyan-500 p-2.5 outline-none cursor-pointer"
+                    className="w-full bg-[#1F2937] border-gray-700 text-white rounded-lg focus:ring-yellow-400 focus:border-yellow-400 p-2.5 outline-none cursor-pointer"
                   >
                     <option value="Disable">Disabled (Live)</option>
                     <option value="Enable">Enabled (Offline)</option>
@@ -591,7 +591,7 @@ export default function AdminDashboard() {
             </div>
             
             <div className="col-span-1 lg:col-span-2 flex justify-end">
-              <button type="button" onClick={handleSaveSettings} className="px-8 py-3 bg-cyan-600 hover:bg-cyan-500 text-white rounded-lg font-semibold transition-colors shadow-lg">
+              <button type="button" onClick={handleSaveSettings} className="px-8 py-3 bg-yellow-500 hover:bg-yellow-400 text-white rounded-lg font-semibold transition-colors shadow-lg">
                 Save All Settings
               </button>
             </div>
@@ -610,7 +610,7 @@ export default function AdminDashboard() {
         >
           <div className="flex justify-between items-center mb-6">
             <h1 className="text-2xl font-bold text-white">Manage Admins</h1>
-            <button onClick={() => openAdminModal(null)} className="px-4 py-2 bg-cyan-600 hover:bg-cyan-500 text-white rounded-lg text-sm font-medium transition-colors">
+            <button onClick={() => openAdminModal(null)} className="px-4 py-2 bg-yellow-500 hover:bg-yellow-400 text-white rounded-lg text-sm font-medium transition-colors">
               + Create New Admin
             </button>
           </div>
@@ -643,7 +643,7 @@ export default function AdminDashboard() {
                       </td>
                       <td className="py-4 px-4 text-right">
                         {admin.id !== 1 && (
-                          <button onClick={() => openAdminModal(admin)} className="text-cyan-500 hover:text-cyan-400 text-sm font-medium px-3 py-1.5 border border-cyan-500/30 hover:border-cyan-400 rounded-lg transition-colors mr-2">
+                          <button onClick={() => openAdminModal(admin)} className="text-yellow-400 hover:text-yellow-400 text-sm font-medium px-3 py-1.5 border border-yellow-400/30 hover:border-yellow-400 rounded-lg transition-colors mr-2">
                             Edit
                           </button>
                         )}
@@ -667,22 +667,22 @@ export default function AdminDashboard() {
                 <form onSubmit={handleSaveAdmin} className="space-y-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-400 mb-1">Name</label>
-                    <input type="text" required value={adminForm.name} onChange={e => setAdminForm({...adminForm, name: e.target.value})} className="w-full bg-black/20 border border-white/10 backdrop-blur-sm text-white rounded-lg px-4 py-2 focus:outline-none focus:border-cyan-500" />
+                    <input type="text" required value={adminForm.name} onChange={e => setAdminForm({...adminForm, name: e.target.value})} className="w-full bg-black/20 border border-white/10 backdrop-blur-sm text-white rounded-lg px-4 py-2 focus:outline-none focus:border-yellow-400" />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-400 mb-1">Email</label>
-                    <input type="email" required value={adminForm.email} onChange={e => setAdminForm({...adminForm, email: e.target.value})} className="w-full bg-black/20 border border-white/10 backdrop-blur-sm text-white rounded-lg px-4 py-2 focus:outline-none focus:border-cyan-500" />
+                    <input type="email" required value={adminForm.email} onChange={e => setAdminForm({...adminForm, email: e.target.value})} className="w-full bg-black/20 border border-white/10 backdrop-blur-sm text-white rounded-lg px-4 py-2 focus:outline-none focus:border-yellow-400" />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-400 mb-1">{editingAdminId ? 'New Password (leave blank to keep current)' : 'Password'}</label>
-                    <input type="password" required={!editingAdminId} value={adminForm.password} onChange={e => setAdminForm({...adminForm, password: e.target.value})} className="w-full bg-black/20 border border-white/10 backdrop-blur-sm text-white rounded-lg px-4 py-2 focus:outline-none focus:border-cyan-500" />
+                    <input type="password" required={!editingAdminId} value={adminForm.password} onChange={e => setAdminForm({...adminForm, password: e.target.value})} className="w-full bg-black/20 border border-white/10 backdrop-blur-sm text-white rounded-lg px-4 py-2 focus:outline-none focus:border-yellow-400" />
                   </div>
                   <div className="pt-4 border-t border-gray-800">
                     <label className="block text-sm font-medium text-gray-300 mb-3">Permissions</label>
                     <div className="grid grid-cols-2 gap-3">
                       {Object.keys(adminForm.permissions).map(key => (
                         <label key={key} className="flex items-center gap-2 cursor-pointer">
-                          <input type="checkbox" checked={adminForm.permissions[key]} onChange={e => setAdminForm({...adminForm, permissions: {...adminForm.permissions, [key]: e.target.checked}})} className="rounded border-gray-700 bg-gray-800 text-cyan-500 focus:ring-cyan-500" />
+                          <input type="checkbox" checked={adminForm.permissions[key]} onChange={e => setAdminForm({...adminForm, permissions: {...adminForm.permissions, [key]: e.target.checked}})} className="rounded border-gray-700 bg-gray-800 text-yellow-400 focus:ring-yellow-400" />
                           <span className="text-sm text-gray-400 capitalize">{key.replace('_', ' ')}</span>
                         </label>
                       ))}
@@ -690,7 +690,7 @@ export default function AdminDashboard() {
                   </div>
                   <div className="flex justify-end gap-3 mt-8">
                     <button type="button" onClick={() => setShowAdminModal(false)} className="px-6 py-2 border border-gray-700 text-gray-300 hover:bg-gray-800 hover:text-white rounded-lg font-medium transition-colors">Cancel</button>
-                    <button type="submit" className="px-6 py-2 bg-cyan-600 hover:bg-cyan-500 text-white rounded-lg font-medium transition-colors">Save Admin</button>
+                    <button type="submit" className="px-6 py-2 bg-yellow-500 hover:bg-yellow-400 text-white rounded-lg font-medium transition-colors">Save Admin</button>
                   </div>
                 </form>
               </div>
@@ -720,11 +720,11 @@ export default function AdminDashboard() {
               </div>
               <div className="relative">
                 <div 
-                  className="p-2 bg-cyan-500/10 rounded-lg cursor-pointer hover:bg-cyan-500/20 transition-colors"
+                  className="p-2 bg-yellow-400/10 rounded-lg cursor-pointer hover:bg-yellow-400/20 transition-colors"
                   onClick={() => setShowLeadsList(!showLeadsList)}
                   title="View Lead Names"
                 >
-                  <Users className="w-5 h-5 text-cyan-400" />
+                  <Users className="w-5 h-5 text-yellow-400" />
                 </div>
                 {showLeadsList && (
                   <div className="absolute right-0 mt-2 w-56 bg-black/20 border border-white/10 backdrop-blur-sm rounded-lg shadow-xl z-50 py-2 max-h-60 overflow-y-auto">
@@ -738,7 +738,7 @@ export default function AdminDashboard() {
                         onClick={() => { setShowLeadsList(false); setActiveTab('users'); }}
                       >
                         <span className="truncate mr-2 font-medium">{lead.name}</span>
-                        <span className="text-[10px] text-cyan-400 bg-cyan-500/10 px-2 py-0.5 rounded-full">{lead.status}</span>
+                        <span className="text-[10px] text-yellow-400 bg-yellow-400/10 px-2 py-0.5 rounded-full">{lead.status}</span>
                       </div>
                     )) : (
                       <div className="px-4 py-3 text-gray-500 text-sm text-center">No leads available</div>
@@ -801,7 +801,7 @@ export default function AdminDashboard() {
                     : '0%'}
                 </div>
               </div>
-              <div className="p-2 bg-blue-500/10 rounded-lg"><Activity className="w-5 h-5 text-blue-400" /></div>
+              <div className="p-2 bg-gray-300/10 rounded-lg"><Activity className="w-5 h-5 text-blue-400" /></div>
             </div>
             <div className="text-green-400 text-sm mt-4 flex items-center gap-1">
               Based on Closed (Won) leads
@@ -907,12 +907,12 @@ export default function AdminDashboard() {
               {leads.slice(0, 3).map((lead) => (
                 <div key={lead.id} className="flex items-center justify-between py-3 border-b border-gray-800/50 last:border-0">
                   <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 rounded-full bg-cyan-500/10 flex items-center justify-center text-cyan-400 font-bold uppercase">
+                    <div className="w-10 h-10 rounded-full bg-yellow-400/10 flex items-center justify-center text-yellow-400 font-bold uppercase">
                       {lead.name ? lead.name.charAt(0) : '?'}
                     </div>
                     <div>
                       <div className="text-white font-medium">{lead.name}</div>
-                      <div className="text-cyan-500 text-sm">Requested: {lead.interest}</div>
+                      <div className="text-yellow-400 text-sm">Requested: {lead.interest}</div>
                     </div>
                   </div>
                   <div className="text-gray-500 text-sm">{lead.date}</div>
@@ -930,15 +930,15 @@ export default function AdminDashboard() {
           <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl p-6 shadow-lg">
             <h3 className="text-lg font-bold text-white mb-4">Quick Actions</h3>
             <div className="grid grid-cols-2 gap-4">
-              <button onClick={handleEmailBroadcast} className="flex flex-col items-center justify-center p-6 bg-gray-800/30 border border-gray-800 hover:border-cyan-500/50 hover:bg-cyan-500/5 rounded-xl transition-all group">
-                <Mail className="w-8 h-8 text-gray-400 group-hover:text-cyan-400 mb-3" />
+              <button onClick={handleEmailBroadcast} className="flex flex-col items-center justify-center p-6 bg-gray-800/30 border border-gray-800 hover:border-yellow-400/50 hover:bg-yellow-400/5 rounded-xl transition-all group">
+                <Mail className="w-8 h-8 text-gray-400 group-hover:text-yellow-400 mb-3" />
                 <span className="text-gray-300 font-medium text-sm text-center">Compose Email Broadcast</span>
               </button>
               <button onClick={() => setActiveTab('settings')} className="flex flex-col items-center justify-center p-6 bg-gray-800/30 border border-gray-800 hover:border-purple-500/50 hover:bg-purple-500/5 rounded-xl transition-all group">
                 <Settings className="w-8 h-8 text-gray-400 group-hover:text-purple-400 mb-3" />
                 <span className="text-gray-300 font-medium text-sm text-center">Update Contact Info</span>
               </button>
-              <button onClick={() => window.open('/', '_blank')} className="flex flex-col items-center justify-center p-6 bg-gray-800/30 border border-gray-800 hover:border-blue-500/50 hover:bg-blue-500/5 rounded-xl transition-all group">
+              <button onClick={() => window.open('/', '_blank')} className="flex flex-col items-center justify-center p-6 bg-gray-800/30 border border-gray-800 hover:border-gray-300/50 hover:bg-gray-300/5 rounded-xl transition-all group">
                 <LayoutDashboard className="w-8 h-8 text-gray-400 group-hover:text-blue-400 mb-3" />
                 <span className="text-gray-300 font-medium text-sm text-center">View Live Site</span>
               </button>
@@ -958,7 +958,7 @@ export default function AdminDashboard() {
         >
           <div className="flex justify-between items-center mb-6">
             <h1 className="text-2xl font-bold text-white">Manage Blogs</h1>
-            <button onClick={() => { setEditingBlog(false); setBlogForm({ title: '', content: '', coverImage: '' }); }} className="px-4 py-2 bg-cyan-600 hover:bg-cyan-500 text-white rounded-lg text-sm font-medium transition-colors">
+            <button onClick={() => { setEditingBlog(false); setBlogForm({ title: '', content: '', coverImage: '' }); }} className="px-4 py-2 bg-yellow-500 hover:bg-yellow-400 text-white rounded-lg text-sm font-medium transition-colors">
               + Create New Blog
             </button>
           </div>
@@ -969,11 +969,11 @@ export default function AdminDashboard() {
               <form onSubmit={handleSaveBlog} className="space-y-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-400 mb-1">Title</label>
-                  <input type="text" required value={blogForm.title} onChange={e => setBlogForm({...blogForm, title: e.target.value})} className="w-full bg-black/20 border border-white/10 backdrop-blur-sm text-white rounded-lg px-4 py-2 focus:outline-none focus:border-cyan-500" />
+                  <input type="text" required value={blogForm.title} onChange={e => setBlogForm({...blogForm, title: e.target.value})} className="w-full bg-black/20 border border-white/10 backdrop-blur-sm text-white rounded-lg px-4 py-2 focus:outline-none focus:border-yellow-400" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-400 mb-1">Cover Image</label>
-                  <input type="file" accept="image/*" onChange={handleUploadImage} className="w-full bg-black/20 border border-white/10 backdrop-blur-sm text-white rounded-lg px-4 py-2 focus:outline-none focus:border-cyan-500" />
+                  <input type="file" accept="image/*" onChange={handleUploadImage} className="w-full bg-black/20 border border-white/10 backdrop-blur-sm text-white rounded-lg px-4 py-2 focus:outline-none focus:border-yellow-400" />
                   {blogForm.coverImage && <img src={blogForm.coverImage} alt="Cover" className="mt-2 h-32 object-cover rounded-lg" />}
                 </div>
                 <div>
@@ -989,7 +989,7 @@ export default function AdminDashboard() {
                 </div>
                 <div className="flex justify-end gap-3 mt-8">
                   <button type="button" onClick={() => setEditingBlog(null)} className="px-6 py-2 border border-gray-700 text-gray-300 hover:bg-gray-800 hover:text-white rounded-lg font-medium transition-colors">Cancel</button>
-                  <button type="submit" className="px-6 py-2 bg-cyan-600 hover:bg-cyan-500 text-white rounded-lg font-medium transition-colors">Save Blog</button>
+                  <button type="submit" className="px-6 py-2 bg-yellow-500 hover:bg-yellow-400 text-white rounded-lg font-medium transition-colors">Save Blog</button>
                 </div>
               </form>
             </div>
@@ -1011,7 +1011,7 @@ export default function AdminDashboard() {
                       <td className="py-4 px-4 text-white font-medium">{blog.title}</td>
                       <td className="py-4 px-4 text-gray-500 text-right">{blog.date}</td>
                       <td className="py-4 px-4 text-right">
-                        <button onClick={() => { setEditingBlog(blog); setBlogForm(blog); }} className="text-cyan-500 hover:text-cyan-400 text-sm font-medium px-3 py-1.5 border border-cyan-500/30 hover:border-cyan-400 rounded-lg transition-colors mr-2">Edit</button>
+                        <button onClick={() => { setEditingBlog(blog); setBlogForm(blog); }} className="text-yellow-400 hover:text-yellow-400 text-sm font-medium px-3 py-1.5 border border-yellow-400/30 hover:border-yellow-400 rounded-lg transition-colors mr-2">Edit</button>
                         <button onClick={() => handleDeleteBlog(blog.id)} className="text-red-500 hover:text-red-400 text-sm font-medium px-3 py-1.5 border border-red-500/30 hover:border-red-400 rounded-lg transition-colors">Delete</button>
                       </td>
                     </tr>
@@ -1038,7 +1038,7 @@ export default function AdminDashboard() {
         <div className="p-6 border-b border-gray-800">
           <h2 
             onClick={() => { setActiveTab('dashboard'); navigate('/admin/dashboard'); }}
-            className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500 cursor-pointer hover:opacity-80 transition-opacity"
+            className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-gray-300 cursor-pointer hover:opacity-80 transition-opacity"
           >
             Admin Panel
           </h2>
@@ -1049,7 +1049,7 @@ export default function AdminDashboard() {
               onClick={() => setActiveTab('dashboard')}
               className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
                 activeTab === 'dashboard'
-                  ? 'bg-cyan-500/10 text-cyan-400'
+                  ? 'bg-yellow-400/10 text-yellow-400'
                   : 'text-gray-400 hover:text-white hover:bg-gray-800'
               }`}
             >
@@ -1063,7 +1063,7 @@ export default function AdminDashboard() {
               onClick={() => setActiveTab('users')}
               className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
                 activeTab === 'users'
-                  ? 'bg-cyan-500/10 text-cyan-400'
+                  ? 'bg-yellow-400/10 text-yellow-400'
                   : 'text-gray-400 hover:text-white hover:bg-gray-800'
               }`}
             >
@@ -1077,7 +1077,7 @@ export default function AdminDashboard() {
               onClick={() => setActiveTab('newsletter')}
               className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
                 activeTab === 'newsletter'
-                  ? 'bg-cyan-500/10 text-cyan-400'
+                  ? 'bg-yellow-400/10 text-yellow-400'
                   : 'text-gray-400 hover:text-white hover:bg-gray-800'
               }`}
             >
@@ -1091,7 +1091,7 @@ export default function AdminDashboard() {
               onClick={() => setActiveTab('settings')}
               className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
                 activeTab === 'settings'
-                  ? 'bg-cyan-500/10 text-cyan-400'
+                  ? 'bg-yellow-400/10 text-yellow-400'
                   : 'text-gray-400 hover:text-white hover:bg-gray-800'
               }`}
             >
@@ -1104,7 +1104,7 @@ export default function AdminDashboard() {
             onClick={() => setActiveTab('blogs')}
             className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
               activeTab === 'blogs'
-                ? 'bg-cyan-500/10 text-cyan-400'
+                ? 'bg-yellow-400/10 text-yellow-400'
                 : 'text-gray-400 hover:text-white hover:bg-gray-800'
             }`}
           >
@@ -1117,7 +1117,7 @@ export default function AdminDashboard() {
               onClick={() => setActiveTab('manage_admins')}
               className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
                 activeTab === 'manage_admins'
-                  ? 'bg-cyan-500/10 text-cyan-400'
+                  ? 'bg-yellow-400/10 text-yellow-400'
                   : 'text-gray-400 hover:text-white hover:bg-gray-800'
               }`}
             >
@@ -1143,7 +1143,7 @@ export default function AdminDashboard() {
         <div className="md:hidden bg-white/5 backdrop-blur-xl border-b border-white/10 p-4 flex justify-between items-center z-20">
           <h2 
             onClick={() => { setActiveTab('dashboard'); navigate('/admin/dashboard'); }}
-            className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500 cursor-pointer hover:opacity-80 transition-opacity"
+            className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-gray-300 cursor-pointer hover:opacity-80 transition-opacity"
           >
             Admin Panel
           </h2>
@@ -1165,7 +1165,7 @@ export default function AdminDashboard() {
             <button
               onClick={() => setActiveTab('dashboard')}
               className={`flex flex-col items-center gap-1 flex-shrink-0 transition-colors ${
-                activeTab === 'dashboard' ? 'text-cyan-400' : 'text-gray-500 hover:text-gray-300'
+                activeTab === 'dashboard' ? 'text-yellow-400' : 'text-gray-500 hover:text-gray-300'
               }`}
             >
               <LayoutDashboard className="w-5 h-5" />
@@ -1176,7 +1176,7 @@ export default function AdminDashboard() {
             <button
               onClick={() => setActiveTab('users')}
               className={`flex flex-col items-center gap-1 flex-shrink-0 transition-colors ${
-                activeTab === 'users' ? 'text-cyan-400' : 'text-gray-500 hover:text-gray-300'
+                activeTab === 'users' ? 'text-yellow-400' : 'text-gray-500 hover:text-gray-300'
               }`}
             >
               <Users className="w-5 h-5" />
@@ -1187,7 +1187,7 @@ export default function AdminDashboard() {
             <button
               onClick={() => setActiveTab('newsletter')}
               className={`flex flex-col items-center gap-1 flex-shrink-0 transition-colors ${
-                activeTab === 'newsletter' ? 'text-cyan-400' : 'text-gray-500 hover:text-gray-300'
+                activeTab === 'newsletter' ? 'text-yellow-400' : 'text-gray-500 hover:text-gray-300'
               }`}
             >
               <Mail className="w-5 h-5" />
@@ -1198,7 +1198,7 @@ export default function AdminDashboard() {
           <button
             onClick={() => setActiveTab('blogs')}
             className={`flex flex-col items-center gap-1 flex-shrink-0 transition-colors ${
-              activeTab === 'blogs' ? 'text-cyan-400' : 'text-gray-500 hover:text-gray-300'
+              activeTab === 'blogs' ? 'text-yellow-400' : 'text-gray-500 hover:text-gray-300'
             }`}
           >
             <FileText className="w-5 h-5" />
@@ -1209,7 +1209,7 @@ export default function AdminDashboard() {
             <button
               onClick={() => setActiveTab('manage_admins')}
               className={`flex flex-col items-center gap-1 flex-shrink-0 transition-colors ${
-                activeTab === 'manage_admins' ? 'text-cyan-400' : 'text-gray-500 hover:text-gray-300'
+                activeTab === 'manage_admins' ? 'text-yellow-400' : 'text-gray-500 hover:text-gray-300'
               }`}
             >
               <LogOut className="w-5 h-5" />
@@ -1221,7 +1221,7 @@ export default function AdminDashboard() {
             <button
               onClick={() => setActiveTab('settings')}
               className={`flex flex-col items-center gap-1 flex-shrink-0 transition-colors ${
-                activeTab === 'settings' ? 'text-cyan-400' : 'text-gray-500 hover:text-gray-300'
+                activeTab === 'settings' ? 'text-yellow-400' : 'text-gray-500 hover:text-gray-300'
               }`}
             >
               <Settings className="w-5 h-5" />

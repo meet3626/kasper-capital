@@ -47,13 +47,13 @@ export default function Admin3DBackground() {
     <div className="fixed inset-0 z-0 pointer-events-none bg-[#030610]">
       {(!mounted || isMobile) ? (
         <div className="absolute inset-0 overflow-hidden opacity-60">
-          <div className="absolute top-[-10%] left-[-20%] w-[70%] h-[70%] bg-cyan-500/10 rounded-full blur-[100px] animate-pulse" style={{ animationDuration: '4s' }} />
+          <div className="absolute top-[-10%] left-[-20%] w-[70%] h-[70%] bg-yellow-400/10 rounded-full blur-[100px] animate-pulse" style={{ animationDuration: '4s' }} />
           <div className="absolute bottom-[-10%] right-[-20%] w-[70%] h-[70%] bg-purple-500/10 rounded-full blur-[100px] animate-pulse" style={{ animationDuration: '5s', animationDelay: '1s' }} />
         </div>
       ) : (
         <Canvas camera={{ position: [0, 0, 5], fov: 45 }}>
           <ambientLight intensity={0.2} />
-          <directionalLight position={[5, 5, 5]} intensity={1.5} color="#00e5ff" />
+          <directionalLight position={[5, 5, 5]} intensity={1.5} color="#FFD700" />
           <directionalLight position={[-5, -5, -5]} intensity={1} color="#a855f7" />
           
           <LiquidBlob position={[-2, 1, -2]} color="#080c16" distort={0.5} speed={1.2} scale={3} />

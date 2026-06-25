@@ -172,7 +172,7 @@ const Partners = () => {
       {/* Background */}
       
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[300px] bg-accent-cyan/[0.03] rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[300px] bg-accent-yellow/[0.03] rounded-full blur-[120px] pointer-events-none" />
 
       <div className="relative z-10">
         {/* Section Header */}
@@ -186,7 +186,7 @@ const Partners = () => {
           <p className="section-label mb-4">Ecosystem</p>
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
             Integrated with{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-cyan to-accent-purple">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-yellow to-white">
               Industry Leaders
             </span>
           </h2>

@@ -26,7 +26,7 @@ const Layout = () => {
         <div className="fixed inset-0 z-0 pointer-events-none">
           {(!mounted || isMobile) ? (
             <div className="absolute inset-0 overflow-hidden opacity-30">
-              <div className="absolute top-[-10%] left-[-20%] w-[70%] h-[70%] bg-cyan-500/20 rounded-full blur-[120px] animate-pulse" style={{ animationDuration: '4s' }} />
+              <div className="absolute top-[-10%] left-[-20%] w-[70%] h-[70%] bg-yellow-400/20 rounded-full blur-[120px] animate-pulse" style={{ animationDuration: '4s' }} />
               <div className="absolute bottom-[-10%] right-[-20%] w-[70%] h-[70%] bg-purple-500/20 rounded-full blur-[120px] animate-pulse" style={{ animationDuration: '5s', animationDelay: '1s' }} />
             </div>
           ) : (

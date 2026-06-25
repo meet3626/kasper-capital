@@ -38,7 +38,7 @@ const FloatingCard = ({ icon: Icon, label, value, color, delay, className, toolt
 // Animated trading chart bars
 const ChartBar = ({ height, delay, active }) => (
   <motion.div
-    className={`w-5 rounded-t-sm ${active ? 'bg-gradient-to-t from-accent-cyan to-accent-cyan/50' : 'bg-black/5 dark:bg-white/10'}`}
+    className={`w-5 rounded-t-sm ${active ? 'bg-gradient-to-t from-accent-yellow to-accent-yellow/50' : 'bg-black/5 dark:bg-white/10'}`}
     initial={{ height: 0 }}
     animate={{ height }}
     transition={{ duration: 0.8, delay, ease: [0.22, 1, 0.36, 1] }}
@@ -92,8 +92,8 @@ const Hero = () => {
 
       {/* Background gradients */}
       <div className="absolute inset-0 bg-gradient-to-br from-gray-50 via-gray-100 to-gray-50 dark:from-[#0B0B0B] dark:via-[#0d0d14] dark:to-[#0B0B0B] z-0 transition-colors duration-500 opacity-0" />
-      <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-accent-purple/[0.07] rounded-full blur-[130px] pointer-events-none z-0" />
-      <div className="absolute bottom-1/4 right-1/4 w-[350px] h-[350px] bg-accent-cyan/[0.05] rounded-full blur-[100px] pointer-events-none z-0" />
+      <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-white/[0.07] rounded-full blur-[130px] pointer-events-none z-0" />
+      <div className="absolute bottom-1/4 right-1/4 w-[350px] h-[350px] bg-accent-yellow/[0.05] rounded-full blur-[100px] pointer-events-none z-0" />
 
       <div className="container mx-auto px-6 relative z-10 pointer-events-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center min-h-[80vh]">
@@ -108,7 +108,7 @@ const Hero = () => {
               transition={{ duration: 0.6 }}
               className="inline-flex items-center gap-2.5 px-4 py-2 bg-black/[0.04] dark:bg-white/[0.04] border border-black/10 dark:border-white/10 rounded-full mb-8 w-fit hover:border-black/20 dark:hover:border-white/20 hover:bg-black/[0.07] dark:hover:bg-white/[0.07] transition-all duration-300 cursor-default"
             >
-              <Sparkles className="w-3.5 h-3.5 text-accent-cyan" />
+              <Sparkles className="w-3.5 h-3.5 text-accent-yellow" />
               <span className="text-[11px] text-gray-600 dark:text-gray-300 uppercase tracking-[0.2em] font-semibold">
                 {t('hero.eyebrow')}
               </span>
@@ -131,7 +131,7 @@ const Hero = () => {
                 <span className="block translate-z-[20px] shadow-black/50">{t('hero.headingLine1')}</span>
                 <span className="block mt-2 translate-z-[40px]">
                   {t('hero.headingLine2')}{' '}
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-cyan to-accent-purple italic font-light pr-2">
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-yellow to-white italic font-light pr-2">
                     {t('hero.headingAccent')}
                   </span>
                 </span>
@@ -167,7 +167,7 @@ const Hero = () => {
                 onClick={handleViewWorkClick}
                 size="lg"
                 variant="outline"
-                className="border-2 border-black/20 dark:border-white/20 hover:bg-black/[0.03] dark:hover:bg-white/[0.07] hover:border-accent-cyan/50 dark:hover:border-accent-cyan/50 text-gray-900 dark:text-white px-8 py-6 text-sm rounded-full w-full sm:w-auto font-bold uppercase tracking-widest transition-all duration-300 hover:shadow-[0_0_20px_rgba(0,229,255,0.1)]"
+                className="border-2 border-black/20 dark:border-white/20 hover:bg-black/[0.03] dark:hover:bg-white/[0.07] hover:border-accent-yellow/50 dark:hover:border-accent-yellow/50 text-gray-900 dark:text-white px-8 py-6 text-sm rounded-full w-full sm:w-auto font-bold uppercase tracking-widest transition-all duration-300 hover:shadow-[0_0_20px_rgba(0,229,255,0.1)]"
               >
                 {t('hero.ctaSecondary')}
               </Button>
@@ -208,7 +208,7 @@ const Hero = () => {
           <motion.div
             animate={{ y: [0, 10, 0] }}
             transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-            className="w-1 h-1 bg-accent-cyan rounded-full opacity-70"
+            className="w-1 h-1 bg-accent-yellow rounded-full opacity-70"
           />
         </motion.div>
       </motion.div>

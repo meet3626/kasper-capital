@@ -11,7 +11,7 @@ const ParticleGlobe = () => {
     const count = 4000;
     const pos = new Float32Array(count * 3);
     const cols = new Float32Array(count * 3);
-    const color1 = new THREE.Color('#00e5ff');
+    const color1 = new THREE.Color('#FFD700');
     const color2 = new THREE.Color('#b026ff');
     
     for (let i = 0; i < count; i++) {
@@ -74,13 +74,13 @@ const DataRings = ({ position }) => {
       <Float speed={2} rotationIntensity={2} floatIntensity={2}>
         <mesh ref={ring1}>
           <torusGeometry args={[3, 0.02, 16, 100]} />
-          <meshBasicMaterial color="#00e5ff" transparent opacity={0.6} />
+          <meshBasicMaterial color="#FFD700" transparent opacity={0.6} />
         </mesh>
         <mesh ref={ring2}>
           <torusGeometry args={[4, 0.01, 16, 100]} />
           <meshBasicMaterial color="#b026ff" transparent opacity={0.4} />
         </mesh>
-        <Sparkles count={200} scale={10} size={2} speed={0.4} color="#00e5ff" />
+        <Sparkles count={200} scale={10} size={2} speed={0.4} color="#FFD700" />
       </Float>
     </group>
   );
@@ -156,7 +156,7 @@ const Global3DScene = () => {
   return (
     <>
       <ambientLight intensity={0.5} />
-      <directionalLight position={[10, 10, 5]} intensity={1} color="#00e5ff" />
+      <directionalLight position={[10, 10, 5]} intensity={1} color="#FFD700" />
       <directionalLight position={[-10, -10, -5]} intensity={1} color="#b026ff" />
       
       <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade speed={1} />
@@ -178,7 +178,7 @@ const Global3DScene = () => {
            <Float speed={1} rotationIntensity={1} floatIntensity={2}>
               <mesh>
                 <octahedronGeometry args={[3, 0]} />
-                <meshStandardMaterial color="#00e5ff" wireframe />
+                <meshStandardMaterial color="#FFD700" wireframe />
               </mesh>
            </Float>
         </group>
@@ -190,7 +190,7 @@ const Global3DScene = () => {
       </group>
       
       {/* Global shadow floor */}
-      <ContactShadows position={[0, -6, 0]} opacity={0.3} scale={100} blur={2.5} far={20} color="#00e5ff" />
+      <ContactShadows position={[0, -6, 0]} opacity={0.3} scale={100} blur={2.5} far={20} color="#FFD700" />
     </>
   );
 };

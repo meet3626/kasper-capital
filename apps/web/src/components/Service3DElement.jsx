@@ -11,7 +11,7 @@ const LiquidSphere = ({ isHovered }) => {
   return (
     <mesh ref={meshRef} scale={1.2}>
       <sphereGeometry args={[1, 64, 64]} />
-      <MeshDistortMaterial color="#00e5ff" emissive="#002244" distort={isHovered ? 0.6 : 0.3} speed={isHovered ? 4 : 1} roughness={0.2} metalness={0.8} />
+      <MeshDistortMaterial color="#FFD700" emissive="#002244" distort={isHovered ? 0.6 : 0.3} speed={isHovered ? 4 : 1} roughness={0.2} metalness={0.8} />
     </mesh>
   );
 };

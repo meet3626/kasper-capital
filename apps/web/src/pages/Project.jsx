@@ -209,7 +209,7 @@ const Project = () => {
         {/* Hero Image */}
         <SectionAnimator>
             <div className="container mx-auto px-6 mb-16">
-                 <div className="aspect-video rounded-2xl overflow-hidden shadow-2xl shadow-accent-purple/10">
+                 <div className="aspect-video rounded-2xl overflow-hidden shadow-2xl shadow-accent-yellow/10">
                     <img class="w-full h-full object-cover" alt={project.images.hero.alt} src="/images/trading_terminal_hero.png" />
                  </div>
             </div>
@@ -266,7 +266,7 @@ const Project = () => {
                 <div className="container mx-auto px-6">
                     <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Work Together?</h2>
                     <p className="text-lg text-gray-400 mb-8">Let's discuss your next big idea and how we can bring it to life.</p>
-                     <Button asChild size="lg" className="bg-accent-purple text-white hover:bg-accent-purple/90 group rounded-full text-lg py-7 px-10">
+                     <Button asChild size="lg" className="bg-white text-white hover:bg-white/90 group rounded-full text-lg py-7 px-10">
                         <Link to="/contact">
                             Let's Talk <ArrowRight className="ml-2 h-5 w-5 transform transition-transform duration-300 group-hover:translate-x-1" />
                         </Link>

@@ -9,7 +9,7 @@ const PrivacyPolicy = () => {
       </Helmet>
       <div className="container mx-auto px-6 max-w-4xl">
         <h1 className="text-4xl md:text-5xl font-bold mb-12 text-white uppercase tracking-widest border-b border-white/10 pb-8">
-          Privacy <span className="text-accent-cyan">Policy</span>
+          Privacy <span className="text-accent-yellow">Policy</span>
         </h1>
         
         <div className="prose prose-invert prose-lg max-w-none space-y-8 text-gray-300">
@@ -60,7 +60,7 @@ const PrivacyPolicy = () => {
             <h2 className="text-2xl font-bold text-white mb-4">5. Contact Us</h2>
             <p>
               If you have any questions about this Privacy Policy, please contact us at: <br/>
-              <a href="mailto:info@brokercoresolution.com" className="text-accent-cyan hover:underline">info@brokercoresolution.com</a>
+              <a href="mailto:info@brokercoresolution.com" className="text-accent-yellow hover:underline">info@brokercoresolution.com</a>
             </p>
           </section>
         </div>

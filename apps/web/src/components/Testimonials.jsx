@@ -79,21 +79,21 @@ const Testimonials = () => {
   return (
     <section id="testimonials" className="py-24 transition-colors duration-500 relative overflow-hidden">
       {/* Background Glows */}
-      <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-accent-purple/5 rounded-full blur-[150px] pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-accent-cyan/5 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-white/5 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-accent-yellow/5 rounded-full blur-[150px] pointer-events-none" />
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
           <div className="max-w-2xl">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 dark:text-white leading-tight tracking-tight">
-              Trusted by <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-cyan to-accent-purple italic font-light">Industry Leaders</span>
+              Trusted by <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-yellow to-white italic font-light">Industry Leaders</span>
             </h2>
           </div>
           <div className="hidden md:flex gap-4">
             <button
               onClick={() => scroll('left')}
               disabled={!canScrollLeft}
-              className="w-14 h-14 rounded-full bg-black/5 dark:bg-white/5 backdrop-blur-md border border-black/10 dark:border-white/10 text-gray-900 dark:text-white flex items-center justify-center hover:bg-black/10 dark:hover:bg-white/10 hover:border-accent-cyan/50 dark:hover:border-accent-cyan/50 transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed group"
+              className="w-14 h-14 rounded-full bg-black/5 dark:bg-white/5 backdrop-blur-md border border-black/10 dark:border-white/10 text-gray-900 dark:text-white flex items-center justify-center hover:bg-black/10 dark:hover:bg-white/10 hover:border-accent-yellow/50 dark:hover:border-accent-yellow/50 transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed group"
               aria-label="Scroll left"
             >
               <ArrowLeft className="w-6 h-6 group-hover:-translate-x-1 transition-transform" />
@@ -101,7 +101,7 @@ const Testimonials = () => {
             <button
               onClick={() => scroll('right')}
               disabled={!canScrollRight}
-              className="w-14 h-14 rounded-full bg-black/5 dark:bg-white/5 backdrop-blur-md border border-black/10 dark:border-white/10 text-gray-900 dark:text-white flex items-center justify-center hover:bg-black/10 dark:hover:bg-white/10 hover:border-accent-cyan/50 dark:hover:border-accent-cyan/50 transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed group"
+              className="w-14 h-14 rounded-full bg-black/5 dark:bg-white/5 backdrop-blur-md border border-black/10 dark:border-white/10 text-gray-900 dark:text-white flex items-center justify-center hover:bg-black/10 dark:hover:bg-white/10 hover:border-accent-yellow/50 dark:hover:border-accent-yellow/50 transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed group"
               aria-label="Scroll right"
             >
               <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
@@ -118,10 +118,10 @@ const Testimonials = () => {
               key={testimonial.id}
               className="flex-shrink-0 w-[calc(100%-10px)] md:w-[calc(50%-12px)] snap-start"
             >
-              <div className="bg-white/50 dark:bg-white/5 backdrop-blur-md p-10 lg:p-12 rounded-3xl h-full flex flex-col border border-black/5 dark:border-white/5 hover:border-accent-purple/30 dark:hover:border-accent-purple/30 transition-all duration-500 relative group overflow-hidden shadow-lg dark:shadow-none">
-                <div className="absolute top-0 right-0 w-48 h-48 bg-gradient-to-br from-accent-purple/10 to-transparent rounded-bl-full -mr-24 -mt-24 transition-transform duration-700 group-hover:scale-110"></div>
+              <div className="bg-white/50 dark:bg-white/5 backdrop-blur-md p-10 lg:p-12 rounded-3xl h-full flex flex-col border border-black/5 dark:border-white/5 hover:border-white/30 dark:hover:border-white/30 transition-all duration-500 relative group overflow-hidden shadow-lg dark:shadow-none">
+                <div className="absolute top-0 right-0 w-48 h-48 bg-gradient-to-br from-white/10 to-transparent rounded-bl-full -mr-24 -mt-24 transition-transform duration-700 group-hover:scale-110"></div>
                 
-                <Quote className="w-10 h-10 text-accent-cyan/40 dark:text-accent-cyan/20 mb-6 group-hover:text-accent-cyan/60 dark:group-hover:text-accent-cyan/40 transition-colors duration-500" />
+                <Quote className="w-10 h-10 text-accent-yellow/40 dark:text-accent-yellow/20 mb-6 group-hover:text-accent-yellow/60 dark:group-hover:text-accent-yellow/40 transition-colors duration-500" />
                 
                 <p className="text-gray-800 dark:text-white text-lg md:text-xl leading-relaxed font-light mb-8 flex-grow">
                   "{testimonial.content}"
@@ -129,12 +129,12 @@ const Testimonials = () => {
 
                 <div className="flex items-center mt-auto">
                   <div className="relative">
-                    <div className="absolute inset-0 rounded-full bg-accent-cyan/20 blur-md group-hover:bg-accent-cyan/40 transition-colors duration-500"></div>
+                    <div className="absolute inset-0 rounded-full bg-accent-yellow/20 blur-md group-hover:bg-accent-yellow/40 transition-colors duration-500"></div>
                     <OptimizedImage width={64} height={64} className="w-16 h-16 rounded-full mr-5 object-cover border-2 border-black/10 dark:border-white/10 relative z-10" alt={testimonial.name} src={testimonial.avatar} />
                   </div>
                   <div>
                     <p className="font-bold text-gray-900 dark:text-white tracking-wide text-lg">{testimonial.name}</p>
-                    <p className="text-sm text-accent-cyan font-medium">{testimonial.role}</p>
+                    <p className="text-sm text-accent-yellow font-medium">{testimonial.role}</p>
                   </div>
                 </div>
               </div>

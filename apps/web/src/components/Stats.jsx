@@ -68,7 +68,7 @@ const Stats = ({ customStats }) => {
   return (
     <section id="stats-section" className="py-24 transition-colors duration-500 relative overflow-hidden border-t border-black/5 dark:border-white/5">
       {/* Background Gradients */}
-      <div className="absolute top-0 right-1/4 w-96 h-96 bg-accent-cyan/10 rounded-full blur-[150px] pointer-events-none mix-blend-multiply dark:mix-blend-screen" />
+      <div className="absolute top-0 right-1/4 w-96 h-96 bg-accent-yellow/10 rounded-full blur-[150px] pointer-events-none mix-blend-multiply dark:mix-blend-screen" />
       
       <div className="container mx-auto px-6 relative z-10">
         {!isProjectPage && (
@@ -78,16 +78,16 @@ const Stats = ({ customStats }) => {
                 initial={{ opacity: 0, y: -10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="inline-flex items-center gap-2 px-4 py-1.5 bg-black/5 dark:bg-white/5 backdrop-blur-md border border-black/10 dark:border-white/10 rounded-full text-xs font-semibold uppercase tracking-widest text-accent-cyan mb-6"
+                className="inline-flex items-center gap-2 px-4 py-1.5 bg-black/5 dark:bg-white/5 backdrop-blur-md border border-black/10 dark:border-white/10 rounded-full text-xs font-semibold uppercase tracking-widest text-accent-yellow mb-6"
               >
                 By the Numbers
               </motion.div>
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 dark:text-white tracking-tight leading-tight">
-                Proven <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-cyan to-accent-purple italic font-light">Impact</span>
+                Proven <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-yellow to-white italic font-light">Impact</span>
               </h2>
             </div>
             <div className="lg:max-w-md">
-              <p className="text-xl text-gray-600 dark:text-gray-400 font-light leading-relaxed border-l-2 border-accent-cyan/30 pl-6">
+              <p className="text-xl text-gray-600 dark:text-gray-400 font-light leading-relaxed border-l-2 border-accent-yellow/30 pl-6">
                 Tangible results backed by robust technology. We build high-performance brokerage environments designed to scale globally.
               </p>
             </div>
@@ -97,7 +97,7 @@ const Stats = ({ customStats }) => {
         {isProjectPage && (
             <div className="text-center mb-24">
                 <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 dark:text-white tracking-tight">
-                    Project <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-cyan to-accent-purple italic font-light">Impact</span>
+                    Project <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-yellow to-white italic font-light">Impact</span>
                 </h2>
             </div>
         )}

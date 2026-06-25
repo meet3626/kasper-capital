@@ -45,7 +45,7 @@ const Blog = () => {
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-7xl font-[800] uppercase tracking-wider mb-6 leading-tight">
               Latest Insights <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-cyan to-accent-purple">& News</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-yellow to-white">& News</span>
             </h1>
             <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
               Stay updated with the latest trends, regulatory changes, and expert advice on running a successful Forex brokerage.
@@ -73,7 +73,7 @@ const Blog = () => {
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   onClick={() => navigate(`/blog/${post.slug}`)}
-                  className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl overflow-hidden hover:border-accent-cyan/30 hover:shadow-[0_0_30px_rgba(0,229,255,0.15)] transition-all duration-500 group flex flex-col h-full cursor-pointer shadow-none"
+                  className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl overflow-hidden hover:border-accent-yellow/30 hover:shadow-[0_0_30px_rgba(0,229,255,0.15)] transition-all duration-500 group flex flex-col h-full cursor-pointer shadow-none"
                 >
                   {/* Image Container with Zoom effect */}
                   <div className="relative aspect-[16/10] overflow-hidden">
@@ -84,7 +84,7 @@ const Blog = () => {
                       height={250}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                     />
-                    <div className="absolute top-4 left-4 bg-accent-cyan text-black text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-md">
+                    <div className="absolute top-4 left-4 bg-accent-yellow text-black text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-md">
                       {post.category}
                     </div>
                   </div>
@@ -102,7 +102,7 @@ const Blog = () => {
                       </div>
                     </div>
 
-                    <h3 className="text-xl font-bold text-white mb-3 line-clamp-2 group-hover:text-accent-cyan transition-colors">
+                    <h3 className="text-xl font-bold text-white mb-3 line-clamp-2 group-hover:text-accent-yellow transition-colors">
                       {post.title}
                     </h3>
                     
@@ -110,7 +110,7 @@ const Blog = () => {
                       {post.excerpt}
                     </p>
 
-                    <button className="flex items-center gap-2 text-sm font-bold text-gray-900 dark:text-white group-hover:text-accent-cyan transition-colors mt-auto w-fit">
+                    <button className="flex items-center gap-2 text-sm font-bold text-gray-900 dark:text-white group-hover:text-accent-yellow transition-colors mt-auto w-fit">
                       READ MORE <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                     </button>
                   </div>

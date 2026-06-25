@@ -114,17 +114,17 @@ const Footer = () => {
     return (
         <footer className="bg-transparent transition-colors duration-500 pt-24 pb-8 relative overflow-hidden border-t border-black/5 dark:border-white/5">
             {/* Ambient Background */}
-            <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-accent-cyan/[0.03] rounded-full blur-[150px] pointer-events-none" />
-            <div className="absolute bottom-0 left-0 w-[800px] h-[800px] bg-accent-purple/[0.03] rounded-full blur-[150px] pointer-events-none" />
+            <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-accent-yellow/[0.03] rounded-full blur-[150px] pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-[800px] h-[800px] bg-white/[0.03] rounded-full blur-[150px] pointer-events-none" />
 
             <div className="container mx-auto px-6 max-w-7xl relative z-10">
                 {/* Massive CTA Section */}
                 <div className="bg-black/5 dark:bg-white/5 backdrop-blur-md p-12 md:p-16 rounded-3xl border border-black/5 dark:border-white/5 mb-20 relative overflow-hidden group">
-                    <div className="absolute inset-0 bg-gradient-to-r from-accent-cyan/5 to-accent-purple/5 dark:from-accent-cyan/10 dark:to-accent-purple/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-accent-yellow/5 to-white/5 dark:from-accent-yellow/10 dark:to-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
                     <div className="flex flex-col lg:flex-row justify-between items-center gap-12 relative z-10">
                         <div className="max-w-xl text-center lg:text-left">
                             <h3 className="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white tracking-tight mb-4">
-                                Ready to launch your <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-cyan to-accent-purple">Brokerage?</span>
+                                Ready to launch your <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-yellow to-white">Brokerage?</span>
                             </h3>
                             <p className="text-gray-600 dark:text-gray-400 text-lg font-light leading-relaxed">
                                 Join the industry leaders and get access to exclusive market insights, regulatory updates, and technology trends.
@@ -143,7 +143,7 @@ const Footer = () => {
                                                 message: "Invalid email address"
                                             }
                                         })}
-                                        className="w-full h-14 pl-6 pr-4 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl text-gray-900 dark:text-white placeholder-gray-500 outline-none focus:border-accent-cyan/50 focus:bg-black/10 dark:focus:bg-white/10 transition-all duration-300 backdrop-blur-md"
+                                        className="w-full h-14 pl-6 pr-4 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl text-gray-900 dark:text-white placeholder-gray-500 outline-none focus:border-accent-yellow/50 focus:bg-black/10 dark:focus:bg-white/10 transition-all duration-300 backdrop-blur-md"
                                     />
                                     {errors.email && <span className="absolute -bottom-6 left-2 text-red-500 dark:text-red-400 text-xs">{errors.email.message}</span>}
                                 </div>
@@ -161,10 +161,10 @@ const Footer = () => {
                     <div className="lg:col-span-4">
                         <div className="mb-8">
                             <h3 className="text-4xl font-[900] tracking-tighter text-gray-900 dark:text-white flex items-center gap-2">
-                                <span className="w-4 h-4 bg-gradient-to-br from-accent-cyan to-accent-purple rounded-sm inline-block"></span>
+                                <span className="w-4 h-4 bg-gradient-to-br from-accent-yellow to-white rounded-sm inline-block"></span>
                                 BROKERCORESOLUTION
                             </h3>
-                            <p className="text-xs font-bold text-accent-cyan tracking-[0.2em] mt-2 uppercase">IT Solutions Est</p>
+                            <p className="text-xs font-bold text-accent-yellow tracking-[0.2em] mt-2 uppercase">IT Solutions Est</p>
                         </div>
                         <p className="text-gray-600 dark:text-gray-400 mb-8 font-light leading-relaxed max-w-sm">
                             Your trusted institutional partner in navigating the dynamic landscape of the global Forex market with Tier-1 infrastructure.
@@ -172,20 +172,20 @@ const Footer = () => {
                         
                         <div className="space-y-4">
                             <div className="flex items-center gap-4 text-gray-600 dark:text-gray-400 font-light group cursor-pointer">
-                                <div className="w-10 h-10 rounded-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 flex items-center justify-center group-hover:border-accent-cyan transition-colors">
-                                    <Mail size={16} className="group-hover:text-accent-cyan transition-colors" />
+                                <div className="w-10 h-10 rounded-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 flex items-center justify-center group-hover:border-accent-yellow transition-colors">
+                                    <Mail size={16} className="group-hover:text-accent-yellow transition-colors" />
                                 </div>
                                 <a href="mailto:enquiry@brokercoresolution.com" className="hover:text-gray-900 dark:hover:text-white transition-colors">enquiry@brokercoresolution.com</a>
                             </div>
                             <div className="flex items-center gap-4 text-gray-600 dark:text-gray-400 font-light group cursor-pointer">
-                                <div className="w-10 h-10 rounded-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 flex items-center justify-center group-hover:border-accent-cyan transition-colors">
-                                    <Phone size={16} className="group-hover:text-accent-cyan transition-colors" />
+                                <div className="w-10 h-10 rounded-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 flex items-center justify-center group-hover:border-accent-yellow transition-colors">
+                                    <Phone size={16} className="group-hover:text-accent-yellow transition-colors" />
                                 </div>
                                 <a href="tel:+971568795828" className="hover:text-gray-900 dark:hover:text-white transition-colors">+971568795828</a>
                             </div>
                             <div className="flex items-center gap-4 text-gray-600 dark:text-gray-400 font-light group cursor-pointer">
-                                <div className="w-10 h-10 rounded-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 flex items-center justify-center group-hover:border-accent-cyan transition-colors">
-                                    <MapPin size={16} className="group-hover:text-accent-cyan transition-colors" />
+                                <div className="w-10 h-10 rounded-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 flex items-center justify-center group-hover:border-accent-yellow transition-colors">
+                                    <MapPin size={16} className="group-hover:text-accent-yellow transition-colors" />
                                 </div>
                                 <span>2807, Churchill Executive Tower, Business Bay, Dubai.</span>
                             </div>
@@ -201,9 +201,9 @@ const Footer = () => {
                                     <a 
                                         href={link.href}
                                         onClick={(e) => handleNavClick(e, link.href)}
-                                        className="text-gray-600 dark:text-gray-400 font-light hover:text-accent-cyan transition-colors flex items-center gap-2 group"
+                                        className="text-gray-600 dark:text-gray-400 font-light hover:text-accent-yellow transition-colors flex items-center gap-2 group"
                                     >
-                                        <span className="w-1.5 h-1.5 rounded-full bg-black/20 dark:bg-white/20 group-hover:bg-accent-cyan transition-colors"></span>
+                                        <span className="w-1.5 h-1.5 rounded-full bg-black/20 dark:bg-white/20 group-hover:bg-accent-yellow transition-colors"></span>
                                         {link.name}
                                     </a>
                                 </li>
@@ -223,9 +223,9 @@ const Footer = () => {
                                             if(policy.href === '#') handleNotImplemented(e);
                                             else handleNavClick(e, policy.href);
                                         }}
-                                        className="text-gray-600 dark:text-gray-400 font-light hover:text-accent-purple transition-colors flex items-center gap-2 group"
+                                        className="text-gray-600 dark:text-gray-400 font-light hover:text-white transition-colors flex items-center gap-2 group"
                                     >
-                                        <span className="w-1.5 h-1.5 rounded-full bg-black/20 dark:bg-white/20 group-hover:bg-accent-purple transition-colors"></span>
+                                        <span className="w-1.5 h-1.5 rounded-full bg-black/20 dark:bg-white/20 group-hover:bg-white transition-colors"></span>
                                         {policy.name}
                                     </a>
                                 </li>
@@ -245,7 +245,7 @@ const Footer = () => {
                                     <div className="w-20 h-16 shrink-0 overflow-hidden rounded-xl border border-black/10 dark:border-white/10">
                                         <OptimizedImage src={post.image} alt={post.title} width={80} height={64} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                                     </div>
-                                    <h5 className="text-sm font-medium text-gray-700 dark:text-gray-300 group-hover:text-accent-cyan transition-colors leading-snug line-clamp-3">
+                                    <h5 className="text-sm font-medium text-gray-700 dark:text-gray-300 group-hover:text-accent-yellow transition-colors leading-snug line-clamp-3">
                                         {post.title}
                                     </h5>
                                 </div>

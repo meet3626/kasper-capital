@@ -13,8 +13,8 @@ const AboutUs = () => {
       />
 
       {/* Ambient Lights */}
-      <div className="absolute top-[-10%] right-[-5%] w-[800px] h-[800px] bg-accent-purple/5 rounded-full blur-[150px] pointer-events-none" />
-      <div className="absolute top-[40%] left-[-10%] w-[600px] h-[600px] bg-accent-cyan/5 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute top-[-10%] right-[-5%] w-[800px] h-[800px] bg-white/5 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute top-[40%] left-[-10%] w-[600px] h-[600px] bg-accent-yellow/5 rounded-full blur-[150px] pointer-events-none" />
 
       {/* Hero Section */}
       <section className="relative z-10 mb-32">
@@ -25,12 +25,12 @@ const AboutUs = () => {
             transition={{ duration: 0.8 }}
             className="flex flex-col items-center"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 glass rounded-full text-xs font-semibold uppercase tracking-widest text-accent-purple mb-8">
-              <div className="w-2 h-2 rounded-full bg-accent-purple animate-pulse"></div>
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 glass rounded-full text-xs font-semibold uppercase tracking-widest text-white mb-8">
+              <div className="w-2 h-2 rounded-full bg-white animate-pulse"></div>
               Our Story
             </div>
             <h1 className="text-5xl md:text-6xl lg:text-8xl font-extrabold tracking-tighter mb-8 leading-none">
-              Pioneering <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-cyan to-accent-purple italic font-light">Brokerage</span> Infrastructure
+              Pioneering <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-yellow to-white italic font-light">Brokerage</span> Infrastructure
             </h1>
             <p className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto font-light leading-relaxed">
               At BROKERCORESOLUTION, we specialize in providing elite technology consulting, infrastructure solutions, and business advisory services to financial institutions, brokerage firms, and corporate clients worldwide.
@@ -70,7 +70,7 @@ const AboutUs = () => {
                 transition={{ duration: 0.8, delay: 0.2 }}
                 className="glass p-10 rounded-[2rem] border border-white/5"
               >
-                <Building2 className="w-12 h-12 text-accent-cyan mb-6" />
+                <Building2 className="w-12 h-12 text-accent-yellow mb-6" />
                 <h3 className="text-2xl font-bold text-white mb-4 tracking-tight">Streamlined Operations</h3>
                 <p className="text-gray-400 font-light leading-relaxed">
                   Our mission is to help businesses scale by implementing robust technology solutions. We cut through the noise to deliver systems that work perfectly from day one.
@@ -84,7 +84,7 @@ const AboutUs = () => {
                 transition={{ duration: 0.8, delay: 0.4 }}
                 className="glass p-10 rounded-[2rem] border border-white/5"
               >
-                <Target className="w-12 h-12 text-accent-purple mb-6" />
+                <Target className="w-12 h-12 text-white mb-6" />
                 <h3 className="text-2xl font-bold text-white mb-4 tracking-tight">Accelerated Growth</h3>
                 <p className="text-gray-400 font-light leading-relaxed">
                   From CRM implementation to liquidity advisory, we provide the entire ecosystem required to build sustainable and highly profitable brokerages.
@@ -105,11 +105,11 @@ const AboutUs = () => {
               viewport={{ once: true }}
               className="glass p-12 md:p-16 rounded-[2.5rem] border border-white/5 relative overflow-hidden group"
             >
-              <div className="absolute top-0 right-0 w-64 h-64 bg-accent-purple/10 rounded-full blur-[80px] -mr-32 -mt-32 transition-transform duration-700 group-hover:scale-150"></div>
+              <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-[80px] -mr-32 -mt-32 transition-transform duration-700 group-hover:scale-150"></div>
               <div className="relative z-10">
-                <h3 className="text-sm font-bold text-accent-purple uppercase tracking-widest mb-4">Our Vision</h3>
+                <h3 className="text-sm font-bold text-white uppercase tracking-widest mb-4">Our Vision</h3>
                 <h4 className="text-3xl md:text-4xl font-extrabold text-white leading-tight mb-8">
-                  To become the undisputed <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-purple to-accent-cyan">trusted partner</span> for global financial infrastructure.
+                  To become the undisputed <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-accent-yellow">trusted partner</span> for global financial infrastructure.
                 </h4>
                 <p className="text-gray-400 font-light text-lg leading-relaxed">
                   We envision a landscape where starting and scaling a brokerage is frictionless, powered by innovative infrastructure, operational excellence, and our deep industry expertise.
@@ -124,11 +124,11 @@ const AboutUs = () => {
               transition={{ delay: 0.2 }}
               className="glass p-12 md:p-16 rounded-[2.5rem] border border-white/5 relative overflow-hidden group"
             >
-              <div className="absolute bottom-0 right-0 w-64 h-64 bg-accent-cyan/10 rounded-full blur-[80px] -mr-32 -mb-32 transition-transform duration-700 group-hover:scale-150"></div>
+              <div className="absolute bottom-0 right-0 w-64 h-64 bg-accent-yellow/10 rounded-full blur-[80px] -mr-32 -mb-32 transition-transform duration-700 group-hover:scale-150"></div>
               <div className="relative z-10">
-                <h3 className="text-sm font-bold text-accent-cyan uppercase tracking-widest mb-4">Our Mission</h3>
+                <h3 className="text-sm font-bold text-accent-yellow uppercase tracking-widest mb-4">Our Mission</h3>
                 <h4 className="text-3xl md:text-4xl font-extrabold text-white leading-tight mb-8">
-                  To deliver reliable technology solutions that drive <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-cyan to-accent-purple">long-term success.</span>
+                  To deliver reliable technology solutions that drive <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-yellow to-white">long-term success.</span>
                 </h4>
                 <p className="text-gray-400 font-light text-lg leading-relaxed">
                   We provide operational expertise and strategic consulting that help institutions improve efficiency, strengthen their technological backbone, and maintain strict regulatory compliance.

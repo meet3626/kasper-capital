@@ -31,7 +31,7 @@ const FAQ = () => {
   return (
     <section id="faq" className="py-28 relative overflow-hidden">
       
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-accent-purple/[0.05] rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-white/[0.05] rounded-full blur-[100px] pointer-events-none" />
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
       <div className="container mx-auto px-6 max-w-3xl relative z-10">
@@ -51,7 +51,7 @@ const FAQ = () => {
             transition={{ delay: 0.1 }}
             className="text-4xl md:text-5xl font-bold mb-4 text-white"
           >
-            Frequently Asked <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-cyan to-accent-purple">Questions</span>
+            Frequently Asked <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-yellow to-white">Questions</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 10 }}
@@ -76,7 +76,7 @@ const FAQ = () => {
                 transition={{ duration: 0.35, delay: index * 0.08 }}
                 className={`border rounded-2xl overflow-hidden transition-all duration-300 ease-in-out ${
                   isActive
-                    ? 'border-accent-cyan/40 bg-gradient-to-b from-accent-cyan/[0.05] to-transparent shadow-lg shadow-accent-cyan/5'
+                    ? 'border-accent-yellow/40 bg-gradient-to-b from-accent-yellow/[0.05] to-transparent shadow-lg shadow-accent-yellow/5'
                     : 'border-white/[0.08] bg-gradient-to-b from-white/[0.03] to-transparent hover:border-white/20 hover:from-white/[0.05]'
                 }`}
               >
@@ -84,12 +84,12 @@ const FAQ = () => {
                   className="w-full flex items-center justify-between p-6 text-left focus:outline-none group"
                   onClick={() => setActiveIndex(isActive ? -1 : index)}
                 >
-                  <span className={`text-base font-semibold transition-colors duration-300 pr-4 leading-snug ${isActive ? 'text-accent-cyan' : 'text-white group-hover:text-accent-cyan/80'}`}>
+                  <span className={`text-base font-semibold transition-colors duration-300 pr-4 leading-snug ${isActive ? 'text-accent-yellow' : 'text-white group-hover:text-accent-yellow/80'}`}>
                     {faq.question}
                   </span>
                   <div className={`shrink-0 w-8 h-8 rounded-full flex items-center justify-center border transition-all duration-500 ${
                     isActive
-                      ? 'bg-accent-cyan/10 text-accent-cyan border-accent-cyan/50 rotate-180 shadow-[0_0_15px_rgba(0,255,255,0.3)]'
+                      ? 'bg-accent-yellow/10 text-accent-yellow border-accent-yellow/50 rotate-180 shadow-[0_0_15px_rgba(0,255,255,0.3)]'
                       : 'bg-white/5 text-gray-400 border-white/10 group-hover:border-white/30 group-hover:text-white rotate-0'
                   }`}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6"/></svg>
