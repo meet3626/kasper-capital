@@ -46,7 +46,7 @@ const CTA = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3 }}
-            className="px-4 md:px-0"
+            className="px-4 md:px-0 flex justify-center"
           >
             <Button
               onClick={handleCTAClick}
