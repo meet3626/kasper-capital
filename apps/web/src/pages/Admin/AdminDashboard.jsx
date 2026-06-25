@@ -259,7 +259,8 @@ export default function AdminDashboard() {
       }
       setShowAdminModal(false);
     } catch (err) {
-      alert("Error saving admin");
+      console.error(err);
+      alert("Error saving admin: " + err.message);
     }
   };
 
