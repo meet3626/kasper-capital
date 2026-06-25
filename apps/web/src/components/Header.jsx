@@ -443,7 +443,7 @@ const Header = () => {
                 <motion.a
                   href="/"
                   onClick={handleHomeClick}
-                  className="text-2xl font-semibold text-gray-300 hover:text-white transition-colors uppercase tracking-widest"
+                  className="text-2xl font-semibold text-gray-300 hover:text-white transition-colors uppercase tracking-widest text-center"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: 0.05 }}
@@ -460,7 +460,7 @@ const Header = () => {
                 >
                   <button
                     onClick={() => setMobileServicesOpen((v) => !v)}
-                    className="w-full flex items-center justify-between text-2xl font-semibold text-gray-300 hover:text-white transition-colors uppercase tracking-widest"
+                    className="w-full flex items-center justify-center gap-3 text-2xl font-semibold text-gray-300 hover:text-white transition-colors uppercase tracking-widest text-center"
                   >
                     {t('nav.services')}
                     <ChevronDown size={20} className={`transition-transform duration-300 ${mobileServicesOpen ? 'rotate-180 text-accent-cyan' : ''}`} />
@@ -512,10 +512,10 @@ const Header = () => {
                   transition={{ duration: 0.4, delay: 0.38 }}
                   className="flex flex-col items-center gap-3 w-full max-w-xs"
                 >
-                  <span className="text-xs font-bold text-gray-500 uppercase tracking-widest border-b border-white/10 pb-2 w-1/2 text-center">{t('nav.company')}</span>
-                  <Link to="/about-us" onClick={() => setIsOpen(false)} className="text-2xl font-semibold text-gray-300 hover:text-white transition-colors uppercase tracking-widest">{t('nav.about')}</Link>
-                  <Link to="/contact" onClick={() => setIsOpen(false)} className="text-2xl font-semibold text-gray-300 hover:text-white transition-colors uppercase tracking-widest">{t('nav.contact')}</Link>
-                  <a href="/#faq" onClick={handleSmoothScroll} className="text-xl font-semibold text-gray-400 hover:text-white transition-colors uppercase tracking-widest">{t('nav.faq')}</a>
+                  <span className="text-[10px] font-bold text-gray-500 uppercase tracking-[0.3em] border-b border-white/5 pb-2 w-full text-center">{t('nav.company')}</span>
+                  <Link to="/about-us" onClick={() => setIsOpen(false)} className="text-2xl font-semibold text-gray-300 hover:text-white transition-colors uppercase tracking-widest text-center">{t('nav.about')}</Link>
+                  <Link to="/contact" onClick={() => setIsOpen(false)} className="text-2xl font-semibold text-gray-300 hover:text-white transition-colors uppercase tracking-widest text-center">{t('nav.contact')}</Link>
+                  <a href="/#faq" onClick={handleSmoothScroll} className="text-2xl font-semibold text-gray-300 hover:text-white transition-colors uppercase tracking-widest text-center">{t('nav.faq')}</a>
                 </motion.div>
 
                 <motion.div
@@ -524,8 +524,8 @@ const Header = () => {
                   transition={{ duration: 0.4, delay: 0.46 }}
                   className="flex flex-col items-center gap-4"
                 >
-                  <Link to="/blog" onClick={() => setIsOpen(false)} className="text-2xl font-semibold text-gray-300 hover:text-white transition-colors uppercase tracking-widest">{t('nav.blog')}</Link>
-                  <Link to="/brokerage-calculator" onClick={() => setIsOpen(false)} className="text-2xl font-semibold text-gray-300 hover:text-white transition-colors uppercase tracking-widest">{t('nav.calculator')}</Link>
+                  <Link to="/blog" onClick={() => setIsOpen(false)} className="text-2xl font-semibold text-gray-300 hover:text-white transition-colors uppercase tracking-widest text-center">{t('nav.blog')}</Link>
+                  <Link to="/brokerage-calculator" onClick={() => setIsOpen(false)} className="text-2xl font-semibold text-gray-300 hover:text-white transition-colors uppercase tracking-widest text-center">{t('nav.calculator')}</Link>
                 </motion.div>
 
                 {/* Mobile Language & Theme */}
