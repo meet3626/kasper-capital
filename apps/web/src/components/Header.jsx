@@ -326,7 +326,7 @@ const Header = () => {
             </Link>
 
             {/* Desktop Nav */}
-            <nav className="hidden md:flex items-center gap-7">
+            <nav className="hidden lg:flex items-center gap-7">
 
               <Link to="/" onClick={handleHomeClick} className="text-gray-300 hover:text-white transition-colors relative group font-semibold uppercase tracking-widest text-sm">
                 {'HOME'}
@@ -377,7 +377,7 @@ const Header = () => {
             </nav>
 
             {/* Desktop Right */}
-            <div className="hidden md:flex items-center gap-3">
+            <div className="hidden lg:flex items-center gap-3">
               <div className="relative flex flex-col items-end">
                 <LanguageSelector />
 
@@ -392,7 +392,7 @@ const Header = () => {
             </div>
 
             {/* Mobile Hamburger */}
-            <div className="md:hidden">
+            <div className="lg:hidden">
               <button onClick={() => setIsOpen(!isOpen)} className="text-white p-1">
                 <Menu size={28} />
               </button>
@@ -409,7 +409,7 @@ const Header = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: '-100%' }}
             transition={{ duration: 0.45, ease: 'easeInOut' }}
-            className="fixed inset-0 bg-black z-[9999] md:hidden overflow-y-auto pointer-events-auto"
+            className="fixed inset-0 bg-black z-[9999] lg:hidden overflow-y-auto pointer-events-auto"
           >
             <div className="container mx-auto px-6 flex flex-col min-h-full">
 

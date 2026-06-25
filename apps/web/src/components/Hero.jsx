@@ -119,7 +119,7 @@ const Hero = () => {
               style={{ perspective: 1000 }}
               onMouseMove={handleMouseMove}
               onMouseLeave={handleMouseLeave}
-              className="py-10 -my-10"
+              className="mb-8"
             >
               <motion.h1
                 style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
