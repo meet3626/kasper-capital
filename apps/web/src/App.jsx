@@ -14,11 +14,8 @@ const Blog = React.lazy(() => import('@/pages/Blog'));
 const BlogPost = React.lazy(() => import('@/pages/BlogPost'));
 const PrivacyPolicy = React.lazy(() => import('@/pages/PrivacyPolicy'));
 const TermsAndConditions = React.lazy(() => import('@/pages/TermsAndConditions'));
-const DisclaimerPolicy = React.lazy(() => import('@/pages/DisclaimerPolicy'));
-const CookiePolicy = React.lazy(() => import('@/pages/CookiePolicy'));
 const RefundPolicy = React.lazy(() => import('@/pages/RefundPolicy'));
 const AMLPolicy = React.lazy(() => import('@/pages/AMLPolicy'));
-const DataProtectionPolicy = React.lazy(() => import('@/pages/DataProtectionPolicy'));
 const ServiceDetail = React.lazy(() => import('@/pages/ServiceDetail'));
 const AdminLogin = React.lazy(() => import('@/pages/Admin/AdminLogin'));
 const AdminDashboard = React.lazy(() => import('@/pages/Admin/AdminDashboard'));
@@ -84,11 +81,8 @@ function App() {
               <Route path="project/:projectId" element={<Project />} />
               <Route path="privacy-policy" element={<PrivacyPolicy />} />
               <Route path="terms-and-conditions" element={<TermsAndConditions />} />
-              <Route path="disclaimer" element={<DisclaimerPolicy />} />
-              <Route path="cookie-policy" element={<CookiePolicy />} />
               <Route path="refund-policy" element={<RefundPolicy />} />
               <Route path="aml-policy" element={<AMLPolicy />} />
-              <Route path="data-protection-policy" element={<DataProtectionPolicy />} />
               <Route path="services/:serviceId" element={<ServiceDetail />} />
             </Route>
           </Routes>
