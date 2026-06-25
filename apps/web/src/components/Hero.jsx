@@ -126,7 +126,7 @@ const Hero = () => {
                 initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-                className="text-4xl md:text-5xl lg:text-6xl font-[800] text-gray-900 dark:text-white leading-[1.1] tracking-tight mb-6 drop-shadow-2xl"
+                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-[800] text-gray-900 dark:text-white leading-[1.1] tracking-tight mb-6 drop-shadow-2xl"
               >
                 <span className="block translate-z-[20px] shadow-black/50">{t('hero.headingLine1')}</span>
                 <span className="block mt-2 translate-z-[40px]">
@@ -158,7 +158,7 @@ const Hero = () => {
               <Button
                 onClick={handleCTAClick}
                 size="lg"
-                className="bg-gray-900 text-white dark:bg-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-100 font-[800] px-8 py-6 text-sm rounded-full group uppercase tracking-widest transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(255,255,255,0.15)]"
+                className="bg-gray-900 text-white dark:bg-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-100 font-[800] px-8 py-6 text-sm rounded-full group w-full sm:w-auto uppercase tracking-widest transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_30px_rgba(255,255,255,0.15)]"
               >
                 {t('hero.ctaPrimary')}
                 <ArrowRight className="ml-2.5 text-white dark:text-black group-hover:translate-x-1.5 transition-transform duration-300" size={16} />
@@ -167,7 +167,7 @@ const Hero = () => {
                 onClick={handleViewWorkClick}
                 size="lg"
                 variant="outline"
-                className="border-2 border-black/20 dark:border-white/20 hover:bg-black/[0.03] dark:hover:bg-white/[0.07] hover:border-accent-cyan/50 dark:hover:border-accent-cyan/50 text-gray-900 dark:text-white px-8 py-6 text-sm rounded-full font-bold uppercase tracking-widest transition-all duration-300 hover:shadow-[0_0_20px_rgba(0,229,255,0.1)]"
+                className="border-2 border-black/20 dark:border-white/20 hover:bg-black/[0.03] dark:hover:bg-white/[0.07] hover:border-accent-cyan/50 dark:hover:border-accent-cyan/50 text-gray-900 dark:text-white px-8 py-6 text-sm rounded-full w-full sm:w-auto font-bold uppercase tracking-widest transition-all duration-300 hover:shadow-[0_0_20px_rgba(0,229,255,0.1)]"
               >
                 {t('hero.ctaSecondary')}
               </Button>

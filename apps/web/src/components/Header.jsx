@@ -409,7 +409,7 @@ const Header = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: '-100%' }}
             transition={{ duration: 0.45, ease: 'easeInOut' }}
-            className="fixed inset-0 bg-[#0B0B0B] z-[9999] md:hidden overflow-y-auto pointer-events-auto"
+            className="fixed inset-0 bg-black z-[9999] md:hidden overflow-y-auto pointer-events-auto"
           >
             <div className="container mx-auto px-6 flex flex-col min-h-full">
 
