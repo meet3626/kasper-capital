@@ -50,7 +50,8 @@ export default function AdminLogin() {
     }
 
     try {
-      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+      const isProd = import.meta.env.PROD;
+      const apiUrl = import.meta.env.VITE_API_URL || (isProd ? '' : 'http://localhost:5000');
       const response = await fetch(`${apiUrl}/api/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -84,7 +85,8 @@ export default function AdminLogin() {
   const handleMfaSubmit = async (e) => {
     e.preventDefault();
     try {
-      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+      const isProd = import.meta.env.PROD;
+      const apiUrl = import.meta.env.VITE_API_URL || (isProd ? '' : 'http://localhost:5000');
       const response = await fetch(`${apiUrl}/api/auth/login-mfa`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
