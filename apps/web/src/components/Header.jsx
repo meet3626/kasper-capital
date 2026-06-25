@@ -311,7 +311,7 @@ const Header = () => {
 
   return (
     <>
-      <div className="fixed top-0 left-0 w-full z-50 pointer-events-none">
+      <div className="fixed top-0 left-0 w-full z-[9990] pointer-events-none">
         <motion.header
           className={`pointer-events-auto transition-all duration-500 ease-[0.22,1,0.36,1] w-full ${isScrolled
             ? 'bg-[#09090b]/90 backdrop-blur-2xl border-b border-white/10 shadow-lg py-3'
@@ -409,7 +409,7 @@ const Header = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: '-100%' }}
             transition={{ duration: 0.45, ease: 'easeInOut' }}
-            className="fixed inset-0 bg-[#0B0B0B] z-50 md:hidden overflow-y-auto"
+            className="fixed inset-0 bg-[#0B0B0B] z-[9999] md:hidden overflow-y-auto pointer-events-auto"
           >
             <div className="container mx-auto px-6 flex flex-col min-h-full">
 
