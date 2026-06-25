@@ -41,6 +41,22 @@ export default function AdminLogin() {
     }
   }, [navigate]);
 
+  const handleSetup = async () => {
+    try {
+      const isProd = import.meta.env.PROD;
+      const apiUrl = import.meta.env.VITE_API_URL || (isProd ? '' : 'http://localhost:5000');
+      const response = await fetch(`${apiUrl}/api/auth/setup`, { method: 'POST' });
+      const data = await response.json();
+      if (response.ok) {
+        alert("Master Admin created! Email: admin@gmail.com, Password: Admin123");
+      } else {
+        alert(data.message || "Setup failed");
+      }
+    } catch (e) {
+      alert("Error running setup");
+    }
+  };
+
   const handleLogin = async (e) => {
     e.preventDefault();
     
@@ -130,73 +146,80 @@ export default function AdminLogin() {
       >
         <div className="bg-[#111827] py-8 px-4 shadow-2xl shadow-yellow-400/5 sm:rounded-2xl sm:px-10 border border-gray-800">
           {!requiresMfa && !setupMfaRequired ? (
-            <form className="space-y-6" onSubmit={handleLogin}>
-              {error && (
-                <div className="bg-red-500/10 border border-red-500/50 rounded-lg p-3 flex items-center gap-2 text-red-500 text-sm">
-                  <AlertCircle className="w-4 h-4" />
-                  {error}
-                </div>
-              )}
-
-              <div>
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium text-gray-300"
-                >
-                  Email or Username
-                </label>
-                <div className="mt-1 relative rounded-md shadow-sm">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <Mail className="h-5 w-5 text-gray-500" />
+            <>
+              <form className="space-y-6" onSubmit={handleLogin}>
+                {error && (
+                  <div className="bg-red-500/10 border border-red-500/50 rounded-lg p-3 flex items-center gap-2 text-red-500 text-sm">
+                    <AlertCircle className="w-4 h-4" />
+                    {error}
                   </div>
-                  <input
-                    id="email"
-                    name="email"
-                    type="text"
-                    autoComplete="username"
-                    required
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="block w-full pl-10 bg-[#1F2937] border-gray-700 text-white rounded-lg focus:ring-yellow-400 focus:border-yellow-400 sm:text-sm py-2.5"
-                    placeholder="Enter your email or username"
-                  />
-                </div>
-              </div>
+                )}
 
-              <div>
-                <label
-                  htmlFor="password"
-                  className="block text-sm font-medium text-gray-300"
-                >
-                  Password
-                </label>
-                <div className="mt-1 relative rounded-md shadow-sm">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <Lock className="h-5 w-5 text-gray-500" />
+                <div>
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-medium text-gray-300"
+                  >
+                    Email or Username
+                  </label>
+                  <div className="mt-1 relative rounded-md shadow-sm">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                      <Mail className="h-5 w-5 text-gray-500" />
+                    </div>
+                    <input
+                      id="email"
+                      name="email"
+                      type="text"
+                      autoComplete="username"
+                      required
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="block w-full pl-10 bg-[#1F2937] border-gray-700 text-white rounded-lg focus:ring-yellow-400 focus:border-yellow-400 sm:text-sm py-2.5"
+                      placeholder="Enter your email or username"
+                    />
                   </div>
-                  <input
-                    id="password"
-                    name="password"
-                    type="password"
-                    autoComplete="current-password"
-                    required
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="block w-full pl-10 bg-[#1F2937] border-gray-700 text-white rounded-lg focus:ring-yellow-400 focus:border-yellow-400 sm:text-sm py-2.5"
-                    placeholder="Enter your password"
-                  />
                 </div>
-              </div>
 
-              <div>
-                <button
-                  type="submit"
-                  className="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-gradient-to-r from-yellow-500 to-gray-400 hover:from-yellow-400 hover:to-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-400 focus:ring-offset-gray-900 transition-all duration-200"
-                >
-                  Sign in
+                <div>
+                  <label
+                    htmlFor="password"
+                    className="block text-sm font-medium text-gray-300"
+                  >
+                    Password
+                  </label>
+                  <div className="mt-1 relative rounded-md shadow-sm">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                      <Lock className="h-5 w-5 text-gray-500" />
+                    </div>
+                    <input
+                      id="password"
+                      name="password"
+                      type="password"
+                      autoComplete="current-password"
+                      required
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      className="block w-full pl-10 bg-[#1F2937] border-gray-700 text-white rounded-lg focus:ring-yellow-400 focus:border-yellow-400 sm:text-sm py-2.5"
+                      placeholder="Enter your password"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <button
+                    type="submit"
+                    className="w-full flex justify-center py-2 px-4 border border-transparent rounded-lg shadow-sm text-sm font-bold text-black bg-gradient-to-r from-yellow-500 to-yellow-400 hover:from-yellow-400 hover:to-yellow-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 transition-all"
+                  >
+                    Sign in
+                  </button>
+                </div>
+              </form>
+              <div className="mt-4 text-center">
+                <button onClick={handleSetup} className="text-xs text-gray-500 hover:text-gray-400">
+                  First Time Setup (Initialize DB)
                 </button>
               </div>
-            </form>
+            </>
           ) : setupMfaRequired ? (
             <form className="space-y-6" onSubmit={handleMfaSubmit}>
               {error && (
