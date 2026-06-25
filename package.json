@@ -4,7 +4,7 @@
 	"private": true,
 	"scripts": {
 		"dev": "concurrently --kill-others --raw \"npm run dev --prefix apps/web\" \"npm start --prefix apps/api\"",
-		"build": "npm run build --prefix apps/web",
+		"build": "npm run build -w web",
 		"start": "concurrently --kill-others --raw",
 		"lint": "npm run lint --prefix apps/web"
 	},

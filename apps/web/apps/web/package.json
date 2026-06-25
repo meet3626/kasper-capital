@@ -1,7 +1,0 @@
-{
-  "name": "vercel-override-hack",
-  "version": "1.0.0",
-  "scripts": {
-    "build": "cd ../.. && npm run build"
-  }
-}
