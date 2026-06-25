@@ -409,9 +409,25 @@ const Header = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: '-100%' }}
             transition={{ duration: 0.45, ease: 'easeInOut' }}
-            className="fixed inset-0 bg-black z-[9999] lg:hidden overflow-y-auto pointer-events-auto"
+            className="fixed inset-0 bg-black/95 backdrop-blur-3xl z-[9999] lg:hidden overflow-y-auto pointer-events-auto"
           >
-            <div className="container mx-auto px-6 flex flex-col min-h-full">
+            {/* 3D Animated Background Elements */}
+            <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+              <div className="absolute top-[-10%] right-[-20%] w-[300px] h-[300px] bg-accent-cyan/[0.2] rounded-full blur-[80px]" />
+              <div className="absolute bottom-[-10%] left-[-20%] w-[300px] h-[300px] bg-accent-purple/[0.2] rounded-full blur-[80px]" />
+              <motion.div
+                animate={{ y: [0, -30, 0], rotate: [0, 90, 0], scale: [1, 1.1, 1] }}
+                transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute top-[20%] left-[5%] w-40 h-40 border border-white/5 rounded-full"
+              />
+              <motion.div
+                animate={{ y: [0, 40, 0], rotate: [0, -90, 0], scale: [1, 1.2, 1] }}
+                transition={{ duration: 15, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+                className="absolute bottom-[20%] right-[5%] w-64 h-64 border border-accent-cyan/10 rounded-full"
+              />
+            </div>
+
+            <div className="container mx-auto px-6 flex flex-col min-h-full relative z-10">
 
               {/* Mobile Header Row */}
               <div className="flex justify-between items-center h-20 shrink-0">
