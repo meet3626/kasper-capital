@@ -806,43 +806,41 @@ export default function AdminDashboard() {
           <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl p-6 shadow-lg">
             <h3 className="text-lg font-bold text-white mb-4">Lead Interests</h3>
             <div className="h-[300px]">
-              {leads.length > 0 ? (
-                <ResponsiveContainer width="100%" height="100%">
-                  <PieChart>
-                    <Pie
-                      data={[
-                        { name: 'White-Label MT5', value: leads.filter(l => l.interest === 'White-Label MT5').length },
-                        { name: 'Liquidity Provider', value: leads.filter(l => l.interest === 'Liquidity Provider').length },
-                        { name: 'CRM Software', value: leads.filter(l => l.interest === 'CRM Software').length },
-                        { name: 'Risk Management', value: leads.filter(l => l.interest === 'Risk Management').length },
-                        { name: 'Business Consulting', value: leads.filter(l => l.interest === 'Business Consulting').length },
-                      ].filter(d => d.value > 0)}
-                      cx="50%"
-                      cy="50%"
-                      innerRadius={60}
-                      outerRadius={100}
-                      paddingAngle={5}
-                      dataKey="value"
-                    >
-                      {[
-                        { name: 'White-Label MT5', value: leads.filter(l => l.interest === 'White-Label MT5').length },
-                        { name: 'Liquidity Provider', value: leads.filter(l => l.interest === 'Liquidity Provider').length },
-                        { name: 'CRM Software', value: leads.filter(l => l.interest === 'CRM Software').length },
-                        { name: 'Risk Management', value: leads.filter(l => l.interest === 'Risk Management').length },
-                        { name: 'Business Consulting', value: leads.filter(l => l.interest === 'Business Consulting').length },
-                      ].filter(d => d.value > 0).map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={['#06b6d4', '#a855f7', '#3b82f6', '#10b981', '#f59e0b'][index % 5]} />
-                      ))}
-                    </Pie>
-                    <Tooltip contentStyle={{ backgroundColor: '#1F2937', border: 'none', borderRadius: '8px', color: '#fff' }} />
-                    <Legend />
-                  </PieChart>
-                </ResponsiveContainer>
-              ) : (
-                <div className="flex h-full items-center justify-center text-gray-500 font-medium border border-dashed border-gray-800 rounded-xl">
-                  No lead data available yet
-                </div>
-              )}
+              {(() => {
+                const pieData = [
+                  { name: 'White-Label MT5', value: leads.filter(l => l.interest === 'White-Label MT5').length },
+                  { name: 'Liquidity Provider', value: leads.filter(l => l.interest === 'Liquidity Provider').length },
+                  { name: 'CRM Software', value: leads.filter(l => l.interest === 'CRM Software').length },
+                  { name: 'Risk Management', value: leads.filter(l => l.interest === 'Risk Management').length },
+                  { name: 'Business Consulting', value: leads.filter(l => l.interest === 'Business Consulting').length },
+                ].filter(d => d.value > 0);
+
+                return pieData.length > 0 ? (
+                  <ResponsiveContainer width="100%" height="100%">
+                    <PieChart>
+                      <Pie
+                        data={pieData}
+                        cx="50%"
+                        cy="50%"
+                        innerRadius={60}
+                        outerRadius={100}
+                        paddingAngle={5}
+                        dataKey="value"
+                      >
+                        {pieData.map((entry, index) => (
+                          <Cell key={`cell-${index}`} fill={['#06b6d4', '#a855f7', '#3b82f6', '#10b981', '#f59e0b'][index % 5]} />
+                        ))}
+                      </Pie>
+                      <Tooltip contentStyle={{ backgroundColor: '#1F2937', border: 'none', borderRadius: '8px', color: '#fff' }} />
+                      <Legend />
+                    </PieChart>
+                  </ResponsiveContainer>
+                ) : (
+                  <div className="flex h-full items-center justify-center text-gray-500 font-medium border border-dashed border-gray-800 rounded-xl">
+                    No matching interests data
+                  </div>
+                );
+              })()}
             </div>
           </div>
         </div>
