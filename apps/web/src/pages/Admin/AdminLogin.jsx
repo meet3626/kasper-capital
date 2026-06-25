@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import QRCode from 'qrcode';
-import { TOTP } from 'totp-generator';
 import Admin3DBackground from '@/components/Admin3DBackground';
 import { motion } from 'framer-motion';
-import { Lock, Mail, AlertCircle, ArrowLeft } from 'lucide-react';
+import { Lock, Mail, AlertCircle } from 'lucide-react';
 
 export default function AdminLogin() {
   const [email, setEmail] = useState('');
@@ -26,7 +24,6 @@ export default function AdminLogin() {
         name: 'Master Admin',
         email: 'admin@gmail.com',
         password: btoa('Admin123'),
-        isMaster: true,
         permissions: {
           dashboard: true,
           users: true,
@@ -38,7 +35,7 @@ export default function AdminLogin() {
       localStorage.setItem('adminUsers', JSON.stringify(masterAdmin));
     }
     
-    // Auto-redirect if already logged in
+    // Auto-redirect if already logged in (optional, but good)
     if (localStorage.getItem('adminAuth')) {
       navigate('/admin/dashboard');
     }
@@ -47,41 +44,9 @@ export default function AdminLogin() {
   const handleLogin = async (e) => {
     e.preventDefault();
     
+    // Check against legacy 'true' string to force re-login if needed
     if (localStorage.getItem('adminAuth') === 'true') {
         localStorage.removeItem('adminAuth');
-    }
-
-    // First check local storage for admins created via the dashboard
-    const localUsers = JSON.parse(localStorage.getItem('adminUsers') || '[]');
-    const localUser = localUsers.find(
-      (u) => (u.email?.toLowerCase() === email.toLowerCase() || u.name?.toLowerCase() === email.toLowerCase()) && u.password === btoa(password)
-    );
-
-    if (localUser) {
-      if (localUser.mfaEnabled && localUser.mfaSecret) {
-        setRequiresMfa(true);
-        setAdminId(localUser.id);
-        setError('');
-      } else {
-        try {
-          const secret = localUser.tempMfaSecret || Array.from({ length: 16 }, () => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567'[Math.floor(Math.random() * 32)]).join('');
-          const uri = `otpauth://totp/AdminPanel:${localUser.email}?secret=${secret}&issuer=AdminPanel`;
-          const qrImageUrl = await QRCode.toDataURL(uri);
-          
-          if (secret && qrImageUrl) {
-            const updatedUsers = localUsers.map(u => u.id === localUser.id ? { ...u, tempMfaSecret: secret } : u);
-            localStorage.setItem('adminUsers', JSON.stringify(updatedUsers));
-            
-            setSetupMfaRequired(true);
-            setQrCode(qrImageUrl);
-            setAdminId(localUser.id);
-            setError('');
-          }
-        } catch (e) {
-          setError('Could not generate MFA setup. Please try again.');
-        }
-      }
-      return;
     }
 
     try {
@@ -113,50 +78,12 @@ export default function AdminLogin() {
         setError(data.message || 'Invalid email or password');
       }
     } catch (err) {
-      setError('Invalid email or password. Could not connect to server.');
+      setError('Could not connect to the server. Please ensure backend is running.');
     }
   };
 
   const handleMfaSubmit = async (e) => {
     e.preventDefault();
-
-    // Check if it's a local user first
-    const localUsers = JSON.parse(localStorage.getItem('adminUsers') || '[]');
-    const localUser = localUsers.find(u => u.id === adminId);
-    
-    if (localUser) {
-       try {
-         const secretToVerify = localUser.tempMfaSecret || localUser.mfaSecret;
-         const { otp } = await TOTP.generate(secretToVerify);
-         
-         if (otp === mfaCode) {
-           const updatedUsers = localUsers.map(u => {
-             if (u.id === localUser.id) {
-               const { tempMfaSecret, ...rest } = u;
-               return { ...rest, mfaSecret: secretToVerify, mfaEnabled: true };
-             }
-             return u;
-           });
-           localStorage.setItem('adminUsers', JSON.stringify(updatedUsers));
-           
-           const authData = {
-             id: localUser.id,
-             name: localUser.name,
-             email: localUser.email,
-             isMaster: localUser.isMaster,
-             permissions: localUser.permissions,
-           };
-           localStorage.setItem('adminAuth', JSON.stringify(authData));
-           navigate('/admin/dashboard');
-         } else {
-           setError('Invalid 2FA code');
-         }
-       } catch (e) {
-         setError('Could not verify 2FA.');
-       }
-       return;
-    }
-
     try {
       const isProd = import.meta.env.PROD;
       const apiUrl = import.meta.env.VITE_API_URL || (isProd ? '' : 'http://localhost:5000');

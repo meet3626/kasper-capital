@@ -23,9 +23,10 @@ export default function AdminDashboard() {
   const [blogForm, setBlogForm] = useState({ title: '', content: '', coverImage: '' });
 
   useEffect(() => {
-    // Try to load state from localStorage or redirect if no auth
+    // Auth check
     const authData = localStorage.getItem('adminAuth');
     if (!authData || authData === 'true') {
+      // If no auth or it's the legacy 'true' string, force re-login
       localStorage.removeItem('adminAuth');
       navigate('/admin');
       return;
@@ -42,6 +43,7 @@ export default function AdminDashboard() {
         else if (parsedAdmin.permissions.settings) setActiveTab('settings');
         else if (parsedAdmin.permissions.manage_admins) setActiveTab('manage_admins');
       }
+
     } catch (e) {
       navigate('/admin');
       return;
@@ -156,7 +158,6 @@ export default function AdminDashboard() {
   };
 
   const [editingLead, setEditingLead] = useState(null);
-  const [editingSubscriber, setEditingSubscriber] = useState(null);
 
   const handleEditChange = (field, value) => {
     setEditingLead({ ...editingLead, [field]: value });
@@ -190,68 +191,20 @@ export default function AdminDashboard() {
     }
   };
 
-  const handleExportCSV = () => {
-    if (!leads || leads.length === 0) {
-      alert("No leads to export.");
-      return;
-    }
-
-    const headers = ['ID', 'Name', 'Email', 'Phone', 'Interest', 'Status', 'Message', 'Date'];
-    const csvRows = leads.map(lead => {
-      return [
-        lead.id,
-        `"${(lead.name || '').replace(/"/g, '""')}"`,
-        `"${(lead.email || '').replace(/"/g, '""')}"`,
-        `"${(lead.phone || '').replace(/"/g, '""')}"`,
-        `"${(lead.interest || '').replace(/"/g, '""')}"`,
-        `"${(lead.status || '').replace(/"/g, '""')}"`,
-        `"${(lead.message || '').replace(/"/g, '""')}"`,
-        `"${(lead.date || '').replace(/"/g, '""')}"`
-      ].join(',');
-    });
-    
-    const csvContent = [headers.join(','), ...csvRows].join('\n');
-    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-    const url = URL.createObjectURL(blob);
-    
-    const a = document.createElement('a');
-    a.href = url;
-    a.setAttribute('download', 'leads_export.csv');
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-  };
-
   const [showAdminModal, setShowAdminModal] = useState(false);
   const [editingAdminId, setEditingAdminId] = useState(null);
-  const [adminForm, setAdminForm] = useState({ name: '', email: '', password: '', isMaster: false, permissions: { dashboard: true, users: true, newsletter: true, settings: false, manage_admins: false } });
+  const [adminForm, setAdminForm] = useState({
+    name: '', email: '', password: '', 
+    permissions: { dashboard: false, users: false, newsletter: false, settings: false, manage_admins: false }
+  });
 
   const handleSaveAdmin = (e) => {
     e.preventDefault();
     let updatedUsers;
     if (editingAdminId) {
-      // Check if target is master admin and we are not master
-      const targetAdmin = adminUsers.find(u => u.id === editingAdminId);
-      if (targetAdmin?.isMaster && !currentAdmin?.isMaster) {
-        return alert("Only a Master Admin can edit a Master Admin.");
-      }
-      
-      updatedUsers = adminUsers.map(u => 
-        u.id === editingAdminId 
-        ? { 
-            ...u, 
-            name: adminForm.name, 
-            email: adminForm.email, 
-            permissions: adminForm.permissions, 
-            password: adminForm.password ? btoa(adminForm.password) : u.password,
-            isMaster: currentAdmin?.isMaster && adminForm.isMaster !== undefined ? adminForm.isMaster : u.isMaster
-          } 
-        : u
-      );
+       updatedUsers = adminUsers.map(u => u.id === editingAdminId ? { ...u, name: adminForm.name, email: adminForm.email, permissions: adminForm.permissions, password: adminForm.password ? btoa(adminForm.password) : u.password } : u);
     } else {
-       // Only allow setting isMaster if current user is master
-       const newIsMaster = currentAdmin?.isMaster ? adminForm.isMaster : false;
-       updatedUsers = [...adminUsers, { ...adminForm, id: Date.now(), password: btoa(adminForm.password), isMaster: newIsMaster }];
+       updatedUsers = [...adminUsers, { ...adminForm, id: Date.now(), password: btoa(adminForm.password) }];
     }
     setAdminUsers(updatedUsers);
     localStorage.setItem('adminUsers', JSON.stringify(updatedUsers));
@@ -259,11 +212,8 @@ export default function AdminDashboard() {
   };
 
   const handleDeleteAdmin = (id) => {
-    if (id === 1) return alert("Cannot delete the Primary Master Admin!");
-    
-    const targetAdmin = adminUsers.find(u => u.id === id);
-    if (targetAdmin?.isMaster) return alert("Master Admins cannot be deleted.");
-    
+    if (id === 1) return alert("Cannot delete the Master Admin!");
+    if (id === currentAdmin.id) return alert("Cannot delete yourself!");
     if (window.confirm("Delete this admin?")) {
       const updated = adminUsers.filter(u => u.id !== id);
       setAdminUsers(updated);
@@ -271,29 +221,13 @@ export default function AdminDashboard() {
     }
   };
 
-  const handleSaveSubscriber = (e) => {
-    e.preventDefault();
-    const updated = subscribers.map(s => s.id === editingSubscriber.id ? editingSubscriber : s);
-    setSubscribers(updated);
-    localStorage.setItem('adminNewsletter', JSON.stringify(updated));
-    setEditingSubscriber(null);
-  };
-
-  const handleDeleteSubscriber = (id) => {
-    if (window.confirm("Are you sure you want to delete this subscriber?")) {
-      const updated = subscribers.filter(s => s.id !== id);
-      setSubscribers(updated);
-      localStorage.setItem('adminNewsletter', JSON.stringify(updated));
-    }
-  };
-
   const openAdminModal = (admin = null) => {
     if (admin) {
       setEditingAdminId(admin.id);
-      setAdminForm({ name: admin.name, email: admin.email, password: '', permissions: admin.permissions || {}, isMaster: admin.isMaster || false });
+      setAdminForm({ name: admin.name, email: admin.email, password: '', permissions: admin.permissions });
     } else {
       setEditingAdminId(null);
-      setAdminForm({ name: '', email: '', password: '', isMaster: false, permissions: { dashboard: false, users: false, newsletter: false, settings: false, manage_admins: false } });
+      setAdminForm({ name: '', email: '', password: '', permissions: { dashboard: false, users: false, newsletter: false, settings: false, manage_admins: false } });
     }
     setShowAdminModal(true);
   };
@@ -359,10 +293,7 @@ export default function AdminDashboard() {
         >
           <div className="flex justify-between items-center mb-6">
             <h1 className="text-2xl font-bold text-white">Leads & Inquiries</h1>
-            <button 
-              onClick={handleExportCSV}
-              className="px-4 py-2 bg-yellow-500 hover:bg-yellow-400 text-white rounded-lg text-sm font-medium transition-colors"
-            >
+            <button className="px-4 py-2 bg-yellow-500 hover:bg-yellow-400 text-white rounded-lg text-sm font-medium transition-colors">
               Export CSV
             </button>
           </div>
@@ -561,15 +492,9 @@ export default function AdminDashboard() {
             <div className="md:hidden space-y-3">
               {subscribers.length > 0 ? (
                 subscribers.map((sub) => (
-                  <div key={sub.id} className="bg-black/20 border border-gray-800 rounded-lg p-4 flex flex-col gap-3">
-                    <div className="flex justify-between items-center">
-                      <div className="text-white font-medium truncate pr-4 text-sm">{sub.email}</div>
-                      <div className="text-gray-500 text-xs whitespace-nowrap">{sub.date}</div>
-                    </div>
-                    <div className="pt-2 border-t border-gray-800 flex justify-end gap-2">
-                      <button onClick={() => setEditingSubscriber(sub)} className="text-yellow-400 hover:text-yellow-400 text-xs font-medium px-3 py-1.5 border border-yellow-400/30 hover:border-yellow-400 rounded-lg transition-colors">Edit</button>
-                      <button onClick={() => handleDeleteSubscriber(sub.id)} className="text-red-500 hover:text-red-400 text-xs font-medium px-3 py-1.5 border border-red-500/30 hover:border-red-400 rounded-lg transition-colors">Delete</button>
-                    </div>
+                  <div key={sub.id} className="bg-black/20 border border-gray-800 rounded-lg p-4 flex justify-between items-center">
+                    <div className="text-white font-medium truncate pr-4 text-sm">{sub.email}</div>
+                    <div className="text-gray-500 text-xs whitespace-nowrap">{sub.date}</div>
                   </div>
                 ))
               ) : (
@@ -584,7 +509,6 @@ export default function AdminDashboard() {
                   <tr className="border-b border-gray-800">
                     <th className="py-3 px-4 text-gray-400 font-medium">Email Address</th>
                     <th className="py-3 px-4 text-gray-400 font-medium text-right">Date Subscribed</th>
-                    <th className="py-3 px-4 text-gray-400 font-medium text-right">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -593,39 +517,17 @@ export default function AdminDashboard() {
                       <tr key={sub.id} className="border-b border-gray-800/50 hover:bg-gray-800/30 transition-colors">
                         <td className="py-4 px-4 text-white font-medium">{sub.email}</td>
                         <td className="py-4 px-4 text-gray-500 text-right">{sub.date}</td>
-                        <td className="py-4 px-4 text-right">
-                          <button onClick={() => setEditingSubscriber(sub)} className="text-yellow-400 hover:text-yellow-400 text-sm font-medium px-3 py-1.5 border border-yellow-400/30 hover:border-yellow-400 rounded-lg transition-colors mr-2">Edit</button>
-                          <button onClick={() => handleDeleteSubscriber(sub.id)} className="text-red-500 hover:text-red-400 text-sm font-medium px-3 py-1.5 border border-red-500/30 hover:border-red-400 rounded-lg transition-colors">Delete</button>
-                        </td>
                       </tr>
                     ))
                   ) : (
                     <tr>
-                      <td colSpan="3" className="py-8 text-center text-gray-500">No newsletter subscribers yet.</td>
+                      <td colSpan="2" className="py-8 text-center text-gray-500">No newsletter subscribers yet.</td>
                     </tr>
                   )}
                 </tbody>
               </table>
             </div>
           </div>
-
-          {editingSubscriber && (
-            <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
-              <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl w-full max-w-md p-6 shadow-2xl relative">
-                <h2 className="text-xl font-bold text-white mb-6">Edit Subscriber</h2>
-                <form onSubmit={handleSaveSubscriber} className="space-y-4">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-400 mb-1">Email Address</label>
-                    <input type="email" required value={editingSubscriber.email} onChange={e => setEditingSubscriber({...editingSubscriber, email: e.target.value})} className="w-full bg-black/20 border border-white/10 backdrop-blur-sm text-white rounded-lg px-4 py-2 focus:outline-none focus:border-yellow-400" />
-                  </div>
-                  <div className="flex justify-end gap-3 mt-8">
-                    <button type="button" onClick={() => setEditingSubscriber(null)} className="px-6 py-2 border border-gray-700 text-gray-300 hover:bg-gray-800 hover:text-white rounded-lg font-medium transition-colors">Cancel</button>
-                    <button type="submit" className="px-6 py-2 bg-yellow-500 hover:bg-yellow-400 text-white rounded-lg font-medium transition-colors">Save</button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          )}
         </motion.div>
       );
     }
@@ -732,11 +634,11 @@ export default function AdminDashboard() {
                     ))}
                   </div>
                   <div className="pt-3 border-t border-gray-800 flex justify-end gap-2">
-                    {(!(admin.id === 1 || admin.isMaster) || (currentAdmin.id === 1 || currentAdmin.isMaster)) && (
-                      <button onClick={() => openAdminModal(admin)} className="text-yellow-400 hover:text-yellow-400 text-xs font-medium px-3 py-1.5 border border-yellow-400/30 hover:border-yellow-400 rounded-lg transition-colors">Edit</button>
-                    )}
-                    {!(admin.id === 1 || admin.isMaster) && (
-                      <button onClick={() => handleDeleteAdmin(admin.id)} className="text-red-500 hover:text-red-400 text-xs font-medium px-3 py-1.5 border border-red-500/30 hover:border-red-400 rounded-lg transition-colors">Delete</button>
+                    {admin.id !== 1 && (
+                      <>
+                        <button onClick={() => openAdminModal(admin)} className="text-yellow-400 hover:text-yellow-400 text-xs font-medium px-3 py-1.5 border border-yellow-400/30 hover:border-yellow-400 rounded-lg transition-colors">Edit</button>
+                        <button onClick={() => handleDeleteAdmin(admin.id)} className="text-red-500 hover:text-red-400 text-xs font-medium px-3 py-1.5 border border-red-500/30 hover:border-red-400 rounded-lg transition-colors">Delete</button>
+                      </>
                     )}
                   </div>
                 </div>
@@ -770,12 +672,12 @@ export default function AdminDashboard() {
                         </div>
                       </td>
                       <td className="py-4 px-4 text-right">
-                        {(!(admin.id === 1 || admin.isMaster) || (currentAdmin.id === 1 || currentAdmin.isMaster)) && (
+                        {admin.id !== 1 && (
                           <button onClick={() => openAdminModal(admin)} className="text-yellow-400 hover:text-yellow-400 text-sm font-medium px-3 py-1.5 border border-yellow-400/30 hover:border-yellow-400 rounded-lg transition-colors mr-2">
                             Edit
                           </button>
                         )}
-                        {!(admin.id === 1 || admin.isMaster) && (
+                        {admin.id !== 1 && (
                           <button onClick={() => handleDeleteAdmin(admin.id)} className="text-red-500 hover:text-red-400 text-sm font-medium px-3 py-1.5 border border-red-500/30 hover:border-red-400 rounded-lg transition-colors">
                             Delete
                           </button>
@@ -815,15 +717,6 @@ export default function AdminDashboard() {
                         </label>
                       ))}
                     </div>
-                    {(currentAdmin.id === 1 || currentAdmin.isMaster) && adminForm.id !== 1 && (
-                      <div className="mt-4 pt-4 border-t border-gray-800/50">
-                        <label className="flex items-center gap-2 cursor-pointer bg-yellow-500/10 p-3 rounded-lg border border-yellow-500/20">
-                          <input type="checkbox" checked={adminForm.isMaster || false} onChange={e => setAdminForm({...adminForm, isMaster: e.target.checked})} className="rounded border-gray-700 bg-gray-800 text-yellow-400 focus:ring-yellow-400" />
-                          <span className="text-sm text-yellow-400 font-bold tracking-wide">Grant Master Admin Role</span>
-                        </label>
-                        <p className="text-xs text-gray-500 mt-2 ml-1">Master admins can edit other master admins and assign master roles.</p>
-                      </div>
-                    )}
                   </div>
                   <div className="flex justify-end gap-3 mt-8">
                     <button type="button" onClick={() => setShowAdminModal(false)} className="px-6 py-2 border border-gray-700 text-gray-300 hover:bg-gray-800 hover:text-white rounded-lg font-medium transition-colors">Cancel</button>
@@ -983,8 +876,8 @@ export default function AdminDashboard() {
                     <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
                     <XAxis dataKey="name" stroke="#9CA3AF" />
                     <YAxis stroke="#9CA3AF" />
-                    <Tooltip cursor={{ fill: 'transparent' }} contentStyle={{ backgroundColor: '#1F2937', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', color: '#fff', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.5)' }} itemStyle={{ color: '#22d3ee', fontWeight: 'bold' }} />
-                    <Bar dataKey="count" fill="#06b6d4" radius={[4, 4, 0, 0]} activeBar={{ fill: '#22d3ee', stroke: '#a5f3fc', strokeWidth: 2, className: 'drop-shadow-[0_0_8px_rgba(34,211,238,0.8)] transition-all duration-300' }} />
+                    <Tooltip contentStyle={{ backgroundColor: '#1F2937', border: 'none', borderRadius: '8px', color: '#fff' }} />
+                    <Bar dataKey="count" fill="#06b6d4" radius={[4, 4, 0, 0]} />
                   </BarChart>
                 </ResponsiveContainer>
               ) : (
