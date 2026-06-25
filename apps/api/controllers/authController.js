@@ -75,6 +75,7 @@ const setupMasterAdmin = async (req, res) => {
         email: admin.email,
         permissions: admin.permissions,
         mfaEnabled: admin.mfaEnabled,
+        isMaster: admin.isMaster,
       });
     }
   } catch (error) {
@@ -125,6 +126,7 @@ const verifyLoginMfa = async (req, res) => {
         email: admin.email,
         permissions: admin.permissions,
         mfaEnabled: admin.mfaEnabled,
+        isMaster: admin.isMaster,
       });
     } else {
       res.status(401).json({ message: 'Invalid MFA token' });
