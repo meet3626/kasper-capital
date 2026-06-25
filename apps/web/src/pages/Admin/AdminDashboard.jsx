@@ -299,8 +299,8 @@ export default function AdminDashboard() {
           </div>
 
           {editingLead && (
-            <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
-              <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl w-full max-w-lg p-6 shadow-2xl relative">
+            <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4 overflow-y-auto">
+              <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl w-full max-w-lg p-6 shadow-2xl relative my-auto max-h-[90vh] overflow-y-auto">
                 <h2 className="text-xl font-bold text-white mb-6">Edit Lead</h2>
                 <div className="space-y-4">
                   <div>
@@ -376,7 +376,47 @@ export default function AdminDashboard() {
           )}
 
           <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl p-6 shadow-lg">
-            <div className="overflow-x-auto">
+            {/* Mobile View */}
+            <div className="md:hidden space-y-4">
+              {leads.map(lead => (
+                <div key={lead.id} className="bg-black/20 border border-gray-800 rounded-lg p-4 space-y-3">
+                  <div className="flex justify-between items-start">
+                    <div className="overflow-hidden pr-2">
+                      <div className="text-white font-medium truncate">{lead.name}</div>
+                      <div className="text-gray-400 text-sm truncate">{lead.email}</div>
+                      <div className="text-gray-500 text-xs">{lead.phone}</div>
+                    </div>
+                    <div className="text-gray-500 text-[10px] whitespace-nowrap">{lead.date}</div>
+                  </div>
+                  <div>
+                    <div className="text-cyan-400 text-sm font-medium">{lead.interest}</div>
+                    {lead.message && <div className="text-gray-400 text-xs mt-1 italic line-clamp-2">"{lead.message}"</div>}
+                  </div>
+                  <div className="pt-3 border-t border-gray-800 flex justify-between items-center">
+                    <select 
+                      value={lead.status}
+                      onChange={(e) => handleStatusChange(lead.id, e.target.value)}
+                      className={`px-2 py-1.5 rounded-lg text-xs font-medium border appearance-none cursor-pointer outline-none ${getStatusColor(lead.status)}`}
+                    >
+                      <option value="New" className="bg-[#111827] text-white">New</option>
+                      <option value="Connected" className="bg-[#111827] text-white">Connected</option>
+                      <option value="In Progress" className="bg-[#111827] text-white">In Progress</option>
+                      <option value="Closed (Won)" className="bg-[#111827] text-white">Closed (Won)</option>
+                      <option value="Closed (Lost)" className="bg-[#111827] text-white">Closed (Lost)</option>
+                    </select>
+                    <button 
+                      onClick={() => setEditingLead(lead)}
+                      className="text-cyan-500 hover:text-cyan-400 text-xs font-medium px-3 py-1.5 border border-cyan-500/30 hover:border-cyan-400 rounded-lg transition-colors"
+                    >
+                      Edit
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Desktop View */}
+            <div className="hidden md:block overflow-x-auto">
               <table className="w-full text-left border-collapse min-w-[800px]">
                 <thead>
                   <tr className="border-b border-gray-800">
@@ -448,7 +488,22 @@ export default function AdminDashboard() {
           </div>
 
           <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl p-6 shadow-lg">
-            <div className="overflow-x-auto">
+            {/* Mobile View */}
+            <div className="md:hidden space-y-3">
+              {subscribers.length > 0 ? (
+                subscribers.map((sub) => (
+                  <div key={sub.id} className="bg-black/20 border border-gray-800 rounded-lg p-4 flex justify-between items-center">
+                    <div className="text-white font-medium truncate pr-4 text-sm">{sub.email}</div>
+                    <div className="text-gray-500 text-xs whitespace-nowrap">{sub.date}</div>
+                  </div>
+                ))
+              ) : (
+                <div className="py-8 text-center text-gray-500">No newsletter subscribers yet.</div>
+              )}
+            </div>
+
+            {/* Desktop View */}
+            <div className="hidden md:block overflow-x-auto">
               <table className="w-full text-left border-collapse min-w-[500px]">
                 <thead>
                   <tr className="border-b border-gray-800">
