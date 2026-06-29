@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Admin3DBackground from '@/components/Admin3DBackground';
 import { motion } from 'framer-motion';
 import { Lock, Mail, AlertCircle, Eye, EyeOff } from 'lucide-react';
+import { supabase } from '@/lib/supabase';
 
 export default function AdminLogin() {
   const [email, setEmail] = useState('');
@@ -13,30 +14,12 @@ export default function AdminLogin() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Seed master admin if adminUsers doesn't exist
-    const users = localStorage.getItem('adminUsers');
-    if (!users) {
-      const masterAdmin = [{
-        id: 1,
-        name: 'Master Admin',
-        email: 'admin@gmail.com',
-        password: btoa('Admin123'),
-        isMaster: true,
-        permissions: {
-          dashboard: true,
-          users: true,
-          newsletter: true,
-          settings: true,
-          manage_admins: true
-        }
-      }];
-      localStorage.setItem('adminUsers', JSON.stringify(masterAdmin));
-    }
-
-    // Auto-redirect if already logged in
-    if (localStorage.getItem('adminAuth')) {
-      navigate('/admin/dashboard');
-    }
+    // Check if already logged in via Supabase session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session) {
+        navigate('/admin/dashboard');
+      }
+    });
   }, [navigate]);
 
   const handleLogin = async (e: React.FormEvent) => {
@@ -44,32 +27,52 @@ export default function AdminLogin() {
     setIsLoading(true);
     setError('');
 
-    // Check against legacy 'true' string to force re-login if needed
-    if (localStorage.getItem('adminAuth') === 'true') {
-      localStorage.removeItem('adminAuth');
-    }
-
     try {
-      const users = JSON.parse(localStorage.getItem('adminUsers') || '[]');
-      const user = users.find((u: any) =>
-        u.email === email && u.password === btoa(password)
-      );
+      // Sign in with Supabase Auth
+      const { data, error: authError } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
 
-      if (user) {
-        const authData = {
-          id: user.id,
-          name: user.name,
-          email: user.email,
-          isMaster: user.isMaster || false,
-          permissions: user.permissions
-        };
-        localStorage.setItem('adminAuth', JSON.stringify(authData));
-        navigate('/admin/dashboard');
-      } else {
-        setError('Invalid email or password');
+      if (authError) {
+        setError(authError.message || 'Invalid email or password');
+        return;
       }
-    } catch (err) {
+
+      if (data.session) {
+        // Check if user exists in admins table
+        const { data: adminData, error: adminError } = await supabase
+          .from('admins')
+          .select('*')
+          .eq('id', data.session.user.id)
+          .single();
+
+        if (adminError || !adminData) {
+          await supabase.auth.signOut();
+          setError('You are not authorized as an admin.');
+          return;
+        }
+
+        // Store admin info in localStorage for dashboard use
+        localStorage.setItem('adminAuth', JSON.stringify({
+          id: adminData.id,
+          name: adminData.name || data.session.user.email,
+          email: data.session.user.email,
+          isMaster: adminData.is_master || false,
+          permissions: adminData.permissions || {
+            dashboard: true,
+            users: true,
+            newsletter: true,
+            settings: true,
+            manage_admins: adminData.is_master || false
+          }
+        }));
+
+        navigate('/admin/dashboard');
+      }
+    } catch (err: any) {
       setError('Something went wrong. Please try again.');
+      console.error(err);
     } finally {
       setIsLoading(false);
     }
