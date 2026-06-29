@@ -47,13 +47,19 @@ const DemoModal = ({ isOpen, onClose }) => {
     setIsSubmitting(true);
     
     try {
-      await apiClient.post('/contact', {
+      const newLead = {
+        id: Date.now().toString(),
         name: formData.name,
         email: formData.email,
         phone: formData.phone,
         message: `Company: ${formData.company}`,
-        interest: 'Demo Request'
-      });
+        interest: 'Demo Request',
+        status: 'New',
+        created_at: new Date().toISOString()
+      };
+
+      const existingLeads = JSON.parse(localStorage.getItem('adminLeads') || '[]');
+      localStorage.setItem('adminLeads', JSON.stringify([newLead, ...existingLeads]));
 
       setIsSuccess(true);
       setTimeout(() => {
