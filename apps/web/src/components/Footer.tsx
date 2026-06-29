@@ -62,25 +62,37 @@ const Footer = () => {
 
     const onSubmit = async (data) => {
         try {
-            await apiClient.post('/subscribe', { email: data.email });
+            const newSubscriber = {
+                id: Date.now().toString(),
+                email: data.email,
+                status: 'Active',
+                created_at: new Date().toISOString()
+            };
+
+            const existingSubscribers = JSON.parse(localStorage.getItem('adminSubscribers') || '[]');
+            
+            // Check if already subscribed
+            if (existingSubscribers.some((sub) => sub.email === data.email)) {
+                toast({
+                    title: "Already Subscribed",
+                    description: "This email is already on our list!",
+                });
+                return;
+            }
+
+            localStorage.setItem('adminSubscribers', JSON.stringify([newSubscriber, ...existingSubscribers]));
+
             toast({
                 title: "Welcome Aboard! 🎉",
                 description: "You've successfully subscribed to our insights newsletter.",
             });
             reset();
         } catch (error) {
-            if (error.message.includes('Already subscribed')) {
-                toast({
-                    title: "Already Subscribed",
-                    description: "This email is already on our list!",
-                });
-            } else {
-                toast({
-                    title: "Error",
-                    description: "Failed to subscribe. Please try again.",
-                    variant: "destructive"
-                });
-            }
+            toast({
+                title: "Error",
+                description: "Failed to subscribe. Please try again.",
+                variant: "destructive"
+            });
         }
     };
 
