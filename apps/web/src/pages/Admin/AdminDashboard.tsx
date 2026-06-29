@@ -49,7 +49,14 @@ export default function AdminDashboard() {
         const { data: admins } = await supabase.from('admins').select('*');
         if (admins) setAdminUsers(admins);
 
-        const localLeads = JSON.parse(localStorage.getItem('adminLeads') || '[]');
+        let localLeads = JSON.parse(localStorage.getItem('adminLeads') || '[]');
+        localLeads = localLeads.map((l: any, i: number) => {
+          if (!l.id && !l._id) {
+            return { ...l, id: `legacy-${Date.now()}-${i}` };
+          }
+          return { ...l, id: String(l.id || l._id) };
+        });
+        localStorage.setItem('adminLeads', JSON.stringify(localLeads));
         setLeads(localLeads);
         
         const localSubscribers = JSON.parse(localStorage.getItem('adminSubscribers') || '[]');
