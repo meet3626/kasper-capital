@@ -323,12 +323,6 @@ export default function AdminDashboard() {
                       >
                         Edit
                       </button>
-                      <button 
-                        onClick={() => deleteLead(lead.id)}
-                        className="text-red-500 hover:text-red-400 text-xs font-medium px-3 py-1.5 border border-red-500/30 hover:border-red-400 rounded-lg transition-colors"
-                      >
-                        Delete
-                      </button>
                     </div>
                   </div>
                 </div>
@@ -377,15 +371,9 @@ export default function AdminDashboard() {
                       <td className="py-4 px-4 text-right">
                         <button 
                           onClick={() => setEditingLead(lead)}
-                          className="text-cyan-400 hover:text-cyan-400 text-sm font-medium px-3 py-1.5 border border-cyan-400/30 hover:border-cyan-400 rounded-lg transition-colors mr-2"
+                          className="text-cyan-400 hover:text-cyan-400 text-sm font-medium px-3 py-1.5 border border-cyan-400/30 hover:border-cyan-400 rounded-lg transition-colors"
                         >
                           Edit
-                        </button>
-                        <button 
-                          onClick={() => deleteLead(lead.id)}
-                          className="text-red-500 hover:text-red-400 text-sm font-medium px-3 py-1.5 border border-red-500/30 hover:border-red-400 rounded-lg transition-colors"
-                        >
-                          Delete
                         </button>
                       </td>
                     </tr>
