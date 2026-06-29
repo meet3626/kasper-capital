@@ -131,7 +131,24 @@ const Footer = () => {
         const fetchPosts = async () => {
             try {
                 setLoading(true);
-                const data = await apiClient.get('/blogs?limit=2');
+                const savedBlogs = localStorage.getItem('adminBlogs');
+                let localBlogs = [];
+                if (savedBlogs) {
+                    localBlogs = JSON.parse(savedBlogs);
+                }
+                
+                const allBlogs = [...localBlogs, {
+                    title: 'Forex Broker Digital Marketing Funnel: From Lead to Trader',
+                    slug: 'forex-broker-digital-marketing-funnel',
+                    cover_image: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=400&auto=format&fit=crop&q=80'
+                },
+                {
+                    title: 'How to Launch a Forex Brokerage in 3 Days Using Turnkey Solutions',
+                    slug: 'how-to-launch-a-forex-brokerage-in-3-days',
+                    cover_image: 'https://images.unsplash.com/photo-1642790106117-e829e14a795f?w=400&auto=format&fit=crop&q=80'
+                }];
+                
+                const data = allBlogs.slice(0, 2);
                 
                 if (data && data.length > 0) {
                     setLatestPosts(data.map(post => ({

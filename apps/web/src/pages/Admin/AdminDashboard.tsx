@@ -148,14 +148,19 @@ export default function AdminDashboard() {
     setEditingLead((prev: any) => ({ ...prev, [field]: value }));
   };
 
-  const deleteLead = (idToDel?: any) => {
-    const targetId = (idToDel && typeof idToDel === 'string') ? idToDel : editingLead?.id;
+  const deleteLead = (eOrId?: any) => {
+    let targetId;
+    if (eOrId && typeof eOrId !== 'object') {
+      targetId = eOrId;
+    } else {
+      targetId = editingLead?.id;
+    }
     if (!targetId) return;
     if (!window.confirm("Are you sure you want to delete this lead?")) return;
-    const updatedLeads = leads.filter((lead: any) => lead.id !== targetId);
+    const updatedLeads = leads.filter((lead: any) => String(lead.id) !== String(targetId));
     setLeads(updatedLeads);
     localStorage.setItem('adminLeads', JSON.stringify(updatedLeads));
-    if (editingLead && editingLead.id === targetId) setEditingLead(null);
+    if (editingLead && String(editingLead.id) === String(targetId)) setEditingLead(null);
     toast.success('Lead deleted successfully!');
   };
 
@@ -194,7 +199,39 @@ export default function AdminDashboard() {
 
   const handleSaveAdmin = () => {};
   const handleEmailBroadcast = () => {};
-  const handleSaveBlog = () => {};
+  const handleSaveBlog = (e: any) => {
+    e.preventDefault();
+    if (!blogForm.title || !blogForm.content) {
+      toast.error("Please fill in the title and content.");
+      return;
+    }
+
+    const isNew = !editingBlog;
+    const newBlog = {
+      id: isNew ? Date.now().toString() : editingBlog.id,
+      title: blogForm.title,
+      slug: blogForm.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, ''),
+      content: blogForm.content,
+      cover_image: blogForm.coverImage || 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3',
+      published_at: isNew ? new Date().toISOString() : editingBlog.published_at,
+      created_at: isNew ? new Date().toISOString() : editingBlog.created_at,
+      author_name: 'Admin',
+      category: 'Insights'
+    };
+
+    let updatedBlogs;
+    if (isNew) {
+      updatedBlogs = [newBlog, ...blogs];
+    } else {
+      updatedBlogs = blogs.map((b: any) => String(b.id) === String(newBlog.id) ? newBlog : b);
+    }
+    
+    setBlogs(updatedBlogs);
+    localStorage.setItem('adminBlogs', JSON.stringify(updatedBlogs));
+    setEditingBlog(null);
+    setBlogForm({ title: '', content: '', coverImage: '' });
+    toast.success(isNew ? 'Blog post created successfully!' : 'Blog post updated successfully!');
+  };
   const handleUploadImage = () => {};
 
   const handleDeleteBlog = (id: any) => {
@@ -456,7 +493,6 @@ export default function AdminDashboard() {
                       <td className="py-4 px-4 text-gray-500">{quote.created_at ? new Date(quote.created_at).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' }) : quote.date}</td>
                       <td className="py-4 px-4 text-right">
                         <button onClick={() => setViewingQuote(quote)} className="text-cyan-400 hover:text-cyan-300 font-medium text-sm border border-cyan-400/30 px-3 py-1.5 rounded-lg">View Quote</button>
-                        <button onClick={() => setEditingLead(quote)} className="text-white hover:text-gray-300 font-medium text-sm border border-gray-600 px-3 py-1.5 rounded-lg ml-2">Edit</button>
                         <button onClick={() => deleteLead(quote.id)} className="text-red-500 hover:text-red-400 font-medium text-sm border border-red-500/30 hover:border-red-400 px-3 py-1.5 rounded-lg ml-2 transition-colors">Delete</button>
                       </td>
                     </tr>
@@ -481,7 +517,6 @@ export default function AdminDashboard() {
                      </select>
                      <div className="flex gap-2">
                        <button onClick={() => setViewingQuote(quote)} className="text-cyan-400 text-xs font-medium px-3 py-1.5 border border-cyan-400/30 rounded-lg">View</button>
-                       <button onClick={() => setEditingLead(quote)} className="text-white text-xs font-medium px-3 py-1.5 border border-gray-600 rounded-lg">Edit</button>
                        <button onClick={() => deleteLead(quote.id)} className="text-red-500 text-xs font-medium px-3 py-1.5 border border-red-500/30 rounded-lg">Delete</button>
                      </div>
                    </div>

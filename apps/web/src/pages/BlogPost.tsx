@@ -18,7 +18,46 @@ const BlogPost = () => {
     const fetchPost = async () => {
       try {
         setLoading(true);
-        const data = await apiClient.get(`/blogs/${slug}`);
+        const savedBlogs = localStorage.getItem('adminBlogs');
+        let localBlogs = [];
+        if (savedBlogs) {
+          localBlogs = JSON.parse(savedBlogs);
+        }
+        
+        // Include dummy blogs for fallback
+        const DUMMY_BLOGS = [
+          {
+            slug: 'future-of-forex-brokerage',
+            title: 'The Future of Forex Brokerage: Trends to Watch',
+            content: '<p>Explore the emerging technologies and regulatory shifts that will define the next decade of retail trading.</p>',
+            category: 'Industry Trends',
+            author_name: 'David Chen',
+            created_at: new Date().toISOString(),
+            cover_image: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=800'
+          },
+          {
+            slug: 'optimizing-mt5-performance',
+            title: 'Optimizing MT5 Server Performance',
+            content: '<p>Learn the technical configurations and hardware requirements needed to achieve sub-millisecond execution speeds.</p>',
+            category: 'Technical',
+            author_name: 'Sarah Jenkins',
+            created_at: new Date(Date.now() - 86400000 * 2).toISOString(),
+            cover_image: 'https://images.unsplash.com/photo-1642543492481-44e81e391452?q=80&w=800'
+          },
+          {
+            slug: 'crypto-payment-gateways',
+            title: 'Integrating Crypto Gateways',
+            content: '<p>How accepting cryptocurrency deposits can dramatically reduce friction and lower your operational costs.</p>',
+            category: 'Payments',
+            author_name: 'Michael Ross',
+            created_at: new Date(Date.now() - 86400000 * 5).toISOString(),
+            cover_image: 'https://images.unsplash.com/photo-1518546305927-5a555bb7020d?q=80&w=800'
+          }
+        ];
+
+        const allBlogs = [...localBlogs, ...DUMMY_BLOGS];
+        const data = allBlogs.find(b => b.slug === slug);
+
         if (data) {
           setPost(data);
         } else {

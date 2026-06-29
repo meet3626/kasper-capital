@@ -48,9 +48,14 @@ const Blog = () => {
     const fetchBlogs = async () => {
       try {
         setLoading(true);
-        const data = await apiClient.get('/blogs?limit=50');
-        if (data && data.length > 0) {
-          setBlogs(data);
+        const savedBlogs = localStorage.getItem('adminBlogs');
+        let localBlogs = [];
+        if (savedBlogs) {
+          localBlogs = JSON.parse(savedBlogs);
+        }
+        
+        if (localBlogs.length > 0) {
+          setBlogs([...localBlogs, ...DUMMY_BLOGS]);
         }
       } catch (err) {
         console.error('Error loading blogs:', err);
