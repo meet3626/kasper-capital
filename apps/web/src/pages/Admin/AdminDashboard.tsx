@@ -115,7 +115,35 @@ export default function AdminDashboard() {
   const [showLeadsList, setShowLeadsList] = useState(false);
   const [showEmailsList, setShowEmailsList] = useState(false);
 
-  const exportLeadsToCSV = () => {};
+  const exportLeadsToCSV = () => {
+    if (!leads || leads.length === 0) return;
+    
+    const headers = ['Date', 'Name', 'Email', 'Phone', 'Interest', 'Status', 'Message'];
+    const csvRows = [headers.join(',')];
+    
+    leads.forEach((lead: any) => {
+      const values = [
+        `"${(lead.created_at || '').replace(/"/g, '""')}"`,
+        `"${(lead.name || '').replace(/"/g, '""')}"`,
+        `"${(lead.email || '').replace(/"/g, '""')}"`,
+        `"${(lead.phone || '').replace(/"/g, '""')}"`,
+        `"${(lead.interest || '').replace(/"/g, '""')}"`,
+        `"${(lead.status || '').replace(/"/g, '""')}"`,
+        `"${(lead.message || '').replace(/"/g, '""')}"`,
+      ];
+      csvRows.push(values.join(','));
+    });
+    
+    const csvContent = csvRows.join('\n');
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.setAttribute("href", url);
+    link.setAttribute("download", `broker-core-leads-${new Date().toISOString().split('T')[0]}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
   const handleEditChange = (field: any, value: any) => {};
   const deleteLead = () => {};
   const saveEditedLead = () => {};
