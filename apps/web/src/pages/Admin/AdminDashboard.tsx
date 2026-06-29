@@ -144,18 +144,65 @@ export default function AdminDashboard() {
     link.click();
     document.body.removeChild(link);
   };
-  const handleEditChange = (field: any, value: any) => {};
-  const deleteLead = () => {};
-  const saveEditedLead = () => {};
-  const deleteSubscriber = (id: any) => {};
+  const handleEditChange = (field: any, value: any) => {
+    setEditingLead((prev: any) => ({ ...prev, [field]: value }));
+  };
+
+  const deleteLead = () => {
+    if (!editingLead) return;
+    if (!window.confirm("Are you sure you want to delete this lead?")) return;
+    const updatedLeads = leads.filter((lead: any) => lead.id !== editingLead.id);
+    setLeads(updatedLeads);
+    localStorage.setItem('adminLeads', JSON.stringify(updatedLeads));
+    setEditingLead(null);
+    toast.success('Lead deleted successfully!');
+  };
+
+  const saveEditedLead = () => {
+    if (!editingLead) return;
+    const updatedLeads = leads.map((lead: any) => 
+      lead.id === editingLead.id ? editingLead : lead
+    );
+    setLeads(updatedLeads);
+    localStorage.setItem('adminLeads', JSON.stringify(updatedLeads));
+    setEditingLead(null);
+    toast.success('Lead updated successfully!');
+  };
+
+  const deleteSubscriber = (id: any) => {
+    if (!window.confirm("Are you sure you want to delete this subscriber?")) return;
+    const updatedSubscribers = subscribers.filter((sub: any) => sub.id !== id);
+    setSubscribers(updatedSubscribers);
+    localStorage.setItem('adminSubscribers', JSON.stringify(updatedSubscribers));
+    toast.success('Subscriber deleted successfully!');
+  };
+
   const handleEditSubscriber = (id: any) => {};
   const openAdminModal = (admin: any = null) => {};
-  const handleDeleteAdmin = (id: any) => {};
+  
+  const handleDeleteAdmin = async (id: any) => {
+    if (!window.confirm("Are you sure you want to delete this admin?")) return;
+    try {
+      await supabase.from('admins').delete().eq('id', id);
+      setAdminUsers(adminUsers.filter((a: any) => a.id !== id && a._id !== id));
+      toast.success('Admin deleted successfully!');
+    } catch (e) {
+      toast.error('Failed to delete admin');
+    }
+  };
+
   const handleSaveAdmin = () => {};
   const handleEmailBroadcast = () => {};
   const handleSaveBlog = () => {};
   const handleUploadImage = () => {};
-  const handleDeleteBlog = (id: any) => {};
+
+  const handleDeleteBlog = (id: any) => {
+    if (!window.confirm("Are you sure you want to delete this blog post?")) return;
+    const updatedBlogs = blogs.filter((b: any) => b.id !== id);
+    setBlogs(updatedBlogs);
+    localStorage.setItem('adminBlogs', JSON.stringify(updatedBlogs));
+    toast.success('Blog deleted successfully!');
+  };
 
   const renderContent = () => {
     if (activeTab === 'users') {
