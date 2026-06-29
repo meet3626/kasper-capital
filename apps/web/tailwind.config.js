@@ -44,9 +44,9 @@ module.exports = {
           yellow: '#FFD700',
           black: '#000000',
           obsidian: '#0A0A0A',
-          cyan: '#FFD700', // Aliased to Electric Yellow for global theme overhaul
-          blue: '#FFFFFF', // Aliased to White for global theme overhaul
-          purple: '#A3A3A3', // Aliased to Muted Gray for global theme overhaul
+          cyan: '#06b6d4', // Real Cyan
+          blue: '#3b82f6', // Real Blue
+          purple: '#a855f7', // Real Purple
         },
         popover: {
           default: 'hsl(var(--popover))',
@@ -58,7 +58,7 @@ module.exports = {
         },
       },
       fontFamily: {
-        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+        sans: ['"Inter"', 'sans-serif'],
       },
       borderRadius: {
         lg: 'var(--radius)',

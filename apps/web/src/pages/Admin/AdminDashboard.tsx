@@ -1,0 +1,1287 @@
+// @ts-nocheck
+import toast from 'react-hot-toast';
+import React, { useEffect, useState } from 'react';
+import Admin3DBackground from '@/components/Admin3DBackground';
+import { useNavigate } from 'react-router-dom';
+import { LogOut, LayoutDashboard, Users, Settings, Mail, Activity, ArrowUpRight, BarChart as BarChartIcon, FileText, Eye, EyeOff, Calculator } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+import { apiClient } from '@/lib/apiClient';
+
+export default function AdminDashboard() {
+  const navigate = useNavigate();
+  const [activeTab, setActiveTab] = useState('dashboard');
+  const [leads, setLeads] = useState<any[]>([]);
+  const [subscribers, setSubscribers] = useState<any[]>([]);
+  const [editingSubscriber, setEditingSubscriber] = useState<any>(null);
+  const [maintenanceMode, setMaintenanceMode] = useState('Disable');
+  const [currentAdmin, setCurrentAdmin] = useState<any>(null);
+  const [adminUsers, setAdminUsers] = useState<any[]>([]);
+  const [blogs, setBlogs] = useState(() => {
+    const saved = localStorage.getItem('adminBlogs');
+    return saved ? JSON.parse(saved) : [];
+  });
+  const [editingBlog, setEditingBlog] = useState<any>(null);
+  const [blogForm, setBlogForm] = useState({ title: '', content: '', coverImage: '' });
+  const [confirmDialog, setConfirmDialog] = useState({ isOpen: false, message: '', onConfirm: null });
+
+  useEffect(() => {
+    const initDashboard = async () => {
+      try {
+        const data = await apiClient.get('/admin/dashboard');
+        
+        if (data.admins) setAdminUsers(data.admins);
+        if (data.currentAdmin) {
+          // Find full object from array just in case
+          const current = data.admins.find((a: any) => a.id === data.currentAdmin.id);
+          setCurrentAdmin(current || data.currentAdmin);
+        } else {
+           navigate('/admin');
+           return;
+        }
+
+        if (data.leads) setLeads(data.leads);
+        if (data.subscribers) setSubscribers(data.subscribers);
+        if (data.blogs) setBlogs(data.blogs);
+
+      } catch (err) {
+        console.error("Dashboard initialization error:", err);
+        navigate('/admin');
+      }
+    };
+
+    initDashboard();
+
+    const savedMaintenance = localStorage.getItem('maintenanceMode');
+    if (savedMaintenance) {
+      setMaintenanceMode(savedMaintenance);
+    }
+  }, [navigate]);
+
+  const handleLogout = async () => {
+    try {
+      await apiClient.post('/admin/logout', {});
+    } catch (e) {}
+    navigate('/admin');
+  };
+
+  const handleStatusChange = (leadId: any, newStatus: any) => {
+    const updatedLeads = leads.map((lead: any) => 
+      lead.id === leadId ? { ...lead, status: newStatus } : lead
+    );
+    setLeads(updatedLeads);
+    localStorage.setItem('adminLeads', JSON.stringify(updatedLeads));
+  };
+
+  const handleSaveSettings = () => {
+    localStorage.setItem('maintenanceMode', maintenanceMode);
+    toast.success('Settings saved successfully!');
+  };
+
+  const getStatusColor = (status: any) => {
+    switch(status) {
+      case 'New': return 'bg-gray-300/10 text-blue-400 border-gray-300/20';
+      case 'Connected': return 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20';
+      case 'In Progress': return 'bg-white/10 text-white border-white/20';
+      case 'Closed (Won)': return 'bg-green-500/10 text-green-400 border-green-500/20';
+      case 'Closed (Lost)': return 'bg-red-500/10 text-red-400 border-red-500/20';
+      default: return 'bg-gray-500/10 text-gray-400 border-gray-500/20';
+    }
+  };
+
+  const [editingLead, setEditingLead] = useState<any>(null);
+
+  // Missing state and handler stubs to satisfy IDE and prevent runtime reference errors
+  const [viewingQuote, setViewingQuote] = useState<any>(null);
+  const [adminForm, setAdminForm] = useState<any>({});
+  const [showAdminPassword, setShowAdminPassword] = useState(false);
+  const [editingAdminId, setEditingAdminId] = useState<any>(null);
+  const [showAdminModal, setShowAdminModal] = useState(false);
+  const [showLeadsList, setShowLeadsList] = useState(false);
+  const [showEmailsList, setShowEmailsList] = useState(false);
+
+  const exportLeadsToCSV = () => {};
+  const handleEditChange = (field: any, value: any) => {};
+  const deleteLead = () => {};
+  const saveEditedLead = () => {};
+  const deleteSubscriber = (id: any) => {};
+  const handleEditSubscriber = (id: any) => {};
+  const openAdminModal = (admin: any = null) => {};
+  const handleDeleteAdmin = (id: any) => {};
+  const handleSaveAdmin = () => {};
+  const handleEmailBroadcast = () => {};
+  const handleSaveBlog = () => {};
+  const handleUploadImage = () => {};
+  const handleDeleteBlog = (id: any) => {};
+
+  const renderContent = () => {
+    if (activeTab === 'users') {
+      return (
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+        >
+          <div className="flex justify-between items-center mb-6">
+            <h1 className="text-2xl font-bold text-white">Leads & Inquiries</h1>
+            <button onClick={exportLeadsToCSV} className="px-4 py-2 bg-cyan-500 hover:bg-cyan-400 text-white rounded-lg text-sm font-medium transition-colors">
+              Export CSV
+            </button>
+          </div>
+
+          {editingLead && (
+            <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4 overflow-y-auto">
+              <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl w-full max-w-lg p-6 shadow-2xl relative my-auto max-h-[90vh] overflow-y-auto">
+                <h2 className="text-xl font-bold text-white mb-6">Edit Lead</h2>
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-400 mb-1">Name</label>
+                    <input 
+                      type="text" 
+                      value={editingLead.name || ''} 
+                      onChange={e => handleEditChange('name', e.target.value)}
+                      className="w-full bg-black/20 border border-white/10 backdrop-blur-sm text-white rounded-lg px-4 py-2 focus:outline-none focus:border-cyan-400"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-400 mb-1">Email</label>
+                    <input 
+                      type="email" 
+                      value={editingLead.email || ''} 
+                      onChange={e => handleEditChange('email', e.target.value)}
+                      className="w-full bg-black/20 border border-white/10 backdrop-blur-sm text-white rounded-lg px-4 py-2 focus:outline-none focus:border-cyan-400"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-400 mb-1">Phone</label>
+                    <input 
+                      type="text" 
+                      value={editingLead.phone || ''} 
+                      onChange={e => handleEditChange('phone', e.target.value)}
+                      className="w-full bg-black/20 border border-white/10 backdrop-blur-sm text-white rounded-lg px-4 py-2 focus:outline-none focus:border-cyan-400"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-400 mb-1">Interest</label>
+                    <input 
+                      type="text" 
+                      value={editingLead.interest || ''} 
+                      onChange={e => handleEditChange('interest', e.target.value)}
+                      className="w-full bg-black/20 border border-white/10 backdrop-blur-sm text-white rounded-lg px-4 py-2 focus:outline-none focus:border-cyan-400"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-400 mb-1">Message</label>
+                    <textarea 
+                      value={editingLead.message || ''} 
+                      onChange={e => handleEditChange('message', e.target.value)}
+                      rows={3}
+                      className="w-full bg-black/20 border border-white/10 backdrop-blur-sm text-white rounded-lg px-4 py-2 focus:outline-none focus:border-cyan-400 resize-none"
+                    />
+                  </div>
+                </div>
+                <div className="flex justify-between items-center mt-8">
+                  <button 
+                    onClick={deleteLead}
+                    className="px-4 py-2 bg-red-500/10 hover:bg-red-500/20 text-red-500 rounded-lg font-medium transition-colors border border-red-500/20"
+                  >
+                    Delete Lead
+                  </button>
+                  <div className="flex gap-3">
+                    <button 
+                      onClick={() => setEditingLead(null)}
+                      className="px-6 py-2 border border-gray-700 text-gray-300 hover:bg-gray-800 hover:text-white rounded-lg font-medium transition-colors"
+                    >
+                      Cancel
+                    </button>
+                    <button 
+                      onClick={saveEditedLead}
+                      className="px-6 py-2 bg-cyan-500 hover:bg-cyan-400 text-white rounded-lg font-medium transition-colors"
+                    >
+                      Save Changes
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl p-6 shadow-lg">
+            {/* Mobile View */}
+            <div className="md:hidden space-y-4">
+              {leads.filter(l => l.interest !== 'Brokerage Quote').map(lead => (
+                <div key={lead.id} className="bg-black/20 border border-gray-800 rounded-lg p-4 space-y-3">
+                  <div className="flex justify-between items-start">
+                    <div className="overflow-hidden pr-2">
+                      <div className="text-white font-medium truncate">{lead.name}</div>
+                      <div className="text-gray-400 text-sm truncate">{lead.email}</div>
+                      <div className="text-gray-500 text-xs">{lead.phone}</div>
+                    </div>
+                    <div className="text-gray-500 text-[10px] whitespace-nowrap">{lead.created_at ? new Date(lead.created_at).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' }) : lead.date}</div>
+                  </div>
+                  <div>
+                    <div className="text-cyan-400 text-sm font-medium">{lead.interest}</div>
+                    {lead.message && <div className="text-gray-400 text-xs mt-1 italic line-clamp-2">"{lead.message}"</div>}
+                  </div>
+                  <div className="pt-3 border-t border-gray-800 flex justify-between items-center">
+                    <select 
+                      value={lead.status}
+                      onChange={(e) => handleStatusChange(lead.id, e.target.value)}
+                      className={`px-2 py-1.5 rounded-lg text-xs font-medium border appearance-none cursor-pointer outline-none ${getStatusColor(lead.status)}`}
+                    >
+                      <option value="New" className="bg-[#111827] text-white">New</option>
+                      <option value="Connected" className="bg-[#111827] text-white">Connected</option>
+                      <option value="In Progress" className="bg-[#111827] text-white">In Progress</option>
+                      <option value="Closed (Won)" className="bg-[#111827] text-white">Closed (Won)</option>
+                      <option value="Closed (Lost)" className="bg-[#111827] text-white">Closed (Lost)</option>
+                    </select>
+                    <button 
+                      onClick={() => setEditingLead(lead)}
+                      className="text-cyan-400 hover:text-cyan-400 text-xs font-medium px-3 py-1.5 border border-cyan-400/30 hover:border-cyan-400 rounded-lg transition-colors"
+                    >
+                      Edit
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Desktop View */}
+            <div className="hidden md:block overflow-x-auto">
+              <table className="w-full text-left border-collapse min-w-[800px]">
+                <thead>
+                  <tr className="border-b border-gray-800">
+                    <th className="py-3 px-4 text-gray-400 font-medium">Name</th>
+                    <th className="py-3 px-4 text-gray-400 font-medium">Email / Phone</th>
+                    <th className="py-3 px-4 text-gray-400 font-medium">Interest / Message</th>
+                    <th className="py-3 px-4 text-gray-400 font-medium">Status</th>
+                    <th className="py-3 px-4 text-gray-400 font-medium">Date</th>
+                    <th className="py-3 px-4 text-gray-400 font-medium text-right">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {leads.filter(l => l.interest !== 'Brokerage Quote').map((lead: any) => (
+                    <tr key={lead.id} className="border-b border-gray-800/50 hover:bg-gray-800/30 transition-colors">
+                      <td className="py-4 px-4 text-white font-medium">{lead.name}</td>
+                      <td className="py-4 px-4">
+                        <div className="text-gray-300">{lead.email}</div>
+                        <div className="text-gray-500 text-sm">{lead.phone}</div>
+                      </td>
+                      <td className="py-4 px-4 text-cyan-400">
+                        {lead.interest}
+                        {lead.message && <div className="text-gray-400 text-xs mt-1 truncate max-w-xs" title={lead.message}>"{lead.message}"</div>}
+                      </td>
+                      <td className="py-4 px-4">
+                        <select 
+                          value={lead.status}
+                          onChange={(e) => handleStatusChange(lead.id, e.target.value)}
+                          className={`px-3 py-1.5 rounded-lg text-xs font-medium border appearance-none cursor-pointer outline-none ${getStatusColor(lead.status)}`}
+                        >
+                          <option value="New" className="bg-[#111827] text-white">New</option>
+                          <option value="Connected" className="bg-[#111827] text-white">Connected</option>
+                          <option value="In Progress" className="bg-[#111827] text-white">In Progress</option>
+                          <option value="Closed (Won)" className="bg-[#111827] text-white">Closed (Won)</option>
+                          <option value="Closed (Lost)" className="bg-[#111827] text-white">Closed (Lost)</option>
+                        </select>
+                      </td>
+                      <td className="py-4 px-4 text-gray-500 whitespace-nowrap">{lead.created_at ? new Date(lead.created_at).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' }) : lead.date}</td>
+                      <td className="py-4 px-4 text-right">
+                        <button 
+                          onClick={() => setEditingLead(lead)}
+                          className="text-cyan-400 hover:text-cyan-400 text-sm font-medium px-3 py-1.5 border border-cyan-400/30 hover:border-cyan-400 rounded-lg transition-colors"
+                        >
+                          Edit
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </motion.div>
+      );
+    }
+
+    if (activeTab === 'newsletter') {
+      return (
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+        >
+          <div className="flex justify-between items-center mb-6">
+            <h1 className="text-2xl font-bold text-white">Newsletter Subscribers</h1>
+            <div className="text-sm font-medium text-white bg-white/10 px-4 py-2 rounded-lg">
+              Total: {subscribers.length}
+            </div>
+          </div>
+
+          <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl p-6 shadow-lg">
+            {/* Mobile View */}
+            <div className="md:hidden space-y-3">
+              {subscribers.length > 0 ? (
+                subscribers.map((sub) => (
+                  <div key={sub.id} className="bg-black/20 border border-gray-800 rounded-lg p-4 flex flex-col gap-3">
+                    <div className="flex justify-between items-center">
+                      <div className="text-white font-medium truncate pr-4 text-sm">{sub.email}</div>
+                      <div className="text-gray-500 text-xs whitespace-nowrap">{sub.date || (sub.created_at ? new Date(sub.created_at).toLocaleDateString() : '')}</div>
+                    </div>
+                    <div className="flex gap-4 border-t border-gray-800/50 pt-3">
+                      <button onClick={() => setEditingSubscriber(sub)} className="text-cyan-400 text-xs font-medium hover:text-cyan-300">Edit</button>
+                      <button onClick={() => deleteSubscriber(sub.id)} className="text-red-400 text-xs font-medium hover:text-red-300">Delete</button>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <div className="py-8 text-center text-gray-500">No newsletter subscribers yet.</div>
+              )}
+            </div>
+
+            {/* Desktop View */}
+            <div className="hidden md:block overflow-x-auto">
+              <table className="w-full text-left border-collapse min-w-[500px]">
+                <thead>
+                  <tr className="border-b border-gray-800">
+                    <th className="py-3 px-4 text-gray-400 font-medium">Email Address</th>
+                    <th className="py-3 px-4 text-gray-400 font-medium">Date Subscribed</th>
+                    <th className="py-3 px-4 text-gray-400 font-medium text-right">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {subscribers.length > 0 ? (
+                    subscribers.map((sub) => (
+                      <tr key={sub.id} className="border-b border-gray-800/50 hover:bg-gray-800/30 transition-colors">
+                        <td className="py-4 px-4 text-white font-medium">{sub.email}</td>
+                        <td className="py-4 px-4 text-gray-500">{sub.date || (sub.created_at ? new Date(sub.created_at).toLocaleDateString() : '')}</td>
+                        <td className="py-4 px-4 text-right">
+                          <button onClick={() => setEditingSubscriber(sub)} className="text-cyan-400 hover:text-cyan-300 mr-4 font-medium text-sm">Edit</button>
+                          <button onClick={() => deleteSubscriber(sub.id)} className="text-red-400 hover:text-red-300 font-medium text-sm">Delete</button>
+                        </td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan="3" className="py-8 text-center text-gray-500">No newsletter subscribers yet.</td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </div>
+          
+          {editingSubscriber && (
+            <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-[100] p-4">
+              <div className="bg-gray-900 border border-gray-800 rounded-2xl p-6 max-w-sm w-full shadow-2xl">
+                <h3 className="text-xl font-bold text-white mb-4">Edit Subscriber</h3>
+                <form onSubmit={handleEditSubscriber}>
+                  <div className="mb-4">
+                    <label className="block text-sm font-medium text-gray-400 mb-1">Email Address</label>
+                    <input 
+                      type="email" 
+                      value={editingSubscriber.email}
+                      onChange={(e) => setEditingSubscriber({ ...editingSubscriber, email: e.target.value })}
+                      className="w-full bg-black/50 border border-gray-700 text-white rounded-lg px-4 py-2 focus:border-cyan-400 focus:outline-none"
+                      required
+                    />
+                  </div>
+                  <div className="flex justify-end gap-3">
+                    <button type="button" onClick={() => setEditingSubscriber(null)} className="px-4 py-2 bg-gray-800 text-gray-300 hover:text-white rounded-lg">Cancel</button>
+                    <button type="submit" className="px-4 py-2 bg-cyan-500 hover:bg-cyan-400 text-white rounded-lg font-medium">Save Changes</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          )}
+        </motion.div>
+      );
+    }
+
+    if (activeTab === 'calculator_quotes') {
+      const quotes = leads.filter(l => l.interest === 'Brokerage Quote');
+      return (
+        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
+          <div className="flex justify-between items-center mb-6">
+            <h1 className="text-2xl font-bold text-white">Calculator Quotes</h1>
+          </div>
+          <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl p-6 shadow-lg">
+            <div className="hidden md:block overflow-x-auto">
+              <table className="w-full text-left border-collapse min-w-[800px]">
+                <thead>
+                  <tr className="border-b border-gray-800">
+                    <th className="py-3 px-4 text-gray-400 font-medium">Name</th>
+                    <th className="py-3 px-4 text-gray-400 font-medium">Email / Phone</th>
+                    <th className="py-3 px-4 text-gray-400 font-medium">Status</th>
+                    <th className="py-3 px-4 text-gray-400 font-medium">Date</th>
+                    <th className="py-3 px-4 text-gray-400 font-medium text-right">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {quotes.map((quote) => (
+                    <tr key={quote.id} className="border-b border-gray-800/50 hover:bg-gray-800/30 transition-colors">
+                      <td className="py-4 px-4 text-white font-medium">{quote.name}</td>
+                      <td className="py-4 px-4">
+                        <div className="text-gray-300">{quote.email}</div>
+                        <div className="text-gray-500 text-sm">{quote.phone}</div>
+                      </td>
+                      <td className="py-4 px-4">
+                        <select 
+                          value={quote.status}
+                          onChange={(e) => handleStatusChange(quote.id, e.target.value)}
+                          className={`px-3 py-1.5 rounded-lg text-xs font-medium border appearance-none cursor-pointer outline-none ${getStatusColor(quote.status)}`}
+                        >
+                          <option value="New" className="bg-[#111827] text-white">New</option>
+                          <option value="Connected" className="bg-[#111827] text-white">Connected</option>
+                          <option value="In Progress" className="bg-[#111827] text-white">In Progress</option>
+                          <option value="Closed (Won)" className="bg-[#111827] text-white">Closed (Won)</option>
+                          <option value="Closed (Lost)" className="bg-[#111827] text-white">Closed (Lost)</option>
+                        </select>
+                      </td>
+                      <td className="py-4 px-4 text-gray-500">{quote.created_at ? new Date(quote.created_at).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' }) : quote.date}</td>
+                      <td className="py-4 px-4 text-right">
+                        <button onClick={() => setViewingQuote(quote)} className="text-cyan-400 hover:text-cyan-300 font-medium text-sm border border-cyan-400/30 px-3 py-1.5 rounded-lg">View Quote</button>
+                        <button onClick={() => setEditingLead(quote)} className="text-white hover:text-gray-300 font-medium text-sm border border-gray-600 px-3 py-1.5 rounded-lg ml-2">Edit</button>
+                      </td>
+                    </tr>
+                  ))}
+                  {quotes.length === 0 && <tr><td colSpan="5" className="py-8 text-center text-gray-500">No quotes received yet.</td></tr>}
+                </tbody>
+              </table>
+            </div>
+            
+            <div className="md:hidden space-y-4">
+               {quotes.map(quote => (
+                 <div key={quote.id} className="bg-black/20 border border-gray-800 rounded-lg p-4 space-y-3">
+                   <div className="text-white font-medium">{quote.name}</div>
+                   <div className="text-gray-400 text-sm">{quote.email}</div>
+                   <div className="pt-3 border-t border-gray-800 flex justify-between items-center">
+                     <select value={quote.status} onChange={(e) => handleStatusChange(quote.id, e.target.value)} className={`px-2 py-1.5 rounded-lg text-xs font-medium border appearance-none cursor-pointer outline-none ${getStatusColor(quote.status)}`}>
+                        <option value="New" className="bg-[#111827] text-white">New</option>
+                        <option value="Connected" className="bg-[#111827] text-white">Connected</option>
+                        <option value="In Progress" className="bg-[#111827] text-white">In Progress</option>
+                        <option value="Closed (Won)" className="bg-[#111827] text-white">Closed (Won)</option>
+                        <option value="Closed (Lost)" className="bg-[#111827] text-white">Closed (Lost)</option>
+                     </select>
+                     <button onClick={() => setViewingQuote(quote)} className="text-cyan-400 text-xs font-medium px-3 py-1.5 border border-cyan-400/30 rounded-lg">View</button>
+                   </div>
+                 </div>
+               ))}
+               {quotes.length === 0 && <div className="text-center text-gray-500 py-4">No quotes received yet.</div>}
+            </div>
+          </div>
+
+          {viewingQuote && (
+            <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-[60] p-4">
+              <div className="bg-gray-900 border border-gray-800 rounded-2xl p-6 max-w-2xl w-full shadow-2xl relative my-auto max-h-[90vh] flex flex-col">
+                <div className="flex justify-between items-center mb-4 pb-4 border-b border-gray-800">
+                   <h3 className="text-xl font-bold text-white">Quote for {viewingQuote.name}</h3>
+                   <button onClick={() => setViewingQuote(null)} className="text-gray-400 hover:text-white">&times;</button>
+                </div>
+                <div className="flex-1 overflow-y-auto pr-2 space-y-4">
+                  <div className="text-sm text-gray-300 whitespace-pre-wrap leading-relaxed">
+                    {viewingQuote.message}
+                  </div>
+                </div>
+                <div className="mt-6 pt-4 border-t border-gray-800 flex justify-end">
+                   <button onClick={() => setViewingQuote(null)} className="px-6 py-2 bg-gray-800 text-white rounded-lg font-medium transition-colors hover:bg-gray-700">Close</button>
+                </div>
+              </div>
+            </div>
+          )}
+        </motion.div>
+      );
+    }
+
+    if (activeTab === 'settings') {
+      return (
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+        >
+          <h1 className="text-2xl font-bold text-white mb-6">Platform Settings</h1>
+          <div className="max-w-2xl">
+
+            {/* System Preferences */}
+            <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl p-6 shadow-lg">
+              <h2 className="text-lg font-semibold text-white mb-4 border-b border-gray-800 pb-2">System Preferences</h2>
+              <form className="space-y-5">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-300">Email Notifications</label>
+                    <p className="text-xs text-gray-500">Receive alerts for new leads.</p>
+                  </div>
+                  <label className="relative inline-flex items-center cursor-pointer">
+                    <input type="checkbox" value="" className="sr-only peer" defaultChecked />
+                    <div className="w-11 h-6 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-cyan-400"></div>
+                  </label>
+                </div>
+
+                <div className="pt-2">
+                  <label className="block text-sm font-medium text-gray-300 mb-2">Maintenance Mode</label>
+                  <select 
+                    value={maintenanceMode}
+                    onChange={(e) => setMaintenanceMode(e.target.value)}
+                    className="w-full bg-[#1F2937] border-gray-700 text-white rounded-lg focus:ring-cyan-400 focus:border-cyan-400 p-2.5 outline-none cursor-pointer"
+                  >
+                    <option value="Disable">Disabled (Live)</option>
+                    <option value="Enable">Enabled (Offline)</option>
+                  </select>
+                </div>
+              </form>
+            </div>
+            
+            <div className="col-span-1 lg:col-span-2 flex justify-end">
+              <button type="button" onClick={handleSaveSettings} className="px-8 py-3 bg-cyan-500 hover:bg-cyan-400 text-white rounded-lg font-semibold transition-colors shadow-lg">
+                Save All Settings
+              </button>
+            </div>
+          </div>
+        </motion.div>
+      );
+    }
+
+    if (activeTab === 'manage_admins') {
+      return (
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+        >
+          <div className="flex justify-between items-center mb-6">
+            <h1 className="text-2xl font-bold text-white">Manage Admins</h1>
+            <button onClick={() => openAdminModal(null)} className="px-4 py-2 bg-cyan-500 hover:bg-cyan-400 text-white rounded-lg text-sm font-medium transition-colors">
+              + Create New Admin
+            </button>
+          </div>
+
+          <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl p-6 shadow-lg">
+            {/* Mobile View */}
+            <div className="md:hidden space-y-4">
+              {adminUsers.map((admin: any) => (
+                <div key={admin.id} className="bg-black/20 border border-gray-800 rounded-lg p-4 space-y-3">
+                  <div className="flex justify-between items-start">
+                    <div className="overflow-hidden pr-2">
+                      <div className="text-white font-medium truncate">{admin.name}</div>
+                      <div className="text-gray-400 text-sm truncate">{admin.email}</div>
+                    </div>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {Object.keys(admin.permissions).map(key => admin.permissions[key] && (
+                      <span key={key} className="px-2 py-1 bg-white/10 text-white border border-white/20 rounded-md text-[10px] uppercase font-bold tracking-wider">
+                        {key.replace('_', ' ')}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="pt-3 border-t border-gray-800 flex justify-end gap-2">
+                    {(currentAdmin?.is_master === true || admin.is_master !== true) && (
+                      <button onClick={() => openAdminModal(admin)} className="text-cyan-400 hover:text-cyan-400 text-xs font-medium px-3 py-1.5 border border-cyan-400/30 hover:border-cyan-400 rounded-lg transition-colors">Edit</button>
+                    )}
+                    {((admin.id || admin._id) !== (currentAdmin?.id || currentAdmin?._id)) && (
+                      <button onClick={() => handleDeleteAdmin(admin._id || admin.id)} className="text-red-500 hover:text-red-400 text-xs font-medium px-3 py-1.5 border border-red-500/30 hover:border-red-400 rounded-lg transition-colors">Delete</button>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Desktop View */}
+            <div className="hidden md:block overflow-x-auto">
+              <table className="w-full text-left border-collapse min-w-[700px]">
+                <thead>
+                  <tr className="border-b border-gray-800">
+                    <th className="py-3 px-4 text-gray-400 font-medium">Name / Email</th>
+                    <th className="py-3 px-4 text-gray-400 font-medium">Permissions</th>
+                    <th className="py-3 px-4 text-gray-400 font-medium text-right">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {adminUsers.map((admin: any) => (
+                    <tr key={admin.id} className="border-b border-gray-800/50 hover:bg-gray-800/30 transition-colors">
+                      <td className="py-4 px-4">
+                        <div className="text-white font-medium">{admin.name}</div>
+                        <div className="text-gray-500 text-sm">{admin.email}</div>
+                      </td>
+                      <td className="py-4 px-4">
+                        <div className="flex flex-wrap gap-2">
+                          {Object.keys(admin.permissions).map(key => admin.permissions[key] && (
+                            <span key={key} className="px-2 py-1 bg-white/10 text-white border border-white/20 rounded-md text-[10px] uppercase font-bold tracking-wider">
+                              {key.replace('_', ' ')}
+                            </span>
+                          ))}
+                        </div>
+                      </td>
+                      <td className="py-4 px-4 text-right">
+                        {(currentAdmin?.is_master === true || admin.is_master !== true) && (
+                          <button onClick={() => openAdminModal(admin)} className="text-cyan-400 hover:text-cyan-400 text-sm font-medium px-3 py-1.5 border border-cyan-400/30 hover:border-cyan-400 rounded-lg transition-colors mr-2">
+                            Edit
+                          </button>
+                        )}
+                        {((admin.id || admin._id) !== (currentAdmin?.id || currentAdmin?._id)) && (
+                          <button onClick={() => handleDeleteAdmin(admin._id || admin.id)} className="text-red-500 hover:text-red-400 text-sm font-medium px-3 py-1.5 border border-red-500/30 hover:border-red-400 rounded-lg transition-colors">
+                            Delete
+                          </button>
+                        )}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          {showAdminModal && (
+            <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
+              <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl w-full max-w-lg p-6 shadow-2xl relative my-auto max-h-[90vh] overflow-y-auto">
+                <h2 className="text-xl font-bold text-white mb-6">{editingAdminId ? 'Edit Admin' : 'Create New Admin'}</h2>
+                <form onSubmit={handleSaveAdmin} className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-400 mb-1">Name</label>
+                    <input type="text" required value={adminForm.name} onChange={e => setAdminForm({...adminForm, name: e.target.value})} className="w-full bg-black/20 border border-white/10 backdrop-blur-sm text-white rounded-lg px-4 py-2 focus:outline-none focus:border-cyan-400" />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-400 mb-1">Email</label>
+                    <input type="email" required value={adminForm.email} onChange={e => setAdminForm({...adminForm, email: e.target.value})} className="w-full bg-black/20 border border-white/10 backdrop-blur-sm text-white rounded-lg px-4 py-2 focus:outline-none focus:border-cyan-400" />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-400 mb-1">{editingAdminId ? 'New Password (leave blank to keep current)' : 'Password'}</label>
+                    <div className="relative">
+                      <input type={showAdminPassword ? "text" : "password"} required={!editingAdminId} value={adminForm.password} onChange={e => setAdminForm({...adminForm, password: e.target.value})} className="w-full bg-black/20 border border-white/10 backdrop-blur-sm text-white rounded-lg px-4 py-2 pr-10 focus:outline-none focus:border-cyan-400" />
+                      <button type="button" onClick={() => setShowAdminPassword(!showAdminPassword)} className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 hover:text-gray-300">
+                        {showAdminPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                      </button>
+                    </div>
+                  </div>
+                  <div className="pt-4 border-t border-gray-800">
+                    <label className="block text-sm font-medium text-gray-300 mb-3">Permissions</label>
+                    <div className="grid grid-cols-2 gap-3">
+                      {Object.keys(adminForm.permissions).map(key => (
+                        <label key={key} className="flex items-center gap-2 cursor-pointer">
+                          <input type="checkbox" checked={adminForm.permissions[key]} onChange={e => setAdminForm({...adminForm, permissions: {...adminForm.permissions, [key]: e.target.checked}})} className="rounded border-gray-700 bg-gray-800 text-cyan-400 focus:ring-cyan-400" />
+                          <span className="text-sm text-gray-400 capitalize">{key.replace('_', ' ')}</span>
+                        </label>
+                      ))}
+                    </div>
+                    {currentAdmin?.is_master && (
+                      <div className="mt-4 pt-4 border-t border-gray-800/50">
+                        <label className="flex items-center gap-2 cursor-pointer bg-cyan-500/10 p-3 rounded-lg border border-cyan-500/20">
+                          <input type="checkbox" checked={adminForm.is_master || false} onChange={e => setAdminForm({...adminForm, is_master: e.target.checked})} className="rounded border-gray-700 bg-gray-800 text-cyan-400 focus:ring-cyan-400" />
+                          <span className="text-sm text-cyan-400 font-bold tracking-wide">Grant Master Admin Role</span>
+                        </label>
+                        <p className="text-xs text-gray-500 mt-2 ml-1">Master admins can edit other master admins and assign master roles.</p>
+                      </div>
+                    )}
+                  </div>
+                  <div className="flex justify-end gap-3 mt-8">
+                    <button type="button" onClick={() => setShowAdminModal(false)} className="px-6 py-2 border border-gray-700 text-gray-300 hover:bg-gray-800 hover:text-white rounded-lg font-medium transition-colors">Cancel</button>
+                    <button type="submit" className="px-6 py-2 bg-cyan-500 hover:bg-cyan-400 text-white rounded-lg font-medium transition-colors">Save Admin</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          )}
+        </motion.div>
+      );
+    }
+
+    if (activeTab === 'dashboard') {
+      return (
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+        >
+        <h1 className="text-2xl font-bold text-white mb-6">Overview Dashboard</h1>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mb-8">
+          {/* Stats Cards */}
+          <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl p-6 shadow-lg">
+            <div className="flex justify-between items-start">
+              <div>
+                <div className="text-gray-400 text-sm font-medium mb-1">Total Leads (This Month)</div>
+                <div className="text-3xl font-bold text-white">{leads.length}</div>
+              </div>
+              <div className="relative">
+                <div 
+                  className="p-2 bg-cyan-400/10 rounded-lg cursor-pointer hover:bg-cyan-400/20 transition-colors"
+                  onClick={() => setShowLeadsList(!showLeadsList)}
+                  title="View Lead Names"
+                >
+                  <Users className="w-5 h-5 text-cyan-400" />
+                </div>
+                {showLeadsList && (
+                  <div className="absolute right-0 mt-2 w-56 bg-black/20 border border-white/10 backdrop-blur-sm rounded-lg shadow-xl z-50 py-2 max-h-60 overflow-y-auto">
+                    <div className="px-4 py-2 border-b border-gray-700 text-xs font-semibold text-gray-400 uppercase tracking-wider">
+                      Recent Leads
+                    </div>
+                    {leads.length > 0 ? leads.map(lead => (
+                      <div 
+                        key={lead.id} 
+                        className="px-4 py-3 text-white text-sm hover:bg-gray-700 cursor-pointer flex justify-between items-center transition-colors border-b border-gray-700/50 last:border-0" 
+                        onClick={() => { setShowLeadsList(false); setActiveTab('users'); }}
+                      >
+                        <span className="truncate mr-2 font-medium">{lead.name}</span>
+                        <span className="text-[10px] text-cyan-400 bg-cyan-400/10 px-2 py-0.5 rounded-full">{lead.status}</span>
+                      </div>
+                    )) : (
+                      <div className="px-4 py-3 text-gray-500 text-sm text-center">No leads available</div>
+                    )}
+                  </div>
+                )}
+              </div>
+            </div>
+            <div className="text-green-400 text-sm mt-4 flex items-center gap-1">
+              <ArrowUpRight className="w-4 h-4" /> New leads arriving
+            </div>
+          </div>
+
+          <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl p-6 shadow-lg">
+            <div className="flex justify-between items-start">
+              <div>
+                <div className="text-gray-400 text-sm font-medium mb-1">Unread Messages</div>
+                <div className="text-3xl font-bold text-white">{leads.length}</div>
+              </div>
+              <div className="relative">
+                <div 
+                  className="p-2 bg-white/10 rounded-lg cursor-pointer hover:bg-white/20 transition-colors"
+                  onClick={() => setShowEmailsList(!showEmailsList)}
+                  title="View Lead Emails"
+                >
+                  <Mail className="w-5 h-5 text-white" />
+                </div>
+                {showEmailsList && (
+                  <div className="absolute right-0 mt-2 w-64 bg-black/20 border border-white/10 backdrop-blur-sm rounded-lg shadow-xl z-50 py-2 max-h-60 overflow-y-auto">
+                    <div className="px-4 py-2 border-b border-gray-700 text-xs font-semibold text-gray-400 uppercase tracking-wider">
+                      Recent Emails
+                    </div>
+                    {leads.length > 0 ? leads.map(lead => (
+                      <div 
+                        key={lead.id} 
+                        className="px-4 py-3 text-white text-sm hover:bg-gray-700 cursor-pointer flex justify-between items-center transition-colors border-b border-gray-700/50 last:border-0" 
+                        onClick={() => { setShowEmailsList(false); setActiveTab('users'); }}
+                      >
+                        <span className="truncate mr-2 text-gray-200 font-medium">{lead.email}</span>
+                      </div>
+                    )) : (
+                      <div className="px-4 py-3 text-gray-500 text-sm text-center">No emails available</div>
+                    )}
+                  </div>
+                )}
+              </div>
+            </div>
+            <div className="text-red-400 text-sm mt-4 flex items-center gap-1">
+              Requires attention
+            </div>
+          </div>
+
+          <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl p-6 shadow-lg">
+            <div className="flex justify-between items-start">
+              <div>
+                <div className="text-gray-400 text-sm font-medium mb-1">Conversion Rate</div>
+                <div className="text-3xl font-bold text-white">
+                  {leads.length > 0 
+                    ? ((leads.filter(l => l.status === 'Closed (Won)').length / leads.length) * 100).toFixed(1) + '%' 
+                    : '0%'}
+                </div>
+              </div>
+              <div className="p-2 bg-gray-300/10 rounded-lg"><Activity className="w-5 h-5 text-blue-400" /></div>
+            </div>
+            <div className="text-green-400 text-sm mt-4 flex items-center gap-1">
+              Based on Closed (Won) leads
+            </div>
+          </div>
+
+          <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl p-6 shadow-lg">
+            <div className="flex justify-between items-start">
+              <div>
+                <div className="text-gray-400 text-sm font-medium mb-1">New Leads</div>
+                <div className="text-3xl font-bold text-white">
+                  {leads.filter(l => l.status === 'New').length}
+                </div>
+              </div>
+              <div className="p-2 bg-cyan-500/10 rounded-lg">
+                <div className="w-3 h-3 rounded-full bg-cyan-500 animate-pulse" />
+              </div>
+            </div>
+            <div className="text-cyan-400/80 text-sm mt-4">
+              Awaiting your response
+            </div>
+          </div>
+        </div>
+
+        {/* Analytics Charts */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+          <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl p-6 shadow-lg">
+            <h3 className="text-lg font-bold text-white mb-4">Leads by Status</h3>
+            <div className="h-[300px]">
+              {leads.length > 0 ? (
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart
+                    data={[
+                      { name: 'New', count: leads.filter(l => l.status === 'New').length },
+                      { name: 'Connected', count: leads.filter(l => l.status === 'Connected').length },
+                      { name: 'In Progress', count: leads.filter(l => l.status === 'In Progress').length },
+                      { name: 'Won', count: leads.filter(l => l.status === 'Closed (Won)').length },
+                      { name: 'Lost', count: leads.filter(l => l.status === 'Closed (Lost)').length },
+                    ]}
+                    margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                  >
+                    <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
+                    <XAxis dataKey="name" stroke="#9CA3AF" />
+                    <YAxis stroke="#9CA3AF" />
+                    <Tooltip contentStyle={{ backgroundColor: '#1F2937', border: 'none', borderRadius: '8px', color: '#fff' }} />
+                    <Bar dataKey="count" fill="#06b6d4" radius={[4, 4, 0, 0]} />
+                  </BarChart>
+                </ResponsiveContainer>
+              ) : (
+                <div className="flex h-full items-center justify-center text-gray-500 font-medium border border-dashed border-gray-800 rounded-xl">
+                  No lead data available yet
+                </div>
+              )}
+            </div>
+          </div>
+
+          <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl p-6 shadow-lg">
+            <h3 className="text-lg font-bold text-white mb-4">Lead Interests</h3>
+            <div className="h-[300px]">
+              {(() => {
+                const interestCounts = leads.reduce((acc, lead) => {
+                  const interest = lead.interest || 'Other';
+                  acc[interest] = (acc[interest] || 0) + 1;
+                  return acc;
+                }, {});
+
+                const pieData = Object.keys(interestCounts).map(key => ({
+                  name: key.length > 20 ? key.substring(0, 20) + '...' : key,
+                  value: interestCounts[key]
+                })).sort((a, b) => b.value - a.value).slice(0, 6); // Top 6 interests
+
+                return pieData.length > 0 ? (
+                  <ResponsiveContainer width="100%" height="100%">
+                    <PieChart>
+                      <Pie
+                        data={pieData}
+                        cx="50%"
+                        cy="50%"
+                        innerRadius={60}
+                        outerRadius={100}
+                        paddingAngle={5}
+                        dataKey="value"
+                      >
+                        {pieData.map((entry, index) => (
+                          <Cell key={`cell-${index}`} fill={['#06b6d4', '#a855f7', '#3b82f6', '#10b981', '#f59e0b'][index % 5]} />
+                        ))}
+                      </Pie>
+                      <Tooltip contentStyle={{ backgroundColor: '#1F2937', border: 'none', borderRadius: '8px', color: '#fff' }} />
+                      <Legend />
+                    </PieChart>
+                  </ResponsiveContainer>
+                ) : (
+                  <div className="flex h-full items-center justify-center text-gray-500 font-medium border border-dashed border-gray-800 rounded-xl">
+                    No matching interests data
+                  </div>
+                );
+              })()}
+            </div>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl p-6 shadow-lg">
+            <h3 className="text-lg font-bold text-white mb-4">Recent Contact Requests</h3>
+            <div className="space-y-4">
+              {leads.slice(0, 3).map((lead: any) => (
+                <div key={lead.id} className="flex items-center justify-between py-3 border-b border-gray-800/50 last:border-0">
+                  <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 rounded-full bg-cyan-400/10 flex items-center justify-center text-cyan-400 font-bold uppercase">
+                      {lead.name ? lead.name.charAt(0) : '?'}
+                    </div>
+                    <div>
+                      <div className="text-white font-medium">{lead.name}</div>
+                      <div className="text-cyan-400 text-sm">Requested: {lead.interest}</div>
+                    </div>
+                  </div>
+                  <div className="text-gray-500 text-sm">{lead.date}</div>
+                </div>
+              ))}
+              {leads.length === 0 && (
+                <div className="text-gray-500 text-sm text-center py-4">No recent requests</div>
+              )}
+            </div>
+            <button onClick={() => setActiveTab('users')} className="w-full mt-4 py-2 border border-gray-700 text-gray-300 hover:text-white hover:bg-gray-800 rounded-lg transition-colors text-sm font-medium">
+              View All Leads
+            </button>
+          </div>
+
+          <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl p-6 shadow-lg">
+            <h3 className="text-lg font-bold text-white mb-4">Quick Actions</h3>
+            <div className="grid grid-cols-2 gap-4">
+              <button onClick={handleEmailBroadcast} className="flex flex-col items-center justify-center p-6 bg-gray-800/30 border border-gray-800 hover:border-cyan-400/50 hover:bg-cyan-400/5 rounded-xl transition-all group">
+                <Mail className="w-8 h-8 text-gray-400 group-hover:text-cyan-400 mb-3" />
+                <span className="text-gray-300 font-medium text-sm text-center">Compose Email Broadcast</span>
+              </button>
+              <button onClick={() => setActiveTab('settings')} className="flex flex-col items-center justify-center p-6 bg-gray-800/30 border border-gray-800 hover:border-white/50 hover:bg-white/5 rounded-xl transition-all group">
+                <Settings className="w-8 h-8 text-gray-400 group-hover:text-white mb-3" />
+                <span className="text-gray-300 font-medium text-sm text-center">Update Contact Info</span>
+              </button>
+              <button onClick={() => window.open('/', '_blank')} className="flex flex-col items-center justify-center p-6 bg-gray-800/30 border border-gray-800 hover:border-gray-300/50 hover:bg-gray-300/5 rounded-xl transition-all group">
+                <LayoutDashboard className="w-8 h-8 text-gray-400 group-hover:text-blue-400 mb-3" />
+                <span className="text-gray-300 font-medium text-sm text-center">View Live Site</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </motion.div>
+    );
+    }
+
+    if (activeTab === 'blogs') {
+      return (
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+        >
+          <div className="flex justify-between items-center mb-6">
+            <h1 className="text-2xl font-bold text-white">Manage Blogs</h1>
+            <div className="flex gap-3">
+              <button onClick={() => window.open('/', '_blank')} className="px-4 py-2 bg-white/10 hover:bg-white/20 border border-white/20 text-white rounded-lg text-sm font-medium transition-colors flex items-center gap-2">
+                <ArrowUpRight className="w-4 h-4" /> Visit Website
+              </button>
+              <button onClick={() => { setEditingBlog(false); setBlogForm({ title: '', content: '', coverImage: '' }); }} className="px-4 py-2 bg-cyan-500 hover:bg-cyan-400 text-white rounded-lg text-sm font-medium transition-colors">
+                + Create New Blog
+              </button>
+            </div>
+          </div>
+
+          {editingBlog !== null && (
+            <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl p-6 shadow-lg mb-8">
+              <h2 className="text-xl font-bold text-white mb-6">{editingBlog ? 'Edit Blog' : 'Create New Blog'}</h2>
+              <form onSubmit={handleSaveBlog} className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-400 mb-1">Title</label>
+                  <input type="text" required value={blogForm.title} onChange={e => setBlogForm({...blogForm, title: e.target.value})} className="w-full bg-black/20 border border-white/10 backdrop-blur-sm text-white rounded-lg px-4 py-2 focus:outline-none focus:border-cyan-400" />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-400 mb-1">Cover Image</label>
+                  <input type="file" accept="image/*" onChange={handleUploadImage} className="w-full bg-black/20 border border-white/10 backdrop-blur-sm text-white rounded-lg px-4 py-2 focus:outline-none focus:border-cyan-400" />
+                  {blogForm.coverImage && <img src={blogForm.coverImage} alt="Cover" className="mt-2 h-32 object-cover rounded-lg" />}
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-400 mb-1">Content (Rich Text)</label>
+                  <div className="bg-white rounded-lg text-black mb-12 pb-12">
+                    <ReactQuill 
+                      theme="snow" 
+                      value={blogForm.content} 
+                      onChange={(content) => setBlogForm({...blogForm, content})} 
+                      style={{ height: '300px' }}
+                    />
+                  </div>
+                </div>
+                <div className="flex justify-end gap-3 mt-8">
+                  <button type="button" onClick={() => setEditingBlog(null)} className="px-6 py-2 border border-gray-700 text-gray-300 hover:bg-gray-800 hover:text-white rounded-lg font-medium transition-colors">Cancel</button>
+                  <button type="submit" className="px-6 py-2 bg-cyan-500 hover:bg-cyan-400 text-white rounded-lg font-medium transition-colors">Save Blog</button>
+                </div>
+              </form>
+            </div>
+          )}
+
+          <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl p-6 shadow-lg">
+            {/* Mobile View */}
+            <div className="md:hidden space-y-4">
+              {blogs.length > 0 ? blogs.map((blog: any) => (
+                <div key={blog.id} className="bg-black/20 border border-gray-800 rounded-lg p-4 space-y-3">
+                  <div className="text-white font-medium truncate">{blog.title}</div>
+                  <div className="text-gray-500 text-xs">{blog.date}</div>
+                  <div className="pt-3 border-t border-gray-800 flex justify-end gap-2">
+                    <button onClick={() => { setEditingBlog(blog); setBlogForm(blog); }} className="text-cyan-400 hover:text-cyan-400 text-xs font-medium px-3 py-1.5 border border-cyan-400/30 hover:border-cyan-400 rounded-lg transition-colors">Edit</button>
+                    <button onClick={() => handleDeleteBlog(blog.id)} className="text-red-500 hover:text-red-400 text-xs font-medium px-3 py-1.5 border border-red-500/30 hover:border-red-400 rounded-lg transition-colors">Delete</button>
+                  </div>
+                </div>
+              )) : (
+                <div className="py-8 text-center text-gray-500">No blogs created yet.</div>
+              )}
+            </div>
+
+            {/* Desktop View */}
+            <div className="hidden md:block overflow-x-auto">
+              <table className="w-full text-left border-collapse min-w-[500px]">
+                <thead>
+                  <tr className="border-b border-gray-800">
+                    <th className="py-3 px-4 text-gray-400 font-medium">Title</th>
+                    <th className="py-3 px-4 text-gray-400 font-medium text-right">Date</th>
+                    <th className="py-3 px-4 text-gray-400 font-medium text-right">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {blogs.length > 0 ? blogs.map((blog: any) => (
+                    <tr key={blog.id} className="border-b border-gray-800/50 hover:bg-gray-800/30 transition-colors">
+                      <td className="py-4 px-4 text-white font-medium">{blog.title}</td>
+                      <td className="py-4 px-4 text-gray-500 text-right">{blog.date}</td>
+                      <td className="py-4 px-4 text-right">
+                        <button onClick={() => { setEditingBlog(blog); setBlogForm(blog); }} className="text-cyan-400 hover:text-cyan-400 text-sm font-medium px-3 py-1.5 border border-cyan-400/30 hover:border-cyan-400 rounded-lg transition-colors mr-2">Edit</button>
+                        <button onClick={() => handleDeleteBlog(blog.id)} className="text-red-500 hover:text-red-400 text-sm font-medium px-3 py-1.5 border border-red-500/30 hover:border-red-400 rounded-lg transition-colors">Delete</button>
+                      </td>
+                    </tr>
+                  )) : (
+                    <tr><td colSpan="3" className="py-8 text-center text-gray-500">No blogs created yet.</td></tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </motion.div>
+      );
+    }
+    
+    return <div className="p-8 text-center text-gray-500">Please select an option from the menu.</div>;
+  };
+
+  return (
+    <div className="relative min-h-screen flex overflow-hidden bg-[#020617]">
+      <Admin3DBackground />
+      <div className="relative z-10 flex w-full">
+      {/* Sidebar */}
+      <div className="w-64 bg-white/5 backdrop-blur-xl border-r border-white/10 flex flex-col hidden md:flex">
+        <div className="p-6 border-b border-gray-800">
+          <h2 
+            onClick={() => { setActiveTab('dashboard'); navigate('/admin/dashboard'); }}
+            className="flex flex-col items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity"
+          >
+            <img src="/logo.png" alt="BrokerCore Solution" className="h-10 w-auto bg-white p-1 rounded-xl" />
+            <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-gray-300">Admin Panel</span>
+          </h2>
+        </div>
+        <nav className="flex-1 p-4 space-y-2">
+          <button
+            onClick={() => setActiveTab('dashboard')}
+            className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
+              activeTab === 'dashboard'
+                ? 'bg-cyan-400/10 text-cyan-400'
+                : 'text-gray-400 hover:text-white hover:bg-gray-800'
+            }`}
+          >
+            <LayoutDashboard className="w-5 h-5" />
+            <span className="font-medium">Dashboard</span>
+          </button>
+          
+          <button
+            onClick={() => setActiveTab('users')}
+            className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
+              activeTab === 'users'
+                ? 'bg-cyan-400/10 text-cyan-400'
+                : 'text-gray-400 hover:text-white hover:bg-gray-800'
+            }`}
+          >
+            <Users className="w-5 h-5" />
+            <span className="font-medium">Leads & Inquiries</span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab('calculator_quotes')}
+            className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
+              activeTab === 'calculator_quotes'
+                ? 'bg-cyan-400/10 text-cyan-400'
+                : 'text-gray-400 hover:text-white hover:bg-gray-800'
+            }`}
+          >
+            <Calculator className="w-5 h-5" />
+            <span className="font-medium">Quotes</span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab('newsletter')}
+            className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
+              activeTab === 'newsletter'
+                ? 'bg-cyan-400/10 text-cyan-400'
+                : 'text-gray-400 hover:text-white hover:bg-gray-800'
+            }`}
+          >
+            <Mail className="w-5 h-5" />
+            <span className="font-medium">Newsletter</span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab('settings')}
+            className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
+              activeTab === 'settings'
+                ? 'bg-cyan-400/10 text-cyan-400'
+                : 'text-gray-400 hover:text-white hover:bg-gray-800'
+            }`}
+          >
+            <Settings className="w-5 h-5" />
+            <span className="font-medium">Settings</span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab('blogs')}
+            className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
+              activeTab === 'blogs'
+                ? 'bg-cyan-400/10 text-cyan-400'
+                : 'text-gray-400 hover:text-white hover:bg-gray-800'
+            }`}
+          >
+            <FileText className="w-5 h-5" />
+            <span className="font-medium">Blogs</span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab('manage_admins')}
+            className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
+              activeTab === 'manage_admins'
+                ? 'bg-cyan-400/10 text-cyan-400'
+                : 'text-gray-400 hover:text-white hover:bg-gray-800'
+            }`}
+          >
+            <LogOut className="w-5 h-5" />
+            <span className="font-medium">Manage Admins</span>
+          </button>
+        </nav>
+        <div className="p-4 border-t border-gray-800 space-y-3">
+          <div className="flex items-center gap-3 px-3 py-2 bg-black/20 rounded-lg border border-gray-800/50">
+            <div className="w-10 h-10 rounded-full bg-cyan-500/20 text-cyan-500 flex items-center justify-center font-bold text-lg border border-cyan-500/30 shrink-0">
+              {currentAdmin?.name ? currentAdmin.name.charAt(0).toUpperCase() : 'A'}
+            </div>
+            <div className="overflow-hidden">
+              <div className="text-white font-medium text-sm truncate">{currentAdmin?.name || 'Loading...'}</div>
+              <div className="text-cyan-500 text-xs font-semibold tracking-wide uppercase mt-0.5 truncate">{currentAdmin?.is_master ? 'Master Admin' : 'Admin'}</div>
+            </div>
+          </div>
+          <button
+            onClick={handleLogout}
+            className="flex items-center gap-3 w-full px-4 py-3 text-red-400 hover:bg-red-500/10 rounded-lg transition-colors"
+          >
+            <LogOut className="w-5 h-5" />
+            <span className="font-medium">Logout</span>
+          </button>
+        </div>
+      </div>
+
+      {/* Main Content */}
+      <div className="flex-1 flex flex-col h-screen">
+        {/* Mobile Header */}
+        <div className="md:hidden bg-white/5 backdrop-blur-xl border-b border-white/10 p-4 flex justify-between items-center z-20">
+          <h2 
+            onClick={() => { setActiveTab('dashboard'); navigate('/admin/dashboard'); }}
+            className="flex items-center gap-3 cursor-pointer hover:opacity-80 transition-opacity"
+          >
+            <img src="/logo.png" alt="BrokerCore Solution" className="h-8 w-auto bg-white p-1 rounded-lg" />
+            <span className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-gray-300">Admin Panel</span>
+          </h2>
+          <button onClick={handleLogout} className="text-red-400 p-2">
+            <LogOut className="w-5 h-5" />
+          </button>
+        </div>
+
+        <main className="flex-1 p-4 md:p-6 lg:p-8 overflow-y-auto pb-24 md:pb-8">
+          {renderContent()}
+        </main>
+
+        {/* Mobile Bottom Navigation */}
+        <style>{`
+          .hide-scrollbar::-webkit-scrollbar { display: none; }
+        `}</style>
+        <div className="md:hidden fixed bottom-0 left-0 right-0 bg-[#0a0f1c]/95 backdrop-blur-xl border-t border-white/10 z-50 px-4 py-3 flex overflow-x-auto gap-6 hide-scrollbar" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+          <button
+            onClick={() => setActiveTab('dashboard')}
+            className={`flex flex-col items-center gap-1 flex-shrink-0 transition-colors ${
+              activeTab === 'dashboard' ? 'text-cyan-400' : 'text-gray-500 hover:text-gray-300'
+            }`}
+          >
+            <LayoutDashboard className="w-5 h-5" />
+            <span className="text-[10px] font-medium">Dashboard</span>
+          </button>
+          <button
+            onClick={() => setActiveTab('users')}
+            className={`flex flex-col items-center gap-1 flex-shrink-0 transition-colors ${
+              activeTab === 'users' ? 'text-cyan-400' : 'text-gray-500 hover:text-gray-300'
+            }`}
+          >
+            <Users className="w-5 h-5" />
+            <span className="text-[10px] font-medium">Leads</span>
+          </button>
+          <button
+            onClick={() => setActiveTab('calculator_quotes')}
+            className={`flex flex-col items-center gap-1 flex-shrink-0 transition-colors ${
+              activeTab === 'calculator_quotes' ? 'text-cyan-400' : 'text-gray-500 hover:text-gray-300'
+            }`}
+          >
+            <Calculator className="w-5 h-5" />
+            <span className="text-[10px] font-medium">Quotes</span>
+          </button>
+          <button
+            onClick={() => setActiveTab('newsletter')}
+            className={`flex flex-col items-center gap-1 flex-shrink-0 transition-colors ${
+              activeTab === 'newsletter' ? 'text-cyan-400' : 'text-gray-500 hover:text-gray-300'
+            }`}
+          >
+            <Mail className="w-5 h-5" />
+            <span className="text-[10px] font-medium">Newsletter</span>
+          </button>
+          
+          <button
+            onClick={() => setActiveTab('blogs')}
+            className={`flex flex-col items-center gap-1 flex-shrink-0 transition-colors ${
+              activeTab === 'blogs' ? 'text-cyan-400' : 'text-gray-500 hover:text-gray-300'
+            }`}
+          >
+            <FileText className="w-5 h-5" />
+            <span className="text-[10px] font-medium">Blogs</span>
+          </button>
+          
+          <button
+            onClick={() => setActiveTab('manage_admins')}
+            className={`flex flex-col items-center gap-1 flex-shrink-0 transition-colors ${
+              activeTab === 'manage_admins' ? 'text-cyan-400' : 'text-gray-500 hover:text-gray-300'
+            }`}
+          >
+            <LogOut className="w-5 h-5" />
+            <span className="text-[10px] font-medium">Admins</span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab('settings')}
+            className={`flex flex-col items-center gap-1 flex-shrink-0 transition-colors ${
+              activeTab === 'settings' ? 'text-cyan-400' : 'text-gray-500 hover:text-gray-300'
+            }`}
+          >
+            <Settings className="w-5 h-5" />
+            <span className="text-[10px] font-medium">Settings</span>
+          </button>
+        </div>
+      </div>
+      {confirmDialog.isOpen && (
+        <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-[100] p-4">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="bg-gray-900 border border-gray-800 rounded-2xl p-6 max-w-sm w-full shadow-2xl"
+          >
+            <h3 className="text-xl font-bold text-white mb-2">Confirm Action</h3>
+            <p className="text-gray-400 mb-6">{confirmDialog.message}</p>
+            <div className="flex justify-end gap-3">
+              <button 
+                onClick={() => setConfirmDialog({ isOpen: false, message: '', onConfirm: null })}
+                className="px-4 py-2 bg-gray-800 text-gray-300 hover:text-white hover:bg-gray-700 rounded-lg font-medium transition-colors"
+              >
+                Cancel
+              </button>
+              <button 
+                onClick={() => {
+                  if (confirmDialog.onConfirm) confirmDialog.onConfirm();
+                  setConfirmDialog({ isOpen: false, message: '', onConfirm: null });
+                }}
+                className="px-4 py-2 bg-red-500 hover:bg-red-400 text-white rounded-lg font-medium transition-colors"
+              >
+                Confirm
+              </button>
+            </div>
+          </motion.div>
+        </div>
+      )}
+    </div>
+    </div>
+  );
+}
