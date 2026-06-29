@@ -34,12 +34,51 @@ function PageLoader() {
 
 function MaintenanceMode() {
   return (
-    <div className="min-h-screen bg-background flex flex-col items-center justify-center p-6 text-center">
-      <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">Under Maintenance</h1>
-      <p className="text-xl text-muted-foreground max-w-lg mb-8">
-        We are currently upgrading our systems to serve you better. Please check back shortly.
-      </p>
-      <div className="w-16 h-16 border-4 border-accent-cyan border-t-transparent rounded-full animate-spin"></div>
+    <div className="min-h-screen bg-[#020617] relative flex flex-col items-center justify-center p-6 text-center overflow-hidden">
+      {/* Premium Background Ambience */}
+      <div className="absolute top-1/4 left-1/4 w-[40vw] h-[40vw] bg-accent-cyan/10 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/4 w-[40vw] h-[40vw] bg-white/5 rounded-full blur-[120px] pointer-events-none" />
+      
+      <div className="relative z-10 max-w-2xl mx-auto flex flex-col items-center">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          className="mb-8 relative"
+        >
+          <div className="w-24 h-24 rounded-full border border-white/10 bg-white/5 backdrop-blur-xl flex items-center justify-center shadow-[0_0_50px_rgba(6,182,212,0.15)]">
+            <div className="w-12 h-12 border-[3px] border-accent-cyan border-t-transparent rounded-full animate-spin" />
+            <div className="absolute inset-0 border border-accent-cyan/30 rounded-full animate-pulse" />
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/5 border border-white/10 rounded-full text-xs font-semibold uppercase tracking-widest text-accent-cyan mb-6">
+            <div className="w-2 h-2 rounded-full bg-accent-cyan animate-pulse"></div>
+            System Upgrade
+          </div>
+          <h1 className="text-4xl md:text-6xl font-extrabold text-white mb-6 tracking-tight leading-tight">
+            Elevating Your <br className="hidden md:block" />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-cyan to-white italic font-light">Experience</span>
+          </h1>
+          <p className="text-lg md:text-xl text-gray-400 max-w-lg mx-auto font-light leading-relaxed">
+            We're deploying enterprise-grade enhancements to our infrastructure. BrokerCore will be back online shortly with unprecedented performance.
+          </p>
+        </motion.div>
+        
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 0.8 }}
+          className="mt-12 text-sm text-gray-600 font-medium tracking-widest uppercase"
+        >
+          Expected downtime: <span className="text-accent-cyan">Under 15 Minutes</span>
+        </motion.div>
+      </div>
     </div>
   );
 }
