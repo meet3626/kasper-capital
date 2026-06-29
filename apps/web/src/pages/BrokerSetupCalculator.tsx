@@ -185,20 +185,25 @@ const BrokerSetupCalculator = () => {
     }
 
     try {
-      await apiClient.post('/contact', {
+      const newLead = {
+        id: Date.now().toString(),
         name: formData.name,
         email: formData.email,
         phone: formData.phone,
         message: quoteText,
-        interest: 'Brokerage Quote'
-      });
+        interest: 'Brokerage Quote',
+        status: 'New',
+        created_at: new Date().toISOString()
+      };
+
+      const existingLeads = JSON.parse(localStorage.getItem('adminLeads') || '[]');
+      localStorage.setItem('adminLeads', JSON.stringify([newLead, ...existingLeads]));
       
       setIsSubmitting(false);
       setIsSuccess(true);
     } catch (error) {
       console.error("Error submitting quote:", error);
       setIsSubmitting(false);
-      // Show success anyway for UX if DB fails, or we could add toast
       setIsSuccess(true); 
     }
   };

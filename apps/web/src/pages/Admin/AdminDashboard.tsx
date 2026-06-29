@@ -9,6 +9,7 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsive
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { apiClient } from '@/lib/apiClient';
+import { supabase } from '@/lib/supabase';
 
 export default function AdminDashboard() {
   const navigate = useNavigate();
@@ -30,21 +31,32 @@ export default function AdminDashboard() {
   useEffect(() => {
     const initDashboard = async () => {
       try {
-        const data = await apiClient.get('/admin/dashboard');
+        const { data: { session } } = await supabase.auth.getSession();
         
-        if (data.admins) setAdminUsers(data.admins);
-        if (data.currentAdmin) {
-          // Find full object from array just in case
-          const current = data.admins.find((a: any) => a.id === data.currentAdmin.id);
-          setCurrentAdmin(current || data.currentAdmin);
-        } else {
-           navigate('/admin');
-           return;
+        if (!session) {
+          navigate('/admin');
+          return;
         }
 
-        if (data.leads) setLeads(data.leads);
-        if (data.subscribers) setSubscribers(data.subscribers);
-        if (data.blogs) setBlogs(data.blogs);
+        const adminAuth = localStorage.getItem('adminAuth');
+        if (adminAuth) {
+          setCurrentAdmin(JSON.parse(adminAuth));
+        } else {
+          navigate('/admin');
+          return;
+        }
+
+        const { data: admins } = await supabase.from('admins').select('*');
+        if (admins) setAdminUsers(admins);
+
+        const localLeads = JSON.parse(localStorage.getItem('adminLeads') || '[]');
+        setLeads(localLeads);
+        
+        const localSubscribers = JSON.parse(localStorage.getItem('adminSubscribers') || '[]');
+        setSubscribers(localSubscribers);
+        
+        const localBlogs = JSON.parse(localStorage.getItem('adminBlogs') || '[]');
+        setBlogs(localBlogs);
 
       } catch (err) {
         console.error("Dashboard initialization error:", err);
@@ -62,7 +74,8 @@ export default function AdminDashboard() {
 
   const handleLogout = async () => {
     try {
-      await apiClient.post('/admin/logout', {});
+      await supabase.auth.signOut();
+      localStorage.removeItem('adminAuth');
     } catch (e) {}
     navigate('/admin');
   };

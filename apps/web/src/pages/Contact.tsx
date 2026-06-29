@@ -81,13 +81,19 @@ const Contact = () => {
 
   const onSubmit = async (data) => {
     try {
-      await apiClient.post('/contact', {
+      const newLead = {
+        id: Date.now().toString(),
         name: data.contact_name_field,
         email: data.contact_email_field,
         phone: data.contact_phone_field,
         message: data.message,
-        interest: 'Contact Page Inquiry'
-      });
+        interest: 'Contact Page Inquiry',
+        status: 'New',
+        created_at: new Date().toISOString()
+      };
+
+      const existingLeads = JSON.parse(localStorage.getItem('adminLeads') || '[]');
+      localStorage.setItem('adminLeads', JSON.stringify([newLead, ...existingLeads]));
 
       toast({
         title: "Message Sent! 🚀",
