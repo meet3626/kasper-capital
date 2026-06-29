@@ -148,13 +148,14 @@ export default function AdminDashboard() {
     setEditingLead((prev: any) => ({ ...prev, [field]: value }));
   };
 
-  const deleteLead = () => {
-    if (!editingLead) return;
+  const deleteLead = (idToDel?: any) => {
+    const targetId = (idToDel && typeof idToDel === 'string') ? idToDel : editingLead?.id;
+    if (!targetId) return;
     if (!window.confirm("Are you sure you want to delete this lead?")) return;
-    const updatedLeads = leads.filter((lead: any) => lead.id !== editingLead.id);
+    const updatedLeads = leads.filter((lead: any) => lead.id !== targetId);
     setLeads(updatedLeads);
     localStorage.setItem('adminLeads', JSON.stringify(updatedLeads));
-    setEditingLead(null);
+    if (editingLead && editingLead.id === targetId) setEditingLead(null);
     toast.success('Lead deleted successfully!');
   };
 
@@ -219,82 +220,7 @@ export default function AdminDashboard() {
             </button>
           </div>
 
-          {editingLead && (
-            <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4 overflow-y-auto">
-              <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl w-full max-w-lg p-6 shadow-2xl relative my-auto max-h-[90vh] overflow-y-auto">
-                <h2 className="text-xl font-bold text-white mb-6">Edit Lead</h2>
-                <div className="space-y-4">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-400 mb-1">Name</label>
-                    <input 
-                      type="text" 
-                      value={editingLead.name || ''} 
-                      onChange={e => handleEditChange('name', e.target.value)}
-                      className="w-full bg-black/20 border border-white/10 backdrop-blur-sm text-white rounded-lg px-4 py-2 focus:outline-none focus:border-cyan-400"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-400 mb-1">Email</label>
-                    <input 
-                      type="email" 
-                      value={editingLead.email || ''} 
-                      onChange={e => handleEditChange('email', e.target.value)}
-                      className="w-full bg-black/20 border border-white/10 backdrop-blur-sm text-white rounded-lg px-4 py-2 focus:outline-none focus:border-cyan-400"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-400 mb-1">Phone</label>
-                    <input 
-                      type="text" 
-                      value={editingLead.phone || ''} 
-                      onChange={e => handleEditChange('phone', e.target.value)}
-                      className="w-full bg-black/20 border border-white/10 backdrop-blur-sm text-white rounded-lg px-4 py-2 focus:outline-none focus:border-cyan-400"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-400 mb-1">Interest</label>
-                    <input 
-                      type="text" 
-                      value={editingLead.interest || ''} 
-                      onChange={e => handleEditChange('interest', e.target.value)}
-                      className="w-full bg-black/20 border border-white/10 backdrop-blur-sm text-white rounded-lg px-4 py-2 focus:outline-none focus:border-cyan-400"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-400 mb-1">Message</label>
-                    <textarea 
-                      value={editingLead.message || ''} 
-                      onChange={e => handleEditChange('message', e.target.value)}
-                      rows={3}
-                      className="w-full bg-black/20 border border-white/10 backdrop-blur-sm text-white rounded-lg px-4 py-2 focus:outline-none focus:border-cyan-400 resize-none"
-                    />
-                  </div>
-                </div>
-                <div className="flex justify-between items-center mt-8">
-                  <button 
-                    onClick={deleteLead}
-                    className="px-4 py-2 bg-red-500/10 hover:bg-red-500/20 text-red-500 rounded-lg font-medium transition-colors border border-red-500/20"
-                  >
-                    Delete Lead
-                  </button>
-                  <div className="flex gap-3">
-                    <button 
-                      onClick={() => setEditingLead(null)}
-                      className="px-6 py-2 border border-gray-700 text-gray-300 hover:bg-gray-800 hover:text-white rounded-lg font-medium transition-colors"
-                    >
-                      Cancel
-                    </button>
-                    <button 
-                      onClick={saveEditedLead}
-                      className="px-6 py-2 bg-cyan-500 hover:bg-cyan-400 text-white rounded-lg font-medium transition-colors"
-                    >
-                      Save Changes
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
+
 
           <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl p-6 shadow-lg">
             {/* Mobile View */}
@@ -531,6 +457,7 @@ export default function AdminDashboard() {
                       <td className="py-4 px-4 text-right">
                         <button onClick={() => setViewingQuote(quote)} className="text-cyan-400 hover:text-cyan-300 font-medium text-sm border border-cyan-400/30 px-3 py-1.5 rounded-lg">View Quote</button>
                         <button onClick={() => setEditingLead(quote)} className="text-white hover:text-gray-300 font-medium text-sm border border-gray-600 px-3 py-1.5 rounded-lg ml-2">Edit</button>
+                        <button onClick={() => deleteLead(quote.id)} className="text-red-500 hover:text-red-400 font-medium text-sm border border-red-500/30 hover:border-red-400 px-3 py-1.5 rounded-lg ml-2 transition-colors">Delete</button>
                       </td>
                     </tr>
                   ))}
@@ -552,7 +479,11 @@ export default function AdminDashboard() {
                         <option value="Closed (Won)" className="bg-[#111827] text-white">Closed (Won)</option>
                         <option value="Closed (Lost)" className="bg-[#111827] text-white">Closed (Lost)</option>
                      </select>
-                     <button onClick={() => setViewingQuote(quote)} className="text-cyan-400 text-xs font-medium px-3 py-1.5 border border-cyan-400/30 rounded-lg">View</button>
+                     <div className="flex gap-2">
+                       <button onClick={() => setViewingQuote(quote)} className="text-cyan-400 text-xs font-medium px-3 py-1.5 border border-cyan-400/30 rounded-lg">View</button>
+                       <button onClick={() => setEditingLead(quote)} className="text-white text-xs font-medium px-3 py-1.5 border border-gray-600 rounded-lg">Edit</button>
+                       <button onClick={() => deleteLead(quote.id)} className="text-red-500 text-xs font-medium px-3 py-1.5 border border-red-500/30 rounded-lg">Delete</button>
+                     </div>
                    </div>
                  </div>
                ))}
@@ -1367,6 +1298,82 @@ export default function AdminDashboard() {
               </button>
             </div>
           </motion.div>
+        </div>
+      )}
+      {editingLead && (
+        <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4 overflow-y-auto">
+          <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl w-full max-w-lg p-6 shadow-2xl relative my-auto max-h-[90vh] overflow-y-auto">
+            <h2 className="text-xl font-bold text-white mb-6">Edit Lead</h2>
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-400 mb-1">Name</label>
+                <input 
+                  type="text" 
+                  value={editingLead.name || ''} 
+                  onChange={e => handleEditChange('name', e.target.value)}
+                  className="w-full bg-black/20 border border-white/10 backdrop-blur-sm text-white rounded-lg px-4 py-2 focus:outline-none focus:border-cyan-400"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-400 mb-1">Email</label>
+                <input 
+                  type="email" 
+                  value={editingLead.email || ''} 
+                  onChange={e => handleEditChange('email', e.target.value)}
+                  className="w-full bg-black/20 border border-white/10 backdrop-blur-sm text-white rounded-lg px-4 py-2 focus:outline-none focus:border-cyan-400"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-400 mb-1">Phone</label>
+                <input 
+                  type="text" 
+                  value={editingLead.phone || ''} 
+                  onChange={e => handleEditChange('phone', e.target.value)}
+                  className="w-full bg-black/20 border border-white/10 backdrop-blur-sm text-white rounded-lg px-4 py-2 focus:outline-none focus:border-cyan-400"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-400 mb-1">Interest</label>
+                <input 
+                  type="text" 
+                  value={editingLead.interest || ''} 
+                  onChange={e => handleEditChange('interest', e.target.value)}
+                  className="w-full bg-black/20 border border-white/10 backdrop-blur-sm text-white rounded-lg px-4 py-2 focus:outline-none focus:border-cyan-400"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-400 mb-1">Message</label>
+                <textarea 
+                  value={editingLead.message || ''} 
+                  onChange={e => handleEditChange('message', e.target.value)}
+                  rows={3}
+                  className="w-full bg-black/20 border border-white/10 backdrop-blur-sm text-white rounded-lg px-4 py-2 focus:outline-none focus:border-cyan-400 resize-none"
+                />
+              </div>
+            </div>
+            <div className="flex justify-between items-center mt-8">
+              <button 
+                onClick={() => deleteLead(editingLead.id)}
+                className="px-4 py-2 bg-red-500/10 hover:bg-red-500/20 text-red-500 rounded-lg font-medium transition-colors border border-red-500/20"
+              >
+                Delete Lead
+              </button>
+              <div className="flex gap-3">
+                <button 
+                  onClick={() => setEditingLead(null)}
+                  className="px-6 py-2 border border-gray-700 text-gray-300 hover:bg-gray-800 hover:text-white rounded-lg font-medium transition-colors"
+                >
+                  Cancel
+                </button>
+                <button 
+                  onClick={saveEditedLead}
+                  className="px-6 py-2 bg-cyan-500 hover:bg-cyan-400 text-white rounded-lg font-medium transition-colors"
+                >
+                  Save Changes
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       )}
     </div>
