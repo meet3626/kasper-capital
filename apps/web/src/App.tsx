@@ -2,7 +2,7 @@ import React, { useEffect, useState, Suspense } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Layout from '@/components/Layout';
 import WhatsAppButton from '@/components/WhatsAppButton';
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { Analytics } from '@vercel/analytics/react';
 import { Toaster } from 'react-hot-toast';
 
