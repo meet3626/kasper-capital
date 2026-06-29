@@ -25,7 +25,7 @@ export default function AdminDashboard() {
     return saved ? JSON.parse(saved) : [];
   });
   const [editingBlog, setEditingBlog] = useState<any>(null);
-  const [blogForm, setBlogForm] = useState({ title: '', content: '', coverImage: '' });
+  const [blogForm, setBlogForm] = useState({ title: '', content: '', coverImage: '', authorName: '' });
   const [confirmDialog, setConfirmDialog] = useState({ isOpen: false, message: '', onConfirm: null });
 
   useEffect(() => {
@@ -215,7 +215,7 @@ export default function AdminDashboard() {
       cover_image: blogForm.coverImage || 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3',
       published_at: isNew ? new Date().toISOString() : editingBlog.published_at,
       created_at: isNew ? new Date().toISOString() : editingBlog.created_at,
-      author_name: 'Admin',
+      author_name: blogForm.authorName || 'Admin',
       category: 'Insights'
     };
 
@@ -229,7 +229,7 @@ export default function AdminDashboard() {
     setBlogs(updatedBlogs);
     localStorage.setItem('adminBlogs', JSON.stringify(updatedBlogs));
     setEditingBlog(null);
-    setBlogForm({ title: '', content: '', coverImage: '' });
+    setBlogForm({ title: '', content: '', coverImage: '', authorName: '' });
     toast.success(isNew ? 'Blog post created successfully!' : 'Blog post updated successfully!');
   };
   const handleUploadImage = () => {};
@@ -1004,7 +1004,7 @@ export default function AdminDashboard() {
               <button onClick={() => window.open('/', '_blank')} className="px-4 py-2 bg-white/10 hover:bg-white/20 border border-white/20 text-white rounded-lg text-sm font-medium transition-colors flex items-center gap-2">
                 <ArrowUpRight className="w-4 h-4" /> Visit Website
               </button>
-              <button onClick={() => { setEditingBlog(false); setBlogForm({ title: '', content: '', coverImage: '' }); }} className="px-4 py-2 bg-cyan-500 hover:bg-cyan-400 text-white rounded-lg text-sm font-medium transition-colors">
+              <button onClick={() => { setEditingBlog(false); setBlogForm({ title: '', content: '', coverImage: '', authorName: '' }); }} className="px-4 py-2 bg-cyan-500 hover:bg-cyan-400 text-white rounded-lg text-sm font-medium transition-colors">
                 + Create New Blog
               </button>
             </div>
@@ -1017,6 +1017,10 @@ export default function AdminDashboard() {
                 <div>
                   <label className="block text-sm font-medium text-gray-400 mb-1">Title</label>
                   <input type="text" required value={blogForm.title} onChange={e => setBlogForm({...blogForm, title: e.target.value})} className="w-full bg-black/20 border border-white/10 backdrop-blur-sm text-white rounded-lg px-4 py-2 focus:outline-none focus:border-cyan-400" />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-400 mb-1">Author Name</label>
+                  <input type="text" value={blogForm.authorName || ''} onChange={e => setBlogForm({...blogForm, authorName: e.target.value})} placeholder="e.g. David Chen" className="w-full bg-black/20 border border-white/10 backdrop-blur-sm text-white rounded-lg px-4 py-2 focus:outline-none focus:border-cyan-400" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-400 mb-1">Cover Image</label>
@@ -1050,7 +1054,7 @@ export default function AdminDashboard() {
                   <div className="text-white font-medium truncate">{blog.title}</div>
                   <div className="text-gray-500 text-xs">{blog.date}</div>
                   <div className="pt-3 border-t border-gray-800 flex justify-end gap-2">
-                    <button onClick={() => { setEditingBlog(blog); setBlogForm(blog); }} className="text-cyan-400 hover:text-cyan-400 text-xs font-medium px-3 py-1.5 border border-cyan-400/30 hover:border-cyan-400 rounded-lg transition-colors">Edit</button>
+                    <button onClick={() => { setEditingBlog(blog); setBlogForm({ ...blog, authorName: blog.author_name }); }} className="text-cyan-400 hover:text-cyan-400 text-xs font-medium px-3 py-1.5 border border-cyan-400/30 hover:border-cyan-400 rounded-lg transition-colors">Edit</button>
                     <button onClick={() => handleDeleteBlog(blog.id)} className="text-red-500 hover:text-red-400 text-xs font-medium px-3 py-1.5 border border-red-500/30 hover:border-red-400 rounded-lg transition-colors">Delete</button>
                   </div>
                 </div>
@@ -1075,7 +1079,7 @@ export default function AdminDashboard() {
                       <td className="py-4 px-4 text-white font-medium">{blog.title}</td>
                       <td className="py-4 px-4 text-gray-500 text-right">{blog.date}</td>
                       <td className="py-4 px-4 text-right">
-                        <button onClick={() => { setEditingBlog(blog); setBlogForm(blog); }} className="text-cyan-400 hover:text-cyan-400 text-sm font-medium px-3 py-1.5 border border-cyan-400/30 hover:border-cyan-400 rounded-lg transition-colors mr-2">Edit</button>
+                        <button onClick={() => { setEditingBlog(blog); setBlogForm({ ...blog, authorName: blog.author_name }); }} className="text-cyan-400 hover:text-cyan-400 text-sm font-medium px-3 py-1.5 border border-cyan-400/30 hover:border-cyan-400 rounded-lg transition-colors mr-2">Edit</button>
                         <button onClick={() => handleDeleteBlog(blog.id)} className="text-red-500 hover:text-red-400 text-sm font-medium px-3 py-1.5 border border-red-500/30 hover:border-red-400 rounded-lg transition-colors">Delete</button>
                       </td>
                     </tr>
