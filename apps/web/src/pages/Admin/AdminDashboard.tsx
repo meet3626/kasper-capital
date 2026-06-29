@@ -155,7 +155,7 @@ export default function AdminDashboard() {
     setEditingLead((prev: any) => ({ ...prev, [field]: value }));
   };
 
-  const deleteLead = (eOrId?: any) => {
+  const deleteLead = async (eOrId?: any) => {
     let targetId;
     if (eOrId && typeof eOrId !== 'object') {
       targetId = eOrId;
@@ -164,6 +164,13 @@ export default function AdminDashboard() {
     }
     if (!targetId) return;
     if (!window.confirm("Are you sure you want to delete this lead?")) return;
+    
+    try {
+      await supabase.from('leads').delete().eq('id', targetId);
+    } catch (e) {
+      console.error('Failed to delete from supabase:', e);
+    }
+
     const updatedLeads = leads.filter((lead: any) => String(lead.id) !== String(targetId));
     setLeads(updatedLeads);
     localStorage.setItem('adminLeads', JSON.stringify(updatedLeads));
@@ -182,8 +189,15 @@ export default function AdminDashboard() {
     toast.success('Lead updated successfully!');
   };
 
-  const deleteSubscriber = (id: any) => {
+  const deleteSubscriber = async (id: any) => {
     if (!window.confirm("Are you sure you want to delete this subscriber?")) return;
+    
+    try {
+      await supabase.from('subscribers').delete().eq('id', id);
+    } catch (e) {
+      console.error('Failed to delete from supabase:', e);
+    }
+
     const updatedSubscribers = subscribers.filter((sub: any) => sub.id !== id);
     setSubscribers(updatedSubscribers);
     localStorage.setItem('adminSubscribers', JSON.stringify(updatedSubscribers));
@@ -241,8 +255,15 @@ export default function AdminDashboard() {
   };
   const handleUploadImage = () => {};
 
-  const handleDeleteBlog = (id: any) => {
+  const handleDeleteBlog = async (id: any) => {
     if (!window.confirm("Are you sure you want to delete this blog post?")) return;
+    
+    try {
+      await supabase.from('blogs').delete().eq('id', id);
+    } catch (e) {
+      console.error('Failed to delete from supabase:', e);
+    }
+
     const updatedBlogs = blogs.filter((b: any) => b.id !== id);
     setBlogs(updatedBlogs);
     localStorage.setItem('adminBlogs', JSON.stringify(updatedBlogs));
