@@ -288,12 +288,20 @@ export default function AdminDashboard() {
                       <option value="Closed (Won)" className="bg-[#111827] text-white">Closed (Won)</option>
                       <option value="Closed (Lost)" className="bg-[#111827] text-white">Closed (Lost)</option>
                     </select>
-                    <button 
-                      onClick={() => setEditingLead(lead)}
-                      className="text-cyan-400 hover:text-cyan-400 text-xs font-medium px-3 py-1.5 border border-cyan-400/30 hover:border-cyan-400 rounded-lg transition-colors"
-                    >
-                      Edit
-                    </button>
+                    <div className="flex gap-2">
+                      <button 
+                        onClick={() => setEditingLead(lead)}
+                        className="text-cyan-400 hover:text-cyan-400 text-xs font-medium px-3 py-1.5 border border-cyan-400/30 hover:border-cyan-400 rounded-lg transition-colors"
+                      >
+                        Edit
+                      </button>
+                      <button 
+                        onClick={() => deleteLead(lead.id)}
+                        className="text-red-500 hover:text-red-400 text-xs font-medium px-3 py-1.5 border border-red-500/30 hover:border-red-400 rounded-lg transition-colors"
+                      >
+                        Delete
+                      </button>
+                    </div>
                   </div>
                 </div>
               ))}
@@ -341,9 +349,15 @@ export default function AdminDashboard() {
                       <td className="py-4 px-4 text-right">
                         <button 
                           onClick={() => setEditingLead(lead)}
-                          className="text-cyan-400 hover:text-cyan-400 text-sm font-medium px-3 py-1.5 border border-cyan-400/30 hover:border-cyan-400 rounded-lg transition-colors"
+                          className="text-cyan-400 hover:text-cyan-400 text-sm font-medium px-3 py-1.5 border border-cyan-400/30 hover:border-cyan-400 rounded-lg transition-colors mr-2"
                         >
                           Edit
+                        </button>
+                        <button 
+                          onClick={() => deleteLead(lead.id)}
+                          className="text-red-500 hover:text-red-400 text-sm font-medium px-3 py-1.5 border border-red-500/30 hover:border-red-400 rounded-lg transition-colors"
+                        >
+                          Delete
                         </button>
                       </td>
                     </tr>
@@ -533,11 +547,41 @@ export default function AdminDashboard() {
                    <h3 className="text-xl font-bold text-white">Quote for {viewingQuote.name}</h3>
                    <button onClick={() => setViewingQuote(null)} className="text-gray-400 hover:text-white">&times;</button>
                 </div>
-                <div className="flex-1 overflow-y-auto pr-2 space-y-4">
-                  <div className="text-sm text-gray-300 whitespace-pre-wrap leading-relaxed">
-                    {viewingQuote.message}
+                  <div className="flex-1 overflow-y-auto pr-2 space-y-4">
+                    <div className="text-sm leading-relaxed bg-black/40 p-6 rounded-xl border border-white/5 shadow-inner">
+                      {viewingQuote.interest === 'Brokerage Quote' ? (
+                        viewingQuote.message.split('\n').map((line: string, i: number) => {
+                          const t = line.trim();
+                          if (!t) return <div key={i} className="h-3"></div>;
+                          if (t.endsWith('Summary') || t === 'Cost Breakdown' || t === 'Additional Notes:') {
+                            return <h4 key={i} className="text-cyan-400 font-bold text-xl mt-6 mb-4 border-b border-gray-800 pb-2 flex items-center gap-2">
+                              {t}
+                            </h4>;
+                          }
+                          if (t.startsWith('-')) {
+                            return (
+                              <div key={i} className="flex items-start gap-3 mb-3 bg-white/5 p-4 rounded-xl border border-white/5 hover:border-cyan-400/30 transition-colors">
+                                <span className="text-cyan-400 mt-0.5">•</span>
+                                <span className="text-gray-200 font-medium leading-relaxed">{t.substring(1).trim()}</span>
+                              </div>
+                            );
+                          }
+                          if (t.includes(': $')) {
+                            const [label, val] = t.split(': $');
+                            return (
+                              <div key={i} className="flex justify-between items-center py-3 border-b border-gray-800/50 hover:bg-white/5 px-3 rounded-lg transition-colors">
+                                <span className="text-gray-400 font-medium">{label}</span>
+                                <span className="text-white font-bold tracking-wider text-base bg-white/10 px-3 py-1 rounded-md border border-white/10">${val}</span>
+                              </div>
+                            );
+                          }
+                          return <p key={i} className="text-gray-300 my-1 font-medium">{t}</p>;
+                        })
+                      ) : (
+                        <div className="whitespace-pre-wrap text-gray-300">{viewingQuote.message}</div>
+                      )}
+                    </div>
                   </div>
-                </div>
                 <div className="mt-6 pt-4 border-t border-gray-800 flex justify-end">
                    <button onClick={() => setViewingQuote(null)} className="px-6 py-2 bg-gray-800 text-white rounded-lg font-medium transition-colors hover:bg-gray-700">Close</button>
                 </div>
